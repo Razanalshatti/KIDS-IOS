@@ -37,6 +37,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B50F24912BFB75F900C0AC02 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		B50F24922BFB75FF00C0AC02 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		B50F24932BFB760D00C0AC02 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		B50F24942BFB761400C0AC02 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B5D48BF02BFB636300CDBA85 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +84,10 @@
 		B5D48BFB2BFB636300CDBA85 /* KFH-Kids */ = {
 			isa = PBXGroup;
 			children = (
+				B50F24942BFB761400C0AC02 /* Model */,
+				B50F24932BFB760D00C0AC02 /* Supporting */,
+				B50F24922BFB75FF00C0AC02 /* NetworkManager */,
+				B50F24912BFB75F900C0AC02 /* VC */,
 				B5D48BFC2BFB636300CDBA85 /* AppDelegate.swift */,
 				B5D48BFE2BFB636300CDBA85 /* SceneDelegate.swift */,
 				B5D48C002BFB636300CDBA85 /* ViewController.swift */,
