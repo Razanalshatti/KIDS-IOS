@@ -9,15 +9,22 @@
 /* Begin PBXBuildFile section */
 		B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24952BFB780C00C0AC02 /* NetworkManager.swift */; };
 		B50F24982BFB781D00C0AC02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* User.swift */; };
+		B50F24982BFB781D00C0AC02 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* Task.swift */; };
 		B5A9FC5D2BFC6BA200897686 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC5C2BFC6BA200897686 /* SnapKit */; };
 		B5A9FC5F2BFC6BA200897686 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC5E2BFC6BA200897686 /* SnapKit-Dynamic */; };
 		B5A9FC622BFC6BAD00897686 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC612BFC6BAD00897686 /* Alamofire */; };
 		B5A9FC642BFC6BAD00897686 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC632BFC6BAD00897686 /* AlamofireDynamic */; };
 		B5A9FC672BFC6BBE00897686 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC662BFC6BBE00897686 /* Kingfisher */; };
 		B5A9FC6A2BFC6BD800897686 /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC692BFC6BD800897686 /* Eureka */; };
+		B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC6B2BFC78C000897686 /* Reward.swift */; };
+		B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */; };
+		B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */; };
+		B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC712BFC956A00897686 /* Transfer.swift */; };
+		B5A9FC742BFC991F00897686 /* CompletedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC732BFC991F00897686 /* CompletedTask.swift */; };
+		B5A9FC762BFC9AB100897686 /* PointsTransferRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC752BFC9AB100897686 /* PointsTransferRequest.swift */; };
+		B5A9FC782BFCAEA800897686 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC772BFCAEA800897686 /* Parent.swift */; };
 		B5D48BFD2BFB636300CDBA85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D48BFC2BFB636300CDBA85 /* AppDelegate.swift */; };
 		B5D48BFF2BFB636300CDBA85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D48BFE2BFB636300CDBA85 /* SceneDelegate.swift */; };
-		B5D48C012BFB636300CDBA85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D48C002BFB636300CDBA85 /* ViewController.swift */; };
 		B5D48C042BFB636300CDBA85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C022BFB636300CDBA85 /* Main.storyboard */; };
 		B5D48C062BFB636300CDBA85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C052BFB636300CDBA85 /* Assets.xcassets */; };
 		B5D48C092BFB636300CDBA85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C072BFB636300CDBA85 /* LaunchScreen.storyboard */; };
@@ -25,11 +32,17 @@
 
 /* Begin PBXFileReference section */
 		B50F24952BFB780C00C0AC02 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		B50F24972BFB781D00C0AC02 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B50F24972BFB781D00C0AC02 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		B5A9FC6B2BFC78C000897686 /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
+		B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimRewards.swift; sourceTree = "<group>"; };
+		B5A9FC712BFC956A00897686 /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
+		B5A9FC732BFC991F00897686 /* CompletedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTask.swift; sourceTree = "<group>"; };
+		B5A9FC752BFC9AB100897686 /* PointsTransferRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsTransferRequest.swift; sourceTree = "<group>"; };
+		B5A9FC772BFCAEA800897686 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
 		B5D48BF92BFB636300CDBA85 /* KFH-Kids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KFH-Kids.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D48BFC2BFB636300CDBA85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5D48BFE2BFB636300CDBA85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B5D48C002BFB636300CDBA85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5D48C032BFB636300CDBA85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5D48C052BFB636300CDBA85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5D48C082BFB636300CDBA85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,7 +69,7 @@
 		B50F24912BFB75F900C0AC02 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				B5D48C002BFB636300CDBA85 /* ViewController.swift */,
+				B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -81,7 +94,13 @@
 		B50F24942BFB761400C0AC02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B50F24972BFB781D00C0AC02 /* User.swift */,
+				B50F24972BFB781D00C0AC02 /* Task.swift */,
+				B5A9FC6B2BFC78C000897686 /* Reward.swift */,
+				B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */,
+				B5A9FC712BFC956A00897686 /* Transfer.swift */,
+				B5A9FC732BFC991F00897686 /* CompletedTask.swift */,
+				B5A9FC752BFC9AB100897686 /* PointsTransferRequest.swift */,
+				B5A9FC772BFCAEA800897686 /* Parent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,9 +222,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */,
-				B5D48C012BFB636300CDBA85 /* ViewController.swift in Sources */,
 				B5D48BFD2BFB636300CDBA85 /* AppDelegate.swift in Sources */,
-				B50F24982BFB781D00C0AC02 /* User.swift in Sources */,
+				B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */,
+				B50F24982BFB781D00C0AC02 /* Task.swift in Sources */,
+				B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */,
+				B5A9FC762BFC9AB100897686 /* PointsTransferRequest.swift in Sources */,
+				B5A9FC742BFC991F00897686 /* CompletedTask.swift in Sources */,
+				B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */,
+				B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */,
+				B5A9FC782BFCAEA800897686 /* Parent.swift in Sources */,
 				B5D48BFF2BFB636300CDBA85 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
