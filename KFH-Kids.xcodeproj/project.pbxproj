@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24952BFB780C00C0AC02 /* NetworkManager.swift */; };
 		B50F24982BFB781D00C0AC02 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* Task.swift */; };
+		B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604902BFDD8DC00C70D2D /* TasksViewController.swift */; };
+		B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604922BFDD91C00C70D2D /* TaskCell.swift */; };
 		B5A9FC5D2BFC6BA200897686 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC5C2BFC6BA200897686 /* SnapKit */; };
 		B5A9FC5F2BFC6BA200897686 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC5E2BFC6BA200897686 /* SnapKit-Dynamic */; };
 		B5A9FC622BFC6BAD00897686 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC612BFC6BAD00897686 /* Alamofire */; };
@@ -36,6 +38,8 @@
 /* Begin PBXFileReference section */
 		B50F24952BFB780C00C0AC02 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B50F24972BFB781D00C0AC02 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		B58604902BFDD8DC00C70D2D /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		B58604922BFDD91C00C70D2D /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		B5A9FC6B2BFC78C000897686 /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
 		B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimRewards.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */,
 				E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */,
 				B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */,
+				B58604902BFDD8DC00C70D2D /* TasksViewController.swift */,
+				B58604922BFDD91C00C70D2D /* TaskCell.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -237,6 +243,7 @@
 				B5D48BFD2BFB636300CDBA85 /* AppDelegate.swift in Sources */,
 				B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */,
 				E0908BD42BFDD37E008EA18A /* TokenResponse.swift in Sources */,
+				B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */,
 				B50F24982BFB781D00C0AC02 /* Task.swift in Sources */,
 				B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */,
 				E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */,
@@ -245,6 +252,7 @@
 				B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */,
 				B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */,
 				B5A9FC782BFCAEA800897686 /* Parent.swift in Sources */,
+				B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */,
 				E0908BD32BFDD37E008EA18A /* Child.swift in Sources */,
 				B5D48BFF2BFB636300CDBA85 /* SceneDelegate.swift in Sources */,
 			);
