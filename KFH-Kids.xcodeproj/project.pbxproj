@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24952BFB780C00C0AC02 /* NetworkManager.swift */; };
-		B50F24982BFB781D00C0AC02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* User.swift */; };
 		B50F24982BFB781D00C0AC02 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* Task.swift */; };
 		B5A9FC5D2BFC6BA200897686 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC5C2BFC6BA200897686 /* SnapKit */; };
 		B5A9FC5F2BFC6BA200897686 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC5E2BFC6BA200897686 /* SnapKit-Dynamic */; };
@@ -28,6 +27,10 @@
 		B5D48C042BFB636300CDBA85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C022BFB636300CDBA85 /* Main.storyboard */; };
 		B5D48C062BFB636300CDBA85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C052BFB636300CDBA85 /* Assets.xcassets */; };
 		B5D48C092BFB636300CDBA85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C072BFB636300CDBA85 /* LaunchScreen.storyboard */; };
+		E0908BCF2BFDD36E008EA18A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */; };
+		E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */; };
+		E0908BD32BFDD37E008EA18A /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BD12BFDD37E008EA18A /* Child.swift */; };
+		E0908BD42BFDD37E008EA18A /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BD22BFDD37E008EA18A /* TokenResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,10 @@
 		B5D48C052BFB636300CDBA85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5D48C082BFB636300CDBA85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5D48C0A2BFB636300CDBA85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		E0908BD12BFDD37E008EA18A /* Child.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
+		E0908BD22BFDD37E008EA18A /* TokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +76,8 @@
 		B50F24912BFB75F900C0AC02 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */,
+				E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */,
 				B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */,
 			);
 			path = VC;
@@ -94,6 +103,8 @@
 		B50F24942BFB761400C0AC02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E0908BD12BFDD37E008EA18A /* Child.swift */,
+				E0908BD22BFDD37E008EA18A /* TokenResponse.swift */,
 				B50F24972BFB781D00C0AC02 /* Task.swift */,
 				B5A9FC6B2BFC78C000897686 /* Reward.swift */,
 				B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */,
@@ -221,16 +232,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0908BCF2BFDD36E008EA18A /* LoginViewController.swift in Sources */,
 				B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */,
 				B5D48BFD2BFB636300CDBA85 /* AppDelegate.swift in Sources */,
 				B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */,
+				E0908BD42BFDD37E008EA18A /* TokenResponse.swift in Sources */,
 				B50F24982BFB781D00C0AC02 /* Task.swift in Sources */,
 				B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */,
+				E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */,
 				B5A9FC762BFC9AB100897686 /* PointsTransferRequest.swift in Sources */,
 				B5A9FC742BFC991F00897686 /* CompletedTask.swift in Sources */,
 				B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */,
 				B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */,
 				B5A9FC782BFCAEA800897686 /* Parent.swift in Sources */,
+				E0908BD32BFDD37E008EA18A /* Child.swift in Sources */,
 				B5D48BFF2BFB636300CDBA85 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
