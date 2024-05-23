@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
         view.addSubview(profileIcon)
 
         // Username Label
-        usernameLabel.text = "Hi, Razan"
+        usernameLabel.text = "Hi, ..."
         usernameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         usernameLabel.textColor = .black
         view.addSubview(usernameLabel)
@@ -74,15 +74,22 @@ class HomeViewController: UIViewController {
         // Rewards Label
         let rewardsLabel = UILabel()
         rewardsLabel.text = "Rewards"
-        rewardsLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        rewardsLabel.font = UIFont.boldSystemFont(ofSize: 24)
         rewardsLabel.textColor = .black
+        rewardsLabel.frame = CGRect(x: 0, y: 0, width: 98, height: 33)
         myView.addSubview(rewardsLabel)
+        rewardsLabel.widthAnchor.constraint(equalToConstant: 98).isActive = true
+        rewardsLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
 
         // Rewards Subtitle
         let rewardsSubtitle = UILabel()
         rewardsSubtitle.text = "Complete tasks to get points"
         rewardsSubtitle.font = UIFont.systemFont(ofSize: 12)
         rewardsSubtitle.textColor = .lightGray
+        rewardsSubtitle.frame = CGRect(x: 0, y: 0, width: 155, height: 16)
+        rewardsSubtitle.translatesAutoresizingMaskIntoConstraints = false
+       
+
         myView.addSubview(rewardsSubtitle)
 
         // Reward Button with image background
@@ -95,8 +102,9 @@ class HomeViewController: UIViewController {
         // Service Section Label
         let serviceLabel = UILabel()
         serviceLabel.text = "Services"
-        serviceLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        serviceLabel.font = UIFont.boldSystemFont(ofSize: 24)
         serviceLabel.textColor = .black
+        serviceLabel.frame = CGRect(x: 0, y: 0, width: 93, height: 33)
         myView.addSubview(serviceLabel)
 
         // Transfer Points to Parent Button
