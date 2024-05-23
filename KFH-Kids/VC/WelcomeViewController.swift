@@ -1,10 +1,4 @@
 
-//  WelcomeViewController.swift
-//  KFH-Kids
-//
-//  Created by Aseel on 21/05/2024.
-//
-
 import UIKit
 import SnapKit
 class WelcomeViewController: UIViewController {

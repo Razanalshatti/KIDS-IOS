@@ -1,8 +1,3 @@
-//
-//  TransferPointsToGoldViewController.swift
-//  KFH-Kids
-//
-//  Created by Razan alshatti on 22/05/2024.
 
 import UIKit
 import SnapKit
