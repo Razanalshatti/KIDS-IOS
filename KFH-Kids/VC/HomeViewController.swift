@@ -31,12 +31,12 @@ class HomeViewController: UIViewController {
         setupConstraints()
         checkBonusButtonState()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
@@ -62,13 +62,14 @@ class HomeViewController: UIViewController {
         view.addSubview(coinIcon)
 
         coinLabel.text = "10"
-        coinLabel.font = UIFont.systemFont(ofSize: 18)
+        coinLabel.font = UIFont.systemFont(ofSize: 16)
         view.addSubview(coinLabel)
-        
+
         // Card Icon (Saving)
         cardIcon.setImage(UIImage(named: "saving"), for: .normal)
         cardIcon.contentMode = .scaleAspectFit
         cardIcon.clipsToBounds = true
+        cardIcon.addTarget(self, action: #selector(navigateToBankCard), for: .touchUpInside)
         view.addSubview(cardIcon)
 
         // Background Image
@@ -78,13 +79,13 @@ class HomeViewController: UIViewController {
 
         // Rewards Label
         rewardsLabel.text = "Rewards"
-        rewardsLabel.font = UIFont.boldSystemFont(ofSize: 21)
+        rewardsLabel.font = UIFont.boldSystemFont(ofSize: 18)
         rewardsLabel.textColor = .black
         view.addSubview(rewardsLabel)
 
         // Rewards Subtitle
         rewardsSubtitle.text = "Complete tasks to get points"
-        rewardsSubtitle.font = UIFont.systemFont(ofSize: 14)
+        rewardsSubtitle.font = UIFont.systemFont(ofSize: 12)
         rewardsSubtitle.textColor = .lightGray
         view.addSubview(rewardsSubtitle)
 
@@ -145,6 +146,11 @@ class HomeViewController: UIViewController {
         applyBlurEffect()
 
         present(vc, animated: true, completion: nil)
+    }
+
+    @objc func navigateToBankCard() {
+        let bankCardVC = BankCardViewController()
+        navigationController?.pushViewController(bankCardVC, animated: true)
     }
 
     func applyBlurEffect() {
