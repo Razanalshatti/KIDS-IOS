@@ -90,11 +90,11 @@ class HomeViewController: UIViewController {
         view.addSubview(rewardsSubtitle)
 
         // Reward Buttons
-        rewardButton1.setBackgroundImage(UIImage(named: "reward1"), for: .normal)
+        rewardButton1.setBackgroundImage(UIImage(named: "reward"), for: .normal)
         rewardButton1.contentMode = .scaleAspectFill
         view.addSubview(rewardButton1)
 
-        rewardButton2.setBackgroundImage(UIImage(named: "reward2"), for: .normal)
+        rewardButton2.setBackgroundImage(UIImage(named: "reward"), for: .normal)
         rewardButton2.contentMode = .scaleAspectFill
         view.addSubview(rewardButton2)
 
