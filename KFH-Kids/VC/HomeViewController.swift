@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     let profileIcon = UIImageView()
     let rewardButton1 = UIButton(type: .custom)
     let rewardButton2 = UIButton(type: .custom)
+    let rewardButton3 = UIButton(type: .custom)
     let transferPtsToGold = UIButton(type: .system)
     let transferPtsToMoney = UIButton(type: .system)
     let bonus = UIButton(type: .system)
@@ -57,12 +58,12 @@ class HomeViewController: UIViewController {
         view.addSubview(usernameLabel)
 
         // Coin Icon and Label
-        coinIcon.image = UIImage(systemName: "star.circle")
-        coinIcon.tintColor = .yellow
+        coinIcon.image = UIImage(named: "favourites")
+        coinIcon.contentMode = .scaleAspectFit
         view.addSubview(coinIcon)
 
         coinLabel.text = "10"
-        coinLabel.font = UIFont.systemFont(ofSize: 16)
+        coinLabel.font = UIFont.systemFont(ofSize: 18)
         view.addSubview(coinLabel)
 
         // Card Icon (Saving)
@@ -79,7 +80,7 @@ class HomeViewController: UIViewController {
 
         // Rewards Label
         rewardsLabel.text = "Rewards"
-        rewardsLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        rewardsLabel.font = UIFont.boldSystemFont(ofSize: 20)
         rewardsLabel.textColor = .black
         view.addSubview(rewardsLabel)
 
@@ -97,27 +98,36 @@ class HomeViewController: UIViewController {
         rewardButton2.setBackgroundImage(UIImage(named: "reward"), for: .normal)
         rewardButton2.contentMode = .scaleAspectFill
         view.addSubview(rewardButton2)
+        
+        rewardButton3.setBackgroundImage(UIImage(named: "reward"), for: .normal)
+        rewardButton3.contentMode = .scaleAspectFill
+        view.addSubview(rewardButton3)
 
         // Service Section Label
         serviceLabel.text = "Services"
-        serviceLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        serviceLabel.font = UIFont.boldSystemFont(ofSize: 20)
         serviceLabel.textColor = .black
         view.addSubview(serviceLabel)
 
         // Transfer Points to Gold Button
         transferPtsToGold.setTitle("Transfer Points To Gold", for: .normal)
-        styleButton(transferPtsToGold, color: UIColor(red: 1.0, green: 0.76, blue: 0.03, alpha: 1.0))
+        styleButton(transferPtsToGold, color: UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0))
+        transferPtsToGold.layer.cornerRadius = 20
+        transferPtsToGold.layer.masksToBounds = true
         transferPtsToGold.addTarget(self, action: #selector(transferToGoldButtonTapped), for: .touchUpInside)
         view.addSubview(transferPtsToGold)
 
         // Transfer Points to Money Button
         transferPtsToMoney.setTitle("Transfer Points To Money", for: .normal)
-        styleButton(transferPtsToMoney, color: UIColor(red: 1.0, green: 0.76, blue: 0.03, alpha: 1.0))
+        styleButton(transferPtsToMoney, color: UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0)) 
+        transferPtsToMoney.layer.cornerRadius = 20
+        transferPtsToMoney.layer.masksToBounds = true
         view.addSubview(transferPtsToMoney)
-
         // Bonus Button
         bonus.setTitle("Extra Points!", for: .normal)
-        styleButton(bonus, color: UIColor(red: 0.29, green: 0.89, blue: 0.76, alpha: 1.0))
+        styleButton(bonus, color: UIColor(red: 0.451, green: 0.859, blue: 0.835, alpha: 1.0))
+        bonus.layer.cornerRadius = 18
+        bonus.layer.masksToBounds = true
         bonus.addTarget(self, action: #selector(bonusButtonTapped), for: .touchUpInside)
         view.addSubview(bonus)
     }
@@ -169,7 +179,7 @@ class HomeViewController: UIViewController {
         bonus.isEnabled = false
         bonus.backgroundColor = .gray
 
-        bonusButtonDisabledUntil = Date().addingTimeInterval(24 * 60 * 60)
+        bonusButtonDisabledUntil = Date().addingTimeInterval(5)
         UserDefaults.standard.set(bonusButtonDisabledUntil, forKey: "bonusButtonDisabledUntil")
 
         startBonusButtonTimer()
@@ -190,7 +200,7 @@ class HomeViewController: UIViewController {
 
     func enableBonusButton() {
         bonus.isEnabled = true
-        bonus.backgroundColor = UIColor(red: 0.29, green: 0.89, blue: 0.76, alpha: 1.0)
+        bonus.backgroundColor = UIColor(red: 0.451, green: 0.859, blue: 0.835, alpha: 1.0)
         bonusButtonDisabledUntil = nil
         UserDefaults.standard.removeObject(forKey: "bonusButtonDisabledUntil")
     }
@@ -291,6 +301,13 @@ class HomeViewController: UIViewController {
             make.width.equalTo(100)
             make.height.equalTo(70)
         }
+        
+        rewardButton3.snp.makeConstraints { make in
+            make.top.equalTo(rewardsSubtitle.snp.bottom).offset(10)
+            make.left.equalTo(rewardButton2.snp.right).offset(20)
+            make.width.equalTo(100)
+            make.height.equalTo(70)
+        }
 
         serviceLabel.snp.makeConstraints { make in
             make.top.equalTo(rewardButton1.snp.bottom).offset(20)
@@ -299,23 +316,23 @@ class HomeViewController: UIViewController {
 
         transferPtsToGold.snp.makeConstraints { make in
             make.top.equalTo(serviceLabel.snp.bottom).offset(10)
-            make.left.equalTo(view).offset(20)
-            make.right.equalTo(view).offset(-20)
-            make.height.equalTo(50)
+            make.left.equalTo(view).offset(30)
+            make.width.equalTo(327)
+            make.height.equalTo(73)
         }
 
         transferPtsToMoney.snp.makeConstraints { make in
             make.top.equalTo(transferPtsToGold.snp.bottom).offset(10)
-            make.left.equalTo(view).offset(20)
-            make.right.equalTo(view).offset(-20)
-            make.height.equalTo(50)
+            make.left.equalTo(view).offset(30)
+            make.width.equalTo(327)
+            make.height.equalTo(73)
         }
 
         bonus.snp.makeConstraints { make in
             make.top.equalTo(transferPtsToMoney.snp.bottom).offset(10)
-            make.left.equalTo(view).offset(20)
-            make.right.equalTo(view).offset(-20)
-            make.height.equalTo(50)
+            make.left.equalTo(view).offset(30)
+            make.width.equalTo(322)
+            make.height.equalTo(69)
         }
     }
 }
