@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 
 //import UIKit
 //import SnapKit
+=======
+>>>>>>> main
 //
-//class TasksViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+//  TaskViewController.swift
+//  KFH-Kids
 //
+<<<<<<< HEAD
 //    let tableView = UITableView()
 //    var tasks: [Task] = []
 //    var totalPoints: Int = 0
@@ -94,6 +99,10 @@
 //        }
 //    }
 //}
+=======
+//  Created by Razan alshatti on 22/05/2024.
+//
+>>>>>>> main
 
 
 import UIKit

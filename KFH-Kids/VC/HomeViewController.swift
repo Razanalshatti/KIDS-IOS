@@ -1,3 +1,4 @@
+
 import UIKit
 import SnapKit
 import Eureka
@@ -21,7 +22,6 @@ class HomeViewController: UIViewController {
     let rewardsSubtitle = UILabel()
     let serviceLabel = UILabel()
     let coinLabel = UILabel()
-    var blurEffectView: UIVisualEffectView?
     var bonusButtonTimer: Timer?
     var bonusButtonDisabledUntil: Date?
 
@@ -119,10 +119,11 @@ class HomeViewController: UIViewController {
 
         // Transfer Points to Money Button
         transferPtsToMoney.setTitle("Transfer Points To Money", for: .normal)
-        styleButton(transferPtsToMoney, color: UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0)) 
+        styleButton(transferPtsToMoney, color: UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0))
         transferPtsToMoney.layer.cornerRadius = 20
         transferPtsToMoney.layer.masksToBounds = true
         view.addSubview(transferPtsToMoney)
+        
         // Bonus Button
         bonus.setTitle("Extra Points!", for: .normal)
         styleButton(bonus, color: UIColor(red: 0.451, green: 0.859, blue: 0.835, alpha: 1.0))
@@ -141,19 +142,26 @@ class HomeViewController: UIViewController {
 
     @objc func bonusButtonTapped() {
         let vc = ActivityViewController()
-        vc.modalPresentationStyle = .popover
-        vc.preferredContentSize = CGSize(width: 300, height: 400)
+        vc.modalPresentationStyle = .pageSheet
         vc.delegate = self
 
-        if let popoverController = vc.popoverPresentationController {
-            popoverController.sourceView = self.view
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popoverController.permittedArrowDirections = []
-            popoverController.delegate = self
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
         }
 
-        // Apply blur effect
-        applyBlurEffect()
+        present(vc, animated: true, completion: nil)
+    }
+
+    @objc func transferToGoldButtonTapped() {
+        let vc = TransferPointsToGoldViewController()
+        vc.modalPresentationStyle = .pageSheet
+        vc.delegate = self
+
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+        }
 
         present(vc, animated: true, completion: nil)
     }
@@ -163,23 +171,11 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(bankCardVC, animated: true)
     }
 
-    func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .light)
-        blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView?.frame = view.bounds
-        blurEffectView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView!)
-    }
-
-    func removeBlurEffect() {
-        blurEffectView?.removeFromSuperview()
-    }
-
     func disableBonusButton() {
         bonus.isEnabled = false
         bonus.backgroundColor = .gray
 
-        bonusButtonDisabledUntil = Date().addingTimeInterval(5)
+        bonusButtonDisabledUntil = Date().addingTimeInterval(1)
         UserDefaults.standard.set(bonusButtonDisabledUntil, forKey: "bonusButtonDisabledUntil")
 
         startBonusButtonTimer()
@@ -224,36 +220,27 @@ class HomeViewController: UIViewController {
         }
     }
 
-    @objc func transferToGoldButtonTapped() {
-        let vc = TransferPointsToGoldViewController()
-        vc.modalPresentationStyle = .popover
-        vc.preferredContentSize = CGSize(width: 300, height: 400)
-
-        if let popoverController = vc.popoverPresentationController {
-            popoverController.sourceView = self.view
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popoverController.permittedArrowDirections = []
-            popoverController.delegate = self
-        }
-
-        // Apply blur effect
-        applyBlurEffect()
-
-        present(vc, animated: true, completion: nil)
-    }
-
     func setupConstraints() {
+        
+        //MARK: Header:
         profileIcon.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.equalTo(view).offset(20)
             make.width.height.equalTo(40)
         }
-
         usernameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(profileIcon)
             make.left.equalTo(profileIcon.snp.right).offset(10)
         }
-
+        coinIcon.snp.makeConstraints { make in
+            make.centerY.equalTo(profileIcon)
+            make.right.equalTo(cardIcon.snp.left).offset(-10)
+            make.width.height.equalTo(30)
+        }
+        coinLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(profileIcon)
+            make.right.equalTo(coinIcon.snp.left).offset(-5)
+        }
         cardIcon.snp.makeConstraints { make in
             make.centerY.equalTo(profileIcon)
             make.right.equalTo(view).offset(-20)
@@ -261,23 +248,19 @@ class HomeViewController: UIViewController {
             make.height.equalTo(30) // Adjusted size
         }
 
-        coinIcon.snp.makeConstraints { make in
-            make.centerY.equalTo(profileIcon)
-            make.right.equalTo(cardIcon.snp.left).offset(-10)
-            make.width.height.equalTo(30)
-        }
 
-        coinLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(profileIcon)
-            make.right.equalTo(coinIcon.snp.left).offset(-5)
-        }
-
+        
+        //MARK: background image:
+        
         screenImage.snp.makeConstraints { make in
-            make.top.equalTo(usernameLabel.snp.bottom).offset(50)
+            make.top.equalTo(profileIcon.snp.bottom).offset(20)
             make.left.right.equalTo(view)
             make.height.equalTo(view).multipliedBy(0.3)
         }
+        
+        // MARK: rewards and service section
 
+      
         rewardsLabel.snp.makeConstraints { make in
             make.top.equalTo(screenImage.snp.bottom).offset(20)
             make.left.equalTo(view).offset(20)
@@ -337,20 +320,17 @@ class HomeViewController: UIViewController {
     }
 }
 
-// Ensure that HomeViewController conforms to UIPopoverPresentationControllerDelegate
-extension HomeViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        removeBlurEffect()
-    }
-}
-
+// Ensure that HomeViewController conforms to ActivityViewControllerDelegate
 extension HomeViewController: ActivityViewControllerDelegate {
     func didCompleteActivity() {
-        removeBlurEffect()
         disableBonusButton()
     }
 }
+
+// Ensure that HomeViewController conforms to TransferPointsToGoldDelegate
+extension HomeViewController: TransferPointsToGoldDelegate {
+    func removeBlurEffect() {
+        // No blur effect to remove
+    }
+}
+    

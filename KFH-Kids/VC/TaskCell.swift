@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //import UIKit
 //
 //class TaskCell: UITableViewCell {
@@ -62,6 +63,8 @@
 //        checkboxAction?()
 //    }
 //}
+=======
+>>>>>>> main
 
 import UIKit
 import SnapKit

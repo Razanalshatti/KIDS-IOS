@@ -1,4 +1,5 @@
 
+
 import UIKit
 import SnapKit
 
@@ -64,8 +65,13 @@ class TransferPointsToGoldViewController: UIViewController {
         view.addSubview(amountLabel)
 
         // Increase Button
-        increaseButton.setTitle("+", for: .normal)
-        increaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        // SF Symbols
+           let symbolConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .bold, scale: .large)
+           let symbolImage = UIImage(systemName: "plus.circle.fill", withConfiguration: symbolConfig)
+        increaseButton.setImage(symbolImage, for: .normal)
+        increaseButton.tintColor = .white
+//        increaseButton.setTitle("+", for: .normal)
+//        increaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 24)
         increaseButton.addTarget(self, action: #selector(increaseButtonTapped), for: .touchUpInside)
         view.addSubview(increaseButton)
 

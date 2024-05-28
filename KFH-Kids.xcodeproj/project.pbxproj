@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24952BFB780C00C0AC02 /* NetworkManager.swift */; };
 		B50F24982BFB781D00C0AC02 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* Task.swift */; };
+		B5269C732C04B32D00374E56 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5269C722C04B32D00374E56 /* QuizViewController.swift */; };
 		B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604902BFDD8DC00C70D2D /* TasksViewController.swift */; };
 		B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604922BFDD91C00C70D2D /* TaskCell.swift */; };
 		B58604952BFE02E400C70D2D /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604942BFE02E400C70D2D /* BankCardViewController.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		B50F24952BFB780C00C0AC02 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B50F24972BFB781D00C0AC02 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		B5269C722C04B32D00374E56 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		B58604902BFDD8DC00C70D2D /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		B58604922BFDD91C00C70D2D /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		B58604942BFE02E400C70D2D /* BankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				B58604942BFE02E400C70D2D /* BankCardViewController.swift */,
 				B58604962BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift */,
 				B598BE5C2BFF2ED2005C244C /* ActivityViewController.swift */,
+				B5269C722C04B32D00374E56 /* QuizViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */,
 				B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */,
 				B5A9FC782BFCAEA800897686 /* Parent.swift in Sources */,
+				B5269C732C04B32D00374E56 /* QuizViewController.swift in Sources */,
 				B58604952BFE02E400C70D2D /* BankCardViewController.swift in Sources */,
 				B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */,
 				B58604972BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift in Sources */,
