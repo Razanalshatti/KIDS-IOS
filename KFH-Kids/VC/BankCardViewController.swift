@@ -83,7 +83,10 @@ class BankCardViewController: UIViewController {
         
         // Show a confirmation alert
         let alert = UIAlertController(title: "Success", message: "Amount saved successfully", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            // Dismiss the current view controller and return to the home page
+            self.navigationController?.popViewController(animated: true)
+        }))
         present(alert, animated: true, completion: nil)
         
         // Clear the text field
