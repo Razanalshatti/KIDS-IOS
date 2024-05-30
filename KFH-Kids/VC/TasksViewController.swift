@@ -37,11 +37,8 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func loadTasks() {
         // Load your tasks data here
-        // This is just a sample. Replace it with your actual data loading logic.
         tasks = [
-            Task(id: 1, ParentId: 101, taskType: "Chore", description: "Clean your room", date: Date(), points: 10, children: "Child1", dueDate: Date(), isDone: false),
-            Task(id: 2, ParentId: 102, taskType: "Homework", description: "Do homework", date: Date().addingTimeInterval(-86400), points: 20, children: "Child2", dueDate: Date().addingTimeInterval(-86400), isDone: false),
-            Task(id: 3, ParentId: 103, taskType: "Chore", description: "Wash dishes", date: Date().addingTimeInterval(-172800), points: 5, children: "Child3", dueDate: Date().addingTimeInterval(-172800), isDone: true)
+            Task(Id: 1, ParentId: 1, TaskType: "Homework", Description: "Do your homework", Date: Date(), Points: 5, childId: 1, dueDate:  Date() , isCompleted: true, Parent: Parent(ParentId: 1, Username: "Razan", Password: "123", Email: "R@gmail.com", PhoneNumber: "94010640", children: "Wafaa"))
         ]
         tableView.reloadData()
     }
@@ -62,14 +59,14 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.checkboxAction = { [weak self] in
             guard let self = self else { return }
             var task = self.tasksForSection(indexPath.section)[indexPath.row]
-            task.isDone.toggle()
-            if task.isDone {
-                self.totalPoints += task.points
+            task.isCompleted.toggle()
+            if task.isCompleted {
+                self.totalPoints += task.Points
             } else {
-                self.totalPoints -= task.points
+                self.totalPoints -= task.Points
             }
-            if let index = self.tasks.firstIndex(where: { $0.id == task.id }) {
-                self.tasks[index].isDone = task.isDone
+            if let index = self.tasks.firstIndex(where: { $0.Id == task.Id }) {
+                self.tasks[index].isCompleted = task.isCompleted
             }
             self.tableView.reloadData()
         }
@@ -90,13 +87,14 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         let now = Date()
         switch section {
         case 0:
-            return tasks.filter { !$0.isDone && Calendar.current.isDateInToday($0.dueDate) }
+            return tasks.filter { !$0.isCompleted && Calendar.current.isDateInToday($0.dueDate) }
         case 1:
-            return tasks.filter { !$0.isDone && $0.dueDate < now && !Calendar.current.isDateInToday($0.dueDate) }
+            return tasks.filter { !$0.isCompleted && $0.dueDate < now && !Calendar.current.isDateInToday($0.dueDate) }
         case 2:
-            return tasks.filter { $0.isDone }
+            return tasks.filter { $0.isCompleted }
         default:
             return []
         }
     }
+    
 }
