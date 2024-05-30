@@ -1,6 +1,7 @@
 
 
 import Foundation
+import Alamofire
 
 
 class NetworkManager {
@@ -12,6 +13,17 @@ class NetworkManager {
     
     
     // MARK: Login
+    func login(child: Child, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
+        let URL = baseURL + "login"
+        AF.request(URL, method: .post, parameters: child, encoder: JSONParameterEncoder.default).responseDecodable(of: TokenResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+                completion(.success(value))
+            case .failure(let afError):
+                completion(.failure(afError as Error))
+            }
+        }
+    }
     
     
     // MARK: Fetch
