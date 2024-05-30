@@ -2,8 +2,8 @@
 
 import Foundation
 struct PointsTransferRequest: Codable{
-    var id: Int
-    var childId: Int
-    var type: String
+    var Id: Int
+    var ChildId: Int
+    var TransferPointType: String
     var deductedPoints: Int
 }

@@ -2,13 +2,14 @@
 
 import Foundation
 struct Child : Codable {
-    let id: Int
-    let username: String
-    let password: String
-    let parentId: Int
-    let points: Int
-    let baityAccountNumber: Int
-    let savingAccountingNumber: Int
-    let tasks: String
+    let Id: Int
+    let Username: String
+    let Password: String
+    let ParentId: Int
+    let Points: Int
+    let BaitiAccountNumber: Int
+    let SavingsAccountNumber: Int
+    let Balance: Decimal
+    let Tasks: String
     let request: String
 }

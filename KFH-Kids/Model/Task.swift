@@ -1,28 +1,16 @@
 
 import Foundation
-//struct Task : Codable {
-//    var id: Int
-//    var tarentId: Int
-//    var taskType: String
-//    var description: String
-//    var date: Date
-//    var points: Int
-//    var children: String
-//    let dueDate: Date
-//    var isDone: Bool
-//    var image: UIImage
-//}
-
-
 struct Task: Codable {
-    var id: Int
+    var Id: Int
     var ParentId: Int
-    var taskType: String
-    var description: String
-    var date: Date
-    var points: Int
-    var children: String
-    let dueDate: Date
-    var isDone: Bool
+    var TaskType: String
+    var Description: String
+    var Date: Date
+    var Points: Int
+    var childId: Int
+    var dueDate: Date
+    var isCompleted: Bool
+    var Parent: Parent
+    
 }
 

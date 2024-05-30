@@ -1,8 +1,8 @@
 
 import Foundation
 struct Transfer: Codable{
-    var id: Int
-    var childId: Int
+    var Id: Int
+    var ChildId: Int
     var amount: Int
-    var type: String
+    var TransferType: String
 }

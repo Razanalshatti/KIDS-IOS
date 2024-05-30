@@ -53,9 +53,9 @@ class TaskCell: UITableViewCell {
     }
     
     func configure(with task: Task) {
-        descriptionLabel.text = task.description
-        pointsLabel.text = "Points: \(task.points)"
-        checkboxButton.isSelected = task.isDone
+        descriptionLabel.text = task.Description
+        pointsLabel.text = "Points: \(task.Points)"
+        checkboxButton.isSelected = task.isCompleted
     }
     
     @objc func checkboxTapped() {

@@ -2,10 +2,10 @@
 
 import Foundation
 struct Parent: Codable{
-    var id: Int
-    var username: String
-    var password: String
-    var email: String
-    var phone_number: String
+    var ParentId: Int
+    var Username: String
+    var Password: String
+    var Email: String
+    var PhoneNumber: String
     var children: String
 }
