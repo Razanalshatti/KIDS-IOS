@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     var bonusButtonDisabledUntil: Date?
     var blurEffectView: UIVisualEffectView?
 
-    var child: Child?
+    var child: TokenResponse?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,7 @@ class HomeViewController: UIViewController {
         view.addSubview(profileIcon)
 
         // Username Label
-        usernameLabel.text = "Hi , \(child?.Username)"
+        usernameLabel.text = "Hi , \(child?.username ?? "No username passed!")"
         usernameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         usernameLabel.textColor = .black
         view.addSubview(usernameLabel)
@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
         coinIcon.image = UIImage(named: "favourites")
         coinIcon.contentMode = .scaleAspectFit
         view.addSubview(coinIcon)
-
+        coinLabel.text = "\(child?.points ?? 0)"
         coinLabel.font = UIFont.systemFont(ofSize: 18)
         view.addSubview(coinLabel)
 

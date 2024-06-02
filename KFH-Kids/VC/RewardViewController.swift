@@ -13,6 +13,8 @@ class RewardView: UIView {
     let backgroundView = UIView()
     let rewardImageView = UIImageView()
     let descriptionLabel = UILabel()
+    
+    //var child = TokenResponse()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,4 +69,5 @@ class RewardView: UIView {
         rewardImageView.image = image
         descriptionLabel.text = description
     }
+
 }

@@ -122,13 +122,15 @@ class LoginViewController: UIViewController {
         
         NetworkManager.shared.login(child: child) { [weak self] result in
             switch result {
-            case .success:
+            case .success(let tokenResponse):
                 DispatchQueue.main.async {
                     let homeViewController = HomeViewController()
+                    homeViewController.child = tokenResponse
                     self?.navigationController?.pushViewController(homeViewController, animated: true)
                 }
-            case .failure:
+            case .failure(let error):
                 DispatchQueue.main.async {
+    
                     self?.presentAlertWithTitle(title: "Error", message: "Username or password is incorrect")
                 }
             }
