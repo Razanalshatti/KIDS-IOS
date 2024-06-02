@@ -1,11 +1,3 @@
-//
-//  TaskViewController.swift
-//  KFH-Kids
-//
-//  Created by Razan alshatti on 22/05/2024.
-//
-
-
 import UIKit
 import SnapKit
 
@@ -13,12 +5,11 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     let tableView = UITableView()
     var tasks: [Task] = []
-    var totalPoints: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Assigned Tasks"
+        title = "Tasks"
 
         setupTableView()
         loadTasks()
@@ -29,6 +20,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(TaskCell.self, forCellReuseIdentifier: "TaskCell")
+        tableView.rowHeight = 80  // Adjusted row height
 
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view)
@@ -36,9 +28,10 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func loadTasks() {
-        // Load your tasks data here
         tasks = [
-            Task(Id: 1, ParentId: 1, TaskType: "Homework", Description: "Do your homework", Date: Date(), Points: 5, childId: 1, dueDate:  Date() , isCompleted: true, Parent: Parent(ParentId: 1, Username: "Razan", Password: "123", Email: "R@gmail.com", PhoneNumber: "94010640", children: "Wafaa"))
+            Task(id: 1, ParentId: 101, taskType: "Chore", description: "Clean your room", date: Date(), points: 10, children: "Child1", dueDate: Date(), isDone: false),
+            Task(id: 2, ParentId: 102, taskType: "Homework", description: "Do homework", date: Date().addingTimeInterval(-86400), points: 35, children: "Child2", dueDate: Date().addingTimeInterval(-86400), isDone: false),
+            Task(id: 3, ParentId: 103, taskType: "Done", description: "Watch TV 1 hour", date: Date().addingTimeInterval(-172800), points: 15, children: "Child3", dueDate: Date().addingTimeInterval(-172800), isDone: true)
         ]
         tableView.reloadData()
     }
@@ -51,6 +44,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         let sectionTasks = tasksForSection(section)
         return sectionTasks.count
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
         let task = tasksForSection(indexPath.section)[indexPath.row]
@@ -59,22 +53,14 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.checkboxAction = { [weak self] in
             guard let self = self else { return }
             var task = self.tasksForSection(indexPath.section)[indexPath.row]
-            task.isCompleted.toggle()
-            if task.isCompleted {
-                self.totalPoints += task.Points
-            } else {
-                self.totalPoints -= task.Points
-            }
-            if let index = self.tasks.firstIndex(where: { $0.Id == task.Id }) {
-                self.tasks[index].isCompleted = task.isCompleted
-            }
+            task.isDone.toggle()
             self.tableView.reloadData()
         }
 
         return cell
     }
 
-    func tableView( tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0: return "Today"
         case 1: return "Past"
@@ -87,14 +73,13 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         let now = Date()
         switch section {
         case 0:
-            return tasks.filter { !$0.isCompleted && Calendar.current.isDateInToday($0.dueDate) }
+            return tasks.filter { !$0.isDone && Calendar.current.isDateInToday($0.dueDate) }
         case 1:
-            return tasks.filter { !$0.isCompleted && $0.dueDate < now && !Calendar.current.isDateInToday($0.dueDate) }
+            return tasks.filter { !$0.isDone && $0.dueDate < now && !Calendar.current.isDateInToday($0.dueDate) }
         case 2:
-            return tasks.filter { $0.isCompleted }
+            return tasks.filter { $0.isDone }
         default:
             return []
         }
     }
-    
 }
