@@ -74,15 +74,15 @@ class TaskCell: UITableViewCell {
     }
     
     func configure(with task: Task) {
-        descriptionLabel.text = task.description
-        pointsLabel.text = "\(task.points)"
-        checkboxButton.isSelected = task.isDone
+        descriptionLabel.text = task.Description
+        pointsLabel.text = "\(task.Points)"
+        checkboxButton.isSelected = task.isCompleted
         
-        if task.isDone {
+        if task.isCompleted {
             taskBackgroundView.backgroundColor = UIColor(red: 0.98, green: 0.67, blue: 0.67, alpha: 1.0) // Pink color for done tasks
             pointsBackgroundView.backgroundColor = UIColor(red: 0.98, green: 0.67, blue: 0.67, alpha: 1.0)
         } else {
-            switch task.taskType {
+            switch task.TaskType {
             case "Chore":
                 taskBackgroundView.backgroundColor = UIColor(red: 0.29, green: 0.89, blue: 0.76, alpha: 1.0) // Blue color
                 pointsBackgroundView.backgroundColor = UIColor(red: 0.29, green: 0.89, blue: 0.76, alpha: 1.0)
