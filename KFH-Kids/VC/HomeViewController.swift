@@ -320,17 +320,17 @@ class HomeViewController: UIViewController {
     }
 }
 
-// Ensure that HomeViewController conforms to ActivityViewControllerDelegate
+// HomeViewController conforms to ActivityViewControllerDelegate
 extension HomeViewController: ActivityViewControllerDelegate {
     func didCompleteActivity() {
         disableBonusButton()
     }
 }
 
-// Ensure that HomeViewController conforms to TransferPointsToGoldDelegate
+// HomeViewController conforms to TransferPointsToGoldDelegate
 extension HomeViewController: TransferPointsToGoldDelegate {
     func removeBlurEffect() {
-        // No blur effect to remove
+        
     }
 }
     
