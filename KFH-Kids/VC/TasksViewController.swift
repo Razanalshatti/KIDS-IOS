@@ -29,9 +29,9 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func loadTasks() {
         tasks = [
-            Task(id: 1, ParentId: 101, taskType: "Chore", description: "Clean your room", date: Date(), points: 10, children: "Child1", dueDate: Date(), isDone: false),
-            Task(id: 2, ParentId: 102, taskType: "Homework", description: "Do homework", date: Date().addingTimeInterval(-86400), points: 35, children: "Child2", dueDate: Date().addingTimeInterval(-86400), isDone: false),
-            Task(id: 3, ParentId: 103, taskType: "Done", description: "Watch TV 1 hour", date: Date().addingTimeInterval(-172800), points: 15, children: "Child3", dueDate: Date().addingTimeInterval(-172800), isDone: true)
+            Task(Id: 1, ParentId: 101, TaskType: "Clean", Description: "Room", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 101, Username: "aseel", Password: "1234", Email: "A@gmail.com", PhoneNumber: "94010640", children: "razan")),
+            Task(Id: 1, ParentId: 102, TaskType: "HW", Description: "Math", Date: Date(), Points: 10, childId: 2, dueDate: Date().addingTimeInterval(-86400), isCompleted: true, Parent: Parent.init(ParentId: 102, Username: "nada", Password: "1234", Email: "N@gmail.com", PhoneNumber: "94999428", children: "aseel")),
+            Task(Id: 1, ParentId: 103, TaskType: "Play", Description: "Park", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 103, Username: "fatma", Password: "1234", Email: "F@gmail.com", PhoneNumber: "94010640", children: "razan"))
         ]
         tableView.reloadData()
     }
@@ -53,7 +53,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.checkboxAction = { [weak self] in
             guard let self = self else { return }
             var task = self.tasksForSection(indexPath.section)[indexPath.row]
-            task.isDone.toggle()
+            task.isCompleted.toggle()
             self.tableView.reloadData()
         }
 
@@ -73,11 +73,11 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         let now = Date()
         switch section {
         case 0:
-            return tasks.filter { !$0.isDone && Calendar.current.isDateInToday($0.dueDate) }
+            return tasks.filter { !$0.isCompleted && Calendar.current.isDateInToday($0.dueDate) }
         case 1:
-            return tasks.filter { !$0.isDone && $0.dueDate < now && !Calendar.current.isDateInToday($0.dueDate) }
+            return tasks.filter { !$0.isCompleted && $0.dueDate < now && !Calendar.current.isDateInToday($0.dueDate) }
         case 2:
-            return tasks.filter { $0.isDone }
+            return tasks.filter { $0.isCompleted }
         default:
             return []
         }
