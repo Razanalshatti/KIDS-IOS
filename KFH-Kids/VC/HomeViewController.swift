@@ -1,4 +1,3 @@
-
 import UIKit
 import SnapKit
 import Eureka
@@ -12,9 +11,9 @@ class HomeViewController: UIViewController {
     let coinIcon = UIImageView()
     let cardIcon = UIButton(type: .custom)
     let profileIcon = UIImageView()
-    let rewardButton1 = UIButton(type: .custom)
-    let rewardButton2 = UIButton(type: .custom)
-    let rewardButton3 = UIButton(type: .custom)
+    let rewardView1 = RewardView()
+    let rewardView2 = RewardView()
+    let rewardView3 = RewardView()
     let transferPtsToGold = UIButton(type: .system)
     let transferPtsToMoney = UIButton(type: .system)
     let bonus = UIButton(type: .system)
@@ -24,6 +23,7 @@ class HomeViewController: UIViewController {
     let coinLabel = UILabel()
     var bonusButtonTimer: Timer?
     var bonusButtonDisabledUntil: Date?
+    var blurEffectView: UIVisualEffectView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +74,10 @@ class HomeViewController: UIViewController {
         view.addSubview(cardIcon)
 
         // Background Image
-        screenImage.image = UIImage(named: "background")
+        screenImage.image = UIImage(named: "background2")
         screenImage.contentMode = .scaleAspectFill
+        screenImage.layer.cornerRadius = 40
+        screenImage.layer.masksToBounds = true
         view.addSubview(screenImage)
 
         // Rewards Label
@@ -90,18 +92,15 @@ class HomeViewController: UIViewController {
         rewardsSubtitle.textColor = .lightGray
         view.addSubview(rewardsSubtitle)
 
-        // Reward Buttons
-        rewardButton1.setBackgroundImage(UIImage(named: "reward"), for: .normal)
-        rewardButton1.contentMode = .scaleAspectFill
-        view.addSubview(rewardButton1)
-
-        rewardButton2.setBackgroundImage(UIImage(named: "reward"), for: .normal)
-        rewardButton2.contentMode = .scaleAspectFill
-        view.addSubview(rewardButton2)
+        // Reward Views
+        rewardView1.configure(image: UIImage(named: "dabdoob"), description: "Super Mario Adventures")
+        view.addSubview(rewardView1)
         
-        rewardButton3.setBackgroundImage(UIImage(named: "reward"), for: .normal)
-        rewardButton3.contentMode = .scaleAspectFill
-        view.addSubview(rewardButton3)
+        rewardView2.configure(image: UIImage(named: "teeela"), description: "Bluetooth headphones")
+        view.addSubview(rewardView2)
+        
+        rewardView3.configure(image: UIImage(named: "fantasy world"), description: "Accoustic guitar")
+        view.addSubview(rewardView3)
 
         // Service Section Label
         serviceLabel.text = "Services"
@@ -154,13 +153,14 @@ class HomeViewController: UIViewController {
     }
 
     @objc func transferToGoldButtonTapped() {
+        addBlurEffect()
         let vc = TransferPointsToGoldViewController()
         vc.modalPresentationStyle = .pageSheet
         vc.delegate = self
-
+        
+        
         if let sheet = vc.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.prefersGrabberVisible = true
+            sheet.detents = [.medium()]
         }
 
         present(vc, animated: true, completion: nil)
@@ -220,9 +220,18 @@ class HomeViewController: UIViewController {
         }
     }
 
+    func addBlurEffect() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        self.blurEffectView = blurEffectView
+    }
+
     func setupConstraints() {
         
-        //MARK: Header:
+        // Header
         profileIcon.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.equalTo(view).offset(20)
@@ -244,23 +253,18 @@ class HomeViewController: UIViewController {
         cardIcon.snp.makeConstraints { make in
             make.centerY.equalTo(profileIcon)
             make.right.equalTo(view).offset(-20)
-            make.width.equalTo(40) // Adjusted size
-            make.height.equalTo(30) // Adjusted size
+            make.width.equalTo(40)
+            make.height.equalTo(30)
         }
 
-
-        
-        //MARK: background image:
-        
+        // Background Image
         screenImage.snp.makeConstraints { make in
             make.top.equalTo(profileIcon.snp.bottom).offset(20)
             make.left.right.equalTo(view)
-            make.height.equalTo(view).multipliedBy(0.3)
+            make.height.equalTo(view).multipliedBy(0.23)
         }
-        
-        // MARK: rewards and service section
 
-      
+        // Rewards and Service Section
         rewardsLabel.snp.makeConstraints { make in
             make.top.equalTo(screenImage.snp.bottom).offset(20)
             make.left.equalTo(view).offset(20)
@@ -271,29 +275,29 @@ class HomeViewController: UIViewController {
             make.left.equalTo(view).offset(20)
         }
 
-        rewardButton1.snp.makeConstraints { make in
+        rewardView1.snp.makeConstraints { make in
             make.top.equalTo(rewardsSubtitle.snp.bottom).offset(10)
             make.left.equalTo(view).offset(20)
             make.width.equalTo(100)
-            make.height.equalTo(70)
+            make.height.equalTo(150)
         }
 
-        rewardButton2.snp.makeConstraints { make in
+        rewardView2.snp.makeConstraints { make in
             make.top.equalTo(rewardsSubtitle.snp.bottom).offset(10)
-            make.left.equalTo(rewardButton1.snp.right).offset(20)
+            make.left.equalTo(rewardView1.snp.right).offset(20)
             make.width.equalTo(100)
-            make.height.equalTo(70)
+            make.height.equalTo(150)
         }
         
-        rewardButton3.snp.makeConstraints { make in
+        rewardView3.snp.makeConstraints { make in
             make.top.equalTo(rewardsSubtitle.snp.bottom).offset(10)
-            make.left.equalTo(rewardButton2.snp.right).offset(20)
+            make.left.equalTo(rewardView2.snp.right).offset(20)
             make.width.equalTo(100)
-            make.height.equalTo(70)
+            make.height.equalTo(150)
         }
 
         serviceLabel.snp.makeConstraints { make in
-            make.top.equalTo(rewardButton1.snp.bottom).offset(20)
+            make.top.equalTo(rewardView1.snp.bottom).offset(20)
             make.left.equalTo(view).offset(20)
         }
 
@@ -329,8 +333,8 @@ extension HomeViewController: ActivityViewControllerDelegate {
 
 // Ensure that HomeViewController conforms to TransferPointsToGoldDelegate
 extension HomeViewController: TransferPointsToGoldDelegate {
+   
     func removeBlurEffect() {
-        // No blur effect to remove
+        blurEffectView?.removeFromSuperview()
     }
 }
-    

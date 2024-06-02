@@ -33,6 +33,8 @@
 		B5D48C042BFB636300CDBA85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C022BFB636300CDBA85 /* Main.storyboard */; };
 		B5D48C062BFB636300CDBA85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C052BFB636300CDBA85 /* Assets.xcassets */; };
 		B5D48C092BFB636300CDBA85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C072BFB636300CDBA85 /* LaunchScreen.storyboard */; };
+		E0461F142C0C400E00A34619 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F132C0C400E00A34619 /* RewardViewController.swift */; };
+		E0461F162C0C593900A34619 /* TransferPointsToMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */; };
 		E0908BCF2BFDD36E008EA18A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */; };
 		E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */; };
 		E0908BD32BFDD37E008EA18A /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BD12BFDD37E008EA18A /* Child.swift */; };
@@ -62,6 +64,8 @@
 		B5D48C052BFB636300CDBA85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5D48C082BFB636300CDBA85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5D48C0A2BFB636300CDBA85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0461F132C0C400E00A34619 /* RewardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
+		E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferPointsToMoneyViewController.swift; sourceTree = "<group>"; };
 		E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E0908BD12BFDD37E008EA18A /* Child.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 				B58604962BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift */,
 				B598BE5C2BFF2ED2005C244C /* ActivityViewController.swift */,
 				B5269C722C04B32D00374E56 /* QuizViewController.swift */,
+				E0461F132C0C400E00A34619 /* RewardViewController.swift */,
+				E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 				B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */,
 				E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */,
 				B5A9FC762BFC9AB100897686 /* PointsTransferRequest.swift in Sources */,
+				E0461F142C0C400E00A34619 /* RewardViewController.swift in Sources */,
 				B5A9FC742BFC991F00897686 /* CompletedTask.swift in Sources */,
 				B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */,
 				B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */,
@@ -270,6 +277,7 @@
 				B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */,
 				B58604972BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift in Sources */,
 				E0908BD32BFDD37E008EA18A /* Child.swift in Sources */,
+				E0461F162C0C593900A34619 /* TransferPointsToMoneyViewController.swift in Sources */,
 				B5D48BFF2BFB636300CDBA85 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
