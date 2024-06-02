@@ -9,7 +9,7 @@ import Alamofire
 
 class NetworkManager {
     
-    private let baseURL = "https://kidsapi20240528084240.azurewebsites.net/api"
+    private let baseURL = "https://kidsapi20240528084240.azurewebsites.net/api/"
     static let shared = NetworkManager()
     
     // MARK: Login
@@ -26,9 +26,9 @@ class NetworkManager {
     }
     
     // MARK: GetTasks
-    func GetTasks(child: Child, completion: @escaping (Result<[Task], Error>) -> Void) {
+    func GetTasks(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         let URL = baseURL + "Child/{childId}/GetTasks"
-        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [Task].self) { response in
+        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let tasks):
                 completion(.success(tasks))
@@ -39,9 +39,9 @@ class NetworkManager {
     }
     
     // MARK: GetRewards
-    func GetRewards(child: Child, completion: @escaping (Result<[Task], Error>) -> Void) {
+    func GetRewards(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         let URL = baseURL + "Child/{Id}/GetRewards"
-        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [Task].self) { response in
+        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let rewards):
                 completion(.success(rewards))
@@ -52,9 +52,9 @@ class NetworkManager {
     }
     
     // MARK: task completion
-    func taskCompletion(child: Child, completion: @escaping (Result<[Task], Error>) -> Void) {
+    func taskCompletion(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         let URL = baseURL + "Child/{childId}/tasks/{taskId}/complete"
-        AF.request(URL, method: .put, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [Task].self) { response in
+        AF.request(URL, method: .put, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let complete):
                 completion(.success(complete))
@@ -65,9 +65,9 @@ class NetworkManager {
     }
     
     // MARK: Balance
-    func getTasks(child: Child, completion: @escaping (Result<[Task], Error>) -> Void) {
+    func getTasks(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         let URL = baseURL + "Child/{childId}/balance"
-        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [Task].self) { response in
+        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let balance):
                 completion(.success(balance))
@@ -78,9 +78,9 @@ class NetworkManager {
     }
     
     // MARK: GetPoints
-    func GetPoints(child: Child, completion: @escaping (Result<[Task], Error>) -> Void) {
+    func GetPoints(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         let URL = baseURL + "Child/GetPoints/{ChildId}"
-        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [Task].self) { response in
+        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let points):
                 completion(.success(points))
@@ -91,9 +91,9 @@ class NetworkManager {
     }
     
     // MARK: transfer
-    func transfer(child: Child, completion: @escaping (Result<[Task], Error>) -> Void) {
+    func transfer(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         let URL = baseURL + "Child/{parentId}/transfer/{childId}"
-        AF.request(URL, method: .post, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [Task].self) { response in
+        AF.request(URL, method: .post, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let transfer):
                 completion(.success(transfer))
@@ -104,9 +104,9 @@ class NetworkManager {
     }
     
     // MARK: ClaimRewards
-    func ClaimRewards(child: Child, completion: @escaping (Result<[Task], Error>) -> Void) {
+    func ClaimRewards(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         let URL = baseURL + "Child/{childId}/claimedrewards"
-        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [Task].self) { response in
+        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let tasks):
                 completion(.success(tasks))

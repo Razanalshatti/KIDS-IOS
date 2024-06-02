@@ -118,7 +118,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        let child = Child(Id: 1, Username: username!, Password: password!, ParentId: 1, Points: 5, BaitiAccountNumber: 54, SavingsAccountNumber: 6789, Balance: 129, Tasks: "", request: username!)
+        let child = Child(Id: 1, Username: username!, Password: password!, ParentId: 1, Points: 5, BaitiAccountNumber: 54, SavingsAccountNumber: 6789, Balance: 129, Tasks: [], request: username!)
         
         NetworkManager.shared.login(child: child) { [weak self] result in
             switch result {

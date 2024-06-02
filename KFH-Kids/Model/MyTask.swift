@@ -1,6 +1,6 @@
 
 import Foundation
-struct Task: Codable {
+struct MyTask: Codable {
     var Id: Int
     var ParentId: Int
     var TaskType: String

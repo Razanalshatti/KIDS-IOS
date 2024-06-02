@@ -1,3 +1,4 @@
+
 import UIKit
 import SnapKit
 import Eureka
@@ -24,6 +25,8 @@ class HomeViewController: UIViewController {
     var bonusButtonTimer: Timer?
     var bonusButtonDisabledUntil: Date?
     var blurEffectView: UIVisualEffectView?
+
+    var child: Child?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +55,7 @@ class HomeViewController: UIViewController {
         view.addSubview(profileIcon)
 
         // Username Label
-        usernameLabel.text = "Hi, Fahad"
+        usernameLabel.text = "Hi , \(child?.Username)"
         usernameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         usernameLabel.textColor = .black
         view.addSubview(usernameLabel)
@@ -62,7 +65,6 @@ class HomeViewController: UIViewController {
         coinIcon.contentMode = .scaleAspectFit
         view.addSubview(coinIcon)
 
-        coinLabel.text = "10"
         coinLabel.font = UIFont.systemFont(ofSize: 18)
         view.addSubview(coinLabel)
 
@@ -322,6 +324,8 @@ class HomeViewController: UIViewController {
             make.height.equalTo(69)
         }
     }
+
+
 }
 
 // Ensure that HomeViewController conforms to ActivityViewControllerDelegate
@@ -333,7 +337,6 @@ extension HomeViewController: ActivityViewControllerDelegate {
 
 // Ensure that HomeViewController conforms to TransferPointsToGoldDelegate
 extension HomeViewController: TransferPointsToGoldDelegate {
-   
     func removeBlurEffect() {
         blurEffectView?.removeFromSuperview()
     }

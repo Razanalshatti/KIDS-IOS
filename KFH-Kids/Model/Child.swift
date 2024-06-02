@@ -10,7 +10,7 @@ struct Child : Codable {
     let BaitiAccountNumber: Int
     let SavingsAccountNumber: Int
     let Balance: Decimal
-    let Tasks: String
+    let Tasks: [MyTask]
     let request: String
 }
 

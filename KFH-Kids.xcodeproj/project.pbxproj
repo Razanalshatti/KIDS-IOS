@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24952BFB780C00C0AC02 /* NetworkManager.swift */; };
-		B50F24982BFB781D00C0AC02 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* Task.swift */; };
+		B50F24982BFB781D00C0AC02 /* MyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* MyTask.swift */; };
 		B5269C732C04B32D00374E56 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5269C722C04B32D00374E56 /* QuizViewController.swift */; };
 		B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604902BFDD8DC00C70D2D /* TasksViewController.swift */; };
 		B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604922BFDD91C00C70D2D /* TaskCell.swift */; };
@@ -43,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		B50F24952BFB780C00C0AC02 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		B50F24972BFB781D00C0AC02 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		B50F24972BFB781D00C0AC02 /* MyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTask.swift; sourceTree = "<group>"; };
 		B5269C722C04B32D00374E56 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		B58604902BFDD8DC00C70D2D /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		B58604922BFDD91C00C70D2D /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 			children = (
 				E0908BD12BFDD37E008EA18A /* Child.swift */,
 				E0908BD22BFDD37E008EA18A /* TokenResponse.swift */,
-				B50F24972BFB781D00C0AC02 /* Task.swift */,
+				B50F24972BFB781D00C0AC02 /* MyTask.swift */,
 				B5A9FC6B2BFC78C000897686 /* Reward.swift */,
 				B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */,
 				B5A9FC712BFC956A00897686 /* Transfer.swift */,
@@ -263,7 +263,7 @@
 				B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */,
 				E0908BD42BFDD37E008EA18A /* TokenResponse.swift in Sources */,
 				B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */,
-				B50F24982BFB781D00C0AC02 /* Task.swift in Sources */,
+				B50F24982BFB781D00C0AC02 /* MyTask.swift in Sources */,
 				B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */,
 				E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */,
 				B5A9FC762BFC9AB100897686 /* PointsTransferRequest.swift in Sources */,

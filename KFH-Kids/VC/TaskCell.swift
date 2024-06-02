@@ -73,7 +73,7 @@ class TaskCell: UITableViewCell {
         }
     }
     
-    func configure(with task: Task) {
+    func configure(with task: MyTask) {
         descriptionLabel.text = task.Description
         pointsLabel.text = "\(task.Points)"
         checkboxButton.isSelected = task.isCompleted
