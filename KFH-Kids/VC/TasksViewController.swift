@@ -5,6 +5,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     let tableView = UITableView()
     var tasks: [MyTask] = []
+    var child: TokenResponse?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,6 +14,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         setupTableView()
         loadTasks()
+//        fetchTasks(childId: Int)
     }
 
     func setupTableView() {
@@ -82,4 +84,28 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
             return []
         }
     }
+    
+    func fetchTasks(childId: Int) {
+        
+        NetworkManager.shared.GetTasks(childId: childId) { result in
+            switch result {
+            case .success(let tokenResponse):
+                
+                print("Success \(tokenResponse.count)")
+                DispatchQueue.main.async {
+
+                    self.tasks = tokenResponse
+
+                }
+            case .failure(let error):
+                
+                print("Failed! \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                }
+            }
+            
+        }
+        
+    }
+    
 }

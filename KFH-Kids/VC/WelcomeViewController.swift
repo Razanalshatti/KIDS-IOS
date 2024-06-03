@@ -4,12 +4,16 @@ import SnapKit
 class WelcomeViewController: UIViewController {
  var background = UIImageView()
     
+    
+    var tasks = [MyTask]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       setupBackground()
+        setupBackground()
         setupLetsStartButton()
         
+        //testing()
         
     }
     
@@ -64,6 +68,28 @@ class WelcomeViewController: UIViewController {
     }
     
     
+//    func testing() {
+//        
+//        NetworkManager.shared.GetTasks(childId:1) { result in
+//            switch result {
+//            case .success(let tokenResponse):
+//                
+//                print("Success \(tokenResponse.count)")
+//                DispatchQueue.main.async {
+//
+//                    self.tasks = tokenResponse
+//
+//                }
+//            case .failure(let error):
+//                
+//                print("Failed! \(error.localizedDescription)")
+//                DispatchQueue.main.async {
+//                }
+//            }
+//            
+//        }
+//        
+//    }
     
     
     

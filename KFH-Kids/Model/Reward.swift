@@ -2,11 +2,22 @@
 
 import Foundation
 struct Reward: Codable {
-    var Id: Int
-    var ParentId: Int
-    var RewardType: String
-    var Description: String
-    var RequiredPoints: Int
-    var children: String
-    var ChildId: Int
+    var id: Int
+    var rewardType: String
+    var description: String
+    var requiredPoints: Int
+    var children: String?
+    var childId: Int
 }
+
+/*
+ 
+
+"id":1,
+ "rewardType":"babdood",
+ "description":"work hard",
+ "requiredPoints":100,
+ "childId":1,
+ "children":null}
+ 
+ */

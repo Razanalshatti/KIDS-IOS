@@ -8,29 +8,29 @@
 import UIKit
 import SnapKit
 
-class RewardView: UIView {
+class RewardViewController: UIView {
     
     let backgroundView = UIView()
     let rewardImageView = UIImageView()
     let descriptionLabel = UILabel()
-    
-    //var child = TokenResponse()
+    // MARK: check the error with nawaf
+    var child : TokenResponse?
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupSubviews()
-        setupConstraints()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupSubviews()
-        setupConstraints()
-    }
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setupSubviews()
+//        setupConstraints()
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//        setupSubviews()
+//        setupConstraints()
+//    }
 
     private func setupSubviews() {
         // Background View
-        backgroundView.backgroundColor = UIColor(red: 1.0, green: 0.949, blue: 0.878, alpha: 1.0) // Adjust color as needed
+        backgroundView.backgroundColor = UIColor(red: 1.0, green: 0.949, blue: 0.878, alpha: 1.0) 
         backgroundView.layer.cornerRadius = 15
         backgroundView.layer.masksToBounds = true
         addSubview(backgroundView)

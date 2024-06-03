@@ -49,6 +49,7 @@ class LoginViewController: UIViewController {
         usernameTextField.placeholder = "Username"
         usernameTextField.backgroundColor = UIColor(white: 0.9, alpha: 1)
         usernameTextField.layer.cornerRadius = 20
+        usernameTextField.text = "Razan"
         usernameTextField.setLeftPaddingPoints(10)
         
         self.view.addSubview(usernameTextField)
@@ -66,6 +67,7 @@ class LoginViewController: UIViewController {
         passwordTextField.backgroundColor = UIColor(white: 0.9, alpha: 1)
         passwordTextField.layer.cornerRadius = 20
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.text = "1234"
         passwordTextField.setLeftPaddingPoints(10)
         
         self.view.addSubview(passwordTextField)
@@ -128,7 +130,7 @@ class LoginViewController: UIViewController {
                     homeViewController.child = tokenResponse
                     self?.navigationController?.pushViewController(homeViewController, animated: true)
                 }
-            case .failure(let error):
+            case .failure(_):
                 DispatchQueue.main.async {
     
                     self?.presentAlertWithTitle(title: "Error", message: "Username or password is incorrect")
@@ -137,14 +139,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+
     func presentAlertWithTitle(title: String, message: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        self.present(alert, animated: true, completion: nil)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            alert.dismiss(animated: true, completion: completion)
+        _ = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        _ = UIAlertAction(title: "OK", style: .default) { _ in
+            completion?()
         }
     }
+
 }
 
 extension UITextField {

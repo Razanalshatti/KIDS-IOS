@@ -39,8 +39,9 @@ class NetworkManager {
     
     // MARK: GetTasks
     func GetTasks(childId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
+        //Child/1/GetTasks
         let URL = baseURL + "Child/\(childId)/GetTasks"
-        AF.request(URL, method: .get, parameters: childId, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
+        AF.request(URL, method: .get).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let tasks):
                 //MARK: EXTRA LINE FOR DEBUGGING
@@ -58,19 +59,21 @@ class NetworkManager {
         }
     }
     
+    
+    
     // MARK: GetRewards
-    func GetRewards(childId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
-        let URL = baseURL + "Child/\(childId)/GetRewards"
-        AF.request(URL, method: .get, parameters: childId, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
+    func GetRewards(childId: Int,parentId:Int ,completion: @escaping (Result<[Reward], Error>) -> Void) {
+        let URL = baseURL + "Child/\(childId)/GetRewards?parentId=\(parentId)"
+        AF.request(URL, method: .get).responseDecodable(of: [Reward].self) { response in
             switch response.result {
             case .success(let rewards):
-                //MARK: EXTRA LINE FOR DEBUGGING
+                // MARK: EXTRA LINE FOR DEBUGGING
                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
                     print("Raw response: (\(str)")
                 }
                 completion(.success(rewards))
             case .failure(let afError):
-                //MARK: EXTRA LINE FOR DEBUGGING
+                // MARK: EXTRA LINE FOR DEBUGGING
                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
                     print("Raw response: (\(str)")
                 }
@@ -78,6 +81,7 @@ class NetworkManager {
             }
         }
     }
+
     
     // MARK: task completion
     func taskCompletion(childId: Int,taskId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
@@ -163,18 +167,17 @@ class NetworkManager {
             }
         }
     }
-    
     // MARK: ClaimRewards
-    func ClaimRewards(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
-        let URL = baseURL + "Child/{childId}/claimedrewards"
-        AF.request(URL, method: .get, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
+    func ClaimRewards(childId: Int, rewardId: Int, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
+        let URL = baseURL + "Child/\(childId)/claimedrewards/\(rewardId)"
+        AF.request(URL, method: .post).responseDecodable(of: TokenResponse.self) { response in
             switch response.result {
-            case .success(let tasks):
+            case .success(let claimedReward):
                 //MARK: EXTRA LINE FOR DEBUGGING
                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
                     print("Raw response: (\(str)")
                 }
-                completion(.success(tasks))
+                completion(.success(claimedReward))
             case .failure(let afError):
                 //MARK: EXTRA LINE FOR DEBUGGING
                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
@@ -184,6 +187,7 @@ class NetworkManager {
             }
         }
     }
+
     
     // MARK: Fetch functions
 
