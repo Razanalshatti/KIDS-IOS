@@ -4,8 +4,9 @@ import SnapKit
 class TasksViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let tableView = UITableView()
-    var tasks: [MyTask] = []
-    var child: TokenResponse?
+    let pointsBalanceLabel = UILabel()
+    var tasks: [Task] = []
+    var childPoints: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,8 +14,9 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         title = "Tasks"
 
         setupTableView()
+        setupPointsBalanceLabel()
         loadTasks()
-//        fetchTasks(childId: Int)
+        updatePointsBalance()
     }
 
     func setupTableView() {
@@ -25,21 +27,38 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.rowHeight = 80  // Adjusted row height
 
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view)
+            make.edges.equalTo(view).inset(UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0))
+        }
+    }
+
+    func setupPointsBalanceLabel() {
+        pointsBalanceLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        pointsBalanceLabel.textColor = .black
+        view.addSubview(pointsBalanceLabel)
+
+        pointsBalanceLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.centerX.equalTo(view)
         }
     }
 
     func loadTasks() {
         tasks = [
-            MyTask(Id: 1, ParentId: 101, TaskType: "Clean", Description: "Room", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 101, Username: "aseel", Password: "1234", Email: "A@gmail.com", PhoneNumber: "94010640", children: "razan")),
-            MyTask(Id: 1, ParentId: 102, TaskType: "HW", Description: "Math", Date: Date(), Points: 10, childId: 2, dueDate: Date().addingTimeInterval(-86400), isCompleted: true, Parent: Parent.init(ParentId: 102, Username: "nada", Password: "1234", Email: "N@gmail.com", PhoneNumber: "94999428", children: "aseel")),
-            MyTask(Id: 1, ParentId: 103, TaskType: "Play", Description: "Park", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 103, Username: "fatma", Password: "1234", Email: "F@gmail.com", PhoneNumber: "94010640", children: "razan"))
+            Task(Id: 1, ParentId: 101, TaskType: "Clean Your Bedroom", Description: "Room", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 101, Username: "aseel", Password: "1234", Email: "A@gmail.com", PhoneNumber: "94010640", children: "razan")),
+            Task(Id: 2, ParentId: 102, TaskType: "Do Your Homework", Description: "Math", Date: Date(), Points: 10, childId: 2, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 102, Username: "nada", Password: "1234", Email: "N@gmail.com", PhoneNumber: "94999428", children: "aseel")),
+            Task(Id: 3, ParentId: 103, TaskType: "Swimming Class and Gym Time", Description: "Park", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 103, Username: "fatma", Password: "1234", Email: "F@gmail.com", PhoneNumber: "94010640", children: "razan"))
         ]
         tableView.reloadData()
+        updatePointsBalance()
+    }
+
+    func updatePointsBalance() {
+        childPoints = tasks.filter { $0.isCompleted }.reduce(0) { $0 + $1.Points }
+        pointsBalanceLabel.text = "Points: \(childPoints)"
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2 // Updated to have two sections: Todo and Done
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,6 +75,10 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
             guard let self = self else { return }
             var task = self.tasksForSection(indexPath.section)[indexPath.row]
             task.isCompleted.toggle()
+            if let index = self.tasks.firstIndex(where: { $0.Id == task.Id }) {
+                self.tasks[index] = task
+            }
+            self.updatePointsBalance()
             self.tableView.reloadData()
         }
 
@@ -64,48 +87,20 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return "Today"
-        case 1: return "Past"
-        case 2: return "Done"
+        case 0: return "To Do Tasks" // Updated section title
+        case 1: return "Done Tasks" // Updated section title
         default: return nil
         }
     }
 
-    func tasksForSection(_ section: Int) -> [MyTask] {
-        let now = Date()
+    func tasksForSection(_ section: Int) -> [Task] {
         switch section {
         case 0:
-            return tasks.filter { !$0.isCompleted && Calendar.current.isDateInToday($0.dueDate) }
+            return tasks.filter { !$0.isCompleted }
         case 1:
-            return tasks.filter { !$0.isCompleted && $0.dueDate < now && !Calendar.current.isDateInToday($0.dueDate) }
-        case 2:
             return tasks.filter { $0.isCompleted }
         default:
             return []
         }
     }
-    
-    func fetchTasks(childId: Int) {
-        
-        NetworkManager.shared.GetTasks(childId: childId) { result in
-            switch result {
-            case .success(let tokenResponse):
-                
-                print("Success \(tokenResponse.count)")
-                DispatchQueue.main.async {
-
-                    self.tasks = tokenResponse
-
-                }
-            case .failure(let error):
-                
-                print("Failed! \(error.localizedDescription)")
-                DispatchQueue.main.async {
-                }
-            }
-            
-        }
-        
-    }
-    
 }

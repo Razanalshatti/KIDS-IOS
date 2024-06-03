@@ -5,16 +5,17 @@ class TaskCell: UITableViewCell {
     
     let descriptionLabel = UILabel()
     let pointsLabel = UILabel()
-    let checkboxButton = UIButton(type: .custom)
-    let taskBackgroundView = UIView()
-    let pointsBackgroundView = UIView()
+    let taskBackgroundView = UIImageView() // Changed to UIImageView
+    let pointsBackgroundView = UIImageView() // Changed to UIImageView
     
+    var task: Task?
     var checkboxAction: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupSubviews()
         setupConstraints()
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(taskTapped)))
     }
     
     required init?(coder: NSCoder) {
@@ -26,10 +27,11 @@ class TaskCell: UITableViewCell {
         taskBackgroundView.addSubview(descriptionLabel)
         contentView.addSubview(pointsBackgroundView)
         pointsBackgroundView.addSubview(pointsLabel)
-        contentView.addSubview(checkboxButton)
         
         taskBackgroundView.layer.cornerRadius = 20
+        taskBackgroundView.clipsToBounds = true // Ensure the image respects the corner radius
         pointsBackgroundView.layer.cornerRadius = 15
+        pointsBackgroundView.clipsToBounds = true
         
         descriptionLabel.font = UIFont.systemFont(ofSize: 16)
         descriptionLabel.textColor = .black
@@ -37,66 +39,51 @@ class TaskCell: UITableViewCell {
         pointsLabel.font = UIFont.systemFont(ofSize: 16)
         pointsLabel.textColor = .black
         pointsLabel.textAlignment = .center
-        
-        checkboxButton.setImage(UIImage(systemName: "square"), for: .normal)
-        checkboxButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
-        checkboxButton.addTarget(self, action: #selector(checkboxTapped), for: .touchUpInside)
     }
     
     func setupConstraints() {
-        checkboxButton.snp.makeConstraints { make in
-            make.left.equalTo(contentView).offset(10)
-            make.centerY.equalTo(contentView)
-            make.width.height.equalTo(24)
-        }
-        
         taskBackgroundView.snp.makeConstraints { make in
-            make.left.equalTo(checkboxButton.snp.right).offset(10)
+            make.left.equalTo(contentView).offset(10)
             make.top.bottom.equalTo(contentView).inset(5)
             make.right.equalTo(pointsBackgroundView.snp.left).offset(-10)
             make.height.equalTo(60)
-            make.width.equalTo(100)
+        }
+        
+        pointsBackgroundView.snp.makeConstraints { make in
+            //make.centerY.equalTo(contentView)
+            make.right.equalTo(contentView).offset(-10)
+            make.width.height.equalTo(60)
+            make.centerX.equalTo(taskBackgroundView)
+            make.centerY.equalTo(taskBackgroundView)
+           
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.edges.equalTo(taskBackgroundView).inset(10)
         }
         
-        pointsBackgroundView.snp.makeConstraints { make in
-            make.centerY.equalTo(contentView)
-            make.right.equalTo(contentView).offset(-10)
-            make.width.height.equalTo(40)
-        }
-        
         pointsLabel.snp.makeConstraints { make in
-            make.edges.equalTo(pointsBackgroundView).inset(5)
+            make.edges.equalTo(pointsBackgroundView).inset(10)
+            
         }
     }
+
     
-    func configure(with task: MyTask) {
+    func configure(with task: Task) {
+        self.task = task
         descriptionLabel.text = task.Description
         pointsLabel.text = "\(task.Points)"
-        checkboxButton.isSelected = task.isCompleted
         
         if task.isCompleted {
-            taskBackgroundView.backgroundColor = UIColor(red: 0.98, green: 0.67, blue: 0.67, alpha: 1.0) // Pink color for done tasks
-            pointsBackgroundView.backgroundColor = UIColor(red: 0.98, green: 0.67, blue: 0.67, alpha: 1.0)
+            taskBackgroundView.image = UIImage(named: "GroupGreen3")
+            pointsBackgroundView.image = UIImage(named: "Point3")
         } else {
-            switch task.TaskType {
-            case "Chore":
-                taskBackgroundView.backgroundColor = UIColor(red: 0.29, green: 0.89, blue: 0.76, alpha: 1.0) // Blue color
-                pointsBackgroundView.backgroundColor = UIColor(red: 0.29, green: 0.89, blue: 0.76, alpha: 1.0)
-            case "Homework":
-                taskBackgroundView.backgroundColor = UIColor(red: 1.0, green: 0.82, blue: 0.546, alpha: 1.0) // Orange color
-                pointsBackgroundView.backgroundColor = UIColor(red: 1.0, green: 0.82, blue: 0.546, alpha: 1.0)
-            default:
-                taskBackgroundView.backgroundColor = UIColor(red: 0.51, green: 0.89, blue: 0.89, alpha: 1.0) // Default blue color
-                pointsBackgroundView.backgroundColor = UIColor(red: 0.51, green: 0.89, blue: 0.89, alpha: 1.0)
-            }
+            taskBackgroundView.image = UIImage(named: "GroupGreen2")
+            pointsBackgroundView.image = UIImage(named: "Point2")
         }
     }
     
-    @objc func checkboxTapped() {
+    @objc func taskTapped() {
         checkboxAction?()
     }
 }
