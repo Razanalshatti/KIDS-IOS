@@ -14,6 +14,7 @@
 		B57B3D4A2C0F10DA0036E30F /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B3D492C0F10DA0036E30F /* HeaderTableViewCell.swift */; };
 		B57B3D4C2C0F2F730036E30F /* TextingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B3D4B2C0F2F730036E30F /* TextingTableViewCell.swift */; };
 		B57B3D4E2C0F3B5E0036E30F /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B3D4D2C0F3B5E0036E30F /* ImageTableViewCell.swift */; };
+		B57B3D502C0F448E0036E30F /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B3D4F2C0F448E0036E30F /* ServiceTableViewCell.swift */; };
 		B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604902BFDD8DC00C70D2D /* TasksViewController.swift */; };
 		B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604922BFDD91C00C70D2D /* TaskCell.swift */; };
 		B58604952BFE02E400C70D2D /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58604942BFE02E400C70D2D /* BankCardViewController.swift */; };
@@ -55,6 +56,7 @@
 		B57B3D492C0F10DA0036E30F /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B57B3D4B2C0F2F730036E30F /* TextingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextingTableViewCell.swift; sourceTree = "<group>"; };
 		B57B3D4D2C0F3B5E0036E30F /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		B57B3D4F2C0F448E0036E30F /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		B58604902BFDD8DC00C70D2D /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		B58604922BFDD91C00C70D2D /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		B58604942BFE02E400C70D2D /* BankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				E0461F172C0EF17F00A34619 /* RewardCell.swift */,
 				B57B3D492C0F10DA0036E30F /* HeaderTableViewCell.swift */,
 				B57B3D4D2C0F3B5E0036E30F /* ImageTableViewCell.swift */,
+				B57B3D4F2C0F448E0036E30F /* ServiceTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */,
 				E0908BD42BFDD37E008EA18A /* TokenResponse.swift in Sources */,
 				B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */,
+				B57B3D502C0F448E0036E30F /* ServiceTableViewCell.swift in Sources */,
 				B50F24982BFB781D00C0AC02 /* MyTask.swift in Sources */,
 				B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */,
 				E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */,

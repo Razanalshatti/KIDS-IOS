@@ -29,6 +29,7 @@ class HomeTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.register(ServiceTableViewCell.self, forCellReuseIdentifier: "ServiceCell")
         tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: "ImageCell")
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: "HeaderCell")
         tableView.register(RewardCell.self, forCellReuseIdentifier: "RewardCell")
@@ -129,7 +130,10 @@ class HomeTableViewController: UITableViewController {
         } else if indexPath.section == 3 {
             
             // Service cell
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as! ServiceTableViewCell
+            
+//            cell.transferPtsToGold.titleLabel 
+            return cell
             
         } else {
             return UITableViewCell()
