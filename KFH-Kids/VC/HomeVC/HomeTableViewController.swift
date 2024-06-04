@@ -8,10 +8,10 @@
 import UIKit
 
 //MARK: Todo
-///  Create cell --> Header
+///  Create cell --> Header ✅
 ///  Image Cell -> Image
 ///  Reward Cell --> UIColecitonView
-///  Service Cell -> UITableViewCell
+///  Service Cell -> UITableViewCell 
 
 class HomeTableViewController: UITableViewController {
     
@@ -29,10 +29,13 @@ class HomeTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: "ImageCell")
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: "HeaderCell")
         tableView.register(RewardCell.self, forCellReuseIdentifier: "RewardCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         fetchRewards(childId: child?.childId ?? 0, parentId: child?.parentId ?? 0)
+        
+        self.tableView.separatorColor = UIColor.clear
         
         print("Rewards Count: \(rewards.count)")
         
@@ -103,7 +106,10 @@ class HomeTableViewController: UITableViewController {
             
         } else if indexPath.section == 1 {
             // Image Cell
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageTableViewCell
+            cell.backgroundImageView.image = UIImage(named: "background2")
+//            cell.backgroundImageView.image = UIImage(named: "background2")
+            return cell
             
         } else if indexPath.section == 2 {
             // Reward cell
