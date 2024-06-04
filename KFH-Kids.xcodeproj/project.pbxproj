@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6EEC7ECC2C0F0DA00075F183 /* BalanceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC7ECB2C0F0DA00075F183 /* BalanceResponse.swift */; };
 		B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24952BFB780C00C0AC02 /* NetworkManager.swift */; };
 		B50F24982BFB781D00C0AC02 /* MyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* MyTask.swift */; };
 		B5269C732C04B32D00374E56 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5269C722C04B32D00374E56 /* QuizViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6EEC7ECB2C0F0DA00075F183 /* BalanceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceResponse.swift; sourceTree = "<group>"; };
 		B50F24952BFB780C00C0AC02 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B50F24972BFB781D00C0AC02 /* MyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTask.swift; sourceTree = "<group>"; };
 		B5269C722C04B32D00374E56 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				B5A9FC732BFC991F00897686 /* CompletedTask.swift */,
 				B5A9FC752BFC9AB100897686 /* PointsTransferRequest.swift */,
 				B5A9FC772BFCAEA800897686 /* Parent.swift */,
+				6EEC7ECB2C0F0DA00075F183 /* BalanceResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */,
 				B5A9FC782BFCAEA800897686 /* Parent.swift in Sources */,
 				E0461F182C0EF17F00A34619 /* RewardCell.swift in Sources */,
+				6EEC7ECC2C0F0DA00075F183 /* BalanceResponse.swift in Sources */,
 				B5269C732C04B32D00374E56 /* QuizViewController.swift in Sources */,
 				B58604952BFE02E400C70D2D /* BankCardViewController.swift in Sources */,
 				B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */,
