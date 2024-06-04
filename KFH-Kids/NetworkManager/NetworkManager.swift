@@ -1,4 +1,5 @@
 import Alamofire
+import Foundation
 
 //MARK: Check list ✅
 /// 1- Check endpoint
@@ -106,25 +107,24 @@ class NetworkManager {
 
     
     // MARK: Balance
-    func getTasks(childId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
-        let URL = baseURL + "Child/{childId}/balance"
-        AF.request(URL, method: .get, parameters: childId, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
-            switch response.result {
-            case .success(let balance):
-                //MARK: EXTRA LINE FOR DEBUGGING
-                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
-                }
-                completion(.success(balance))
+    func getBalance(token: String, childId: Int, completion: @escaping (Result<BalanceResponse, Error>) -> Void) {
+        let URL = baseURL + "Child/\(childId)/balance"
+        let headers: HTTPHeaders = [.authorization(bearerToken: token)]
+        AF.request(URL, method: .get, parameters: childId, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result{
+            case .success(let data):
+                do {
+                    let balance = try JSONDecoder().decode(BalanceResponse.self, from: data ?? Data())
+                    completion(.success(balance))
+                    } catch {
+                        completion(.failure(error))
+                    }
             case .failure(let afError):
-                //MARK: EXTRA LINE FOR DEBUGGING
-                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
-                }
                 completion(.failure(afError as Error))
             }
         }
     }
+ 
     
     // MARK: GetPoints
     func GetPoints(childId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
