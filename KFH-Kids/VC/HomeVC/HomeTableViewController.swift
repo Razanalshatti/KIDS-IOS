@@ -29,7 +29,7 @@ class HomeTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+        tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: "HeaderCell")
         tableView.register(RewardCell.self, forCellReuseIdentifier: "RewardCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         fetchRewards(childId: child?.childId ?? 0, parentId: child?.parentId ?? 0)
@@ -37,6 +37,7 @@ class HomeTableViewController: UITableViewController {
         print("Rewards Count: \(rewards.count)")
         
     }
+    
     
     // MARK: - Table view data source
     
@@ -93,7 +94,12 @@ class HomeTableViewController: UITableViewController {
         
         if indexPath.section == 0 {
             
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderTableViewCell
+            
+            cell.usernameLabel.text = child?.username
+            cell.coinLabel.text = String(child?.points ?? 0)
+            
+            return cell
             
         } else if indexPath.section == 1 {
             // Image Cell
@@ -130,7 +136,17 @@ class HomeTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        if indexPath.section == 0 {
+            return 50
+        } else if indexPath.section == 1 {
+            return 200
+        } else if indexPath.section == 2 {
+         return 200
+        } else if indexPath.section == 3 {
+            return 75
+        } else {
+            return 100
+        }
     }
     
     
