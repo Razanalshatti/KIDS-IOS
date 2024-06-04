@@ -19,7 +19,7 @@ class WelcomeViewController: UIViewController {
     
     func setupBackground(){
         background = UIImageView()
-        background.image = UIImage(named: "welcome-3")
+        background.image = UIImage(named: "welcome")
         background.contentMode = .scaleAspectFill
         background.clipsToBounds = true
         

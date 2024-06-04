@@ -5,7 +5,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     let tableView = UITableView()
     let pointsBalanceLabel = UILabel()
-    var tasks: [Task] = []
+    var tasks: [MyTask] = []
     var childPoints: Int = 0
 
     override func viewDidLoad() {
@@ -44,9 +44,9 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func loadTasks() {
         tasks = [
-            Task(Id: 1, ParentId: 101, TaskType: "Clean Your Bedroom", Description: "Room", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 101, Username: "aseel", Password: "1234", Email: "A@gmail.com", PhoneNumber: "94010640", children: "razan")),
-            Task(Id: 2, ParentId: 102, TaskType: "Do Your Homework", Description: "Math", Date: Date(), Points: 10, childId: 2, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 102, Username: "nada", Password: "1234", Email: "N@gmail.com", PhoneNumber: "94999428", children: "aseel")),
-            Task(Id: 3, ParentId: 103, TaskType: "Swimming Class and Gym Time", Description: "Park", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 103, Username: "fatma", Password: "1234", Email: "F@gmail.com", PhoneNumber: "94010640", children: "razan"))
+            MyTask(Id: 1, ParentId: 101, TaskType: "Clean Your Bedroom", Description: "Room", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 101, Username: "aseel", Password: "1234", Email: "A@gmail.com", PhoneNumber: "94010640", children: "razan")),
+            MyTask(Id: 2, ParentId: 102, TaskType: "Do Your Homework", Description: "Math", Date: Date(), Points: 10, childId: 2, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 102, Username: "nada", Password: "1234", Email: "N@gmail.com", PhoneNumber: "94999428", children: "aseel")),
+            MyTask(Id: 3, ParentId: 103, TaskType: "Swimming Class and Gym Time", Description: "Park", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 103, Username: "fatma", Password: "1234", Email: "F@gmail.com", PhoneNumber: "94010640", children: "razan"))
         ]
         tableView.reloadData()
         updatePointsBalance()
@@ -93,7 +93,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
 
-    func tasksForSection(_ section: Int) -> [Task] {
+    func tasksForSection(_ section: Int) -> [MyTask] {
         switch section {
         case 0:
             return tasks.filter { !$0.isCompleted }

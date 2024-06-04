@@ -8,7 +8,7 @@ class TaskCell: UITableViewCell {
     let taskBackgroundView = UIImageView() // Changed to UIImageView
     let pointsBackgroundView = UIImageView() // Changed to UIImageView
     
-    var task: Task?
+    var task: MyTask?
     var checkboxAction: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -69,7 +69,7 @@ class TaskCell: UITableViewCell {
     }
 
     
-    func configure(with task: Task) {
+    func configure(with task: MyTask) {
         self.task = task
         descriptionLabel.text = task.Description
         pointsLabel.text = "\(task.Points)"

@@ -35,6 +35,8 @@
 		B5D48C092BFB636300CDBA85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C072BFB636300CDBA85 /* LaunchScreen.storyboard */; };
 		E0461F142C0C400E00A34619 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F132C0C400E00A34619 /* RewardViewController.swift */; };
 		E0461F162C0C593900A34619 /* TransferPointsToMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */; };
+		E0461F182C0EF17F00A34619 /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F172C0EF17F00A34619 /* RewardCell.swift */; };
+		E0461F1F2C0EF8F000A34619 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F1E2C0EF8F000A34619 /* HomeTableViewController.swift */; };
 		E0908BCF2BFDD36E008EA18A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */; };
 		E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */; };
 		E0908BD32BFDD37E008EA18A /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BD12BFDD37E008EA18A /* Child.swift */; };
@@ -66,6 +68,8 @@
 		B5D48C0A2BFB636300CDBA85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0461F132C0C400E00A34619 /* RewardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferPointsToMoneyViewController.swift; sourceTree = "<group>"; };
+		E0461F172C0EF17F00A34619 /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
+		E0461F1E2C0EF8F000A34619 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E0908BD12BFDD37E008EA18A /* Child.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
@@ -92,16 +96,9 @@
 		B50F24912BFB75F900C0AC02 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */,
-				E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */,
-				B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */,
+				E0461F1A2C0EF7EB00A34619 /* Welcome-Login */,
+				E0461F1B2C0EF83200A34619 /* HomeVC */,
 				B58604902BFDD8DC00C70D2D /* TasksViewController.swift */,
-				B58604922BFDD91C00C70D2D /* TaskCell.swift */,
-				B58604942BFE02E400C70D2D /* BankCardViewController.swift */,
-				B58604962BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift */,
-				B598BE5C2BFF2ED2005C244C /* ActivityViewController.swift */,
-				B5269C722C04B32D00374E56 /* QuizViewController.swift */,
-				E0461F132C0C400E00A34619 /* RewardViewController.swift */,
 				E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */,
 			);
 			path = VC;
@@ -169,6 +166,39 @@
 				B5D48C0A2BFB636300CDBA85 /* Info.plist */,
 			);
 			path = "KFH-Kids";
+			sourceTree = "<group>";
+		};
+		E0461F192C0EF7D300A34619 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B58604922BFDD91C00C70D2D /* TaskCell.swift */,
+				E0461F172C0EF17F00A34619 /* RewardCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E0461F1A2C0EF7EB00A34619 /* Welcome-Login */ = {
+			isa = PBXGroup;
+			children = (
+				E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */,
+				E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */,
+			);
+			path = "Welcome-Login";
+			sourceTree = "<group>";
+		};
+		E0461F1B2C0EF83200A34619 /* HomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */,
+				E0461F1E2C0EF8F000A34619 /* HomeTableViewController.swift */,
+				B58604942BFE02E400C70D2D /* BankCardViewController.swift */,
+				B58604962BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift */,
+				B598BE5C2BFF2ED2005C244C /* ActivityViewController.swift */,
+				E0461F132C0C400E00A34619 /* RewardViewController.swift */,
+				B5269C722C04B32D00374E56 /* QuizViewController.swift */,
+				E0461F192C0EF7D300A34619 /* Cells */,
+			);
+			path = HomeVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +302,7 @@
 				B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */,
 				B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */,
 				B5A9FC782BFCAEA800897686 /* Parent.swift in Sources */,
+				E0461F182C0EF17F00A34619 /* RewardCell.swift in Sources */,
 				B5269C732C04B32D00374E56 /* QuizViewController.swift in Sources */,
 				B58604952BFE02E400C70D2D /* BankCardViewController.swift in Sources */,
 				B58604932BFDD91C00C70D2D /* TaskCell.swift in Sources */,
@@ -279,6 +310,7 @@
 				E0908BD32BFDD37E008EA18A /* Child.swift in Sources */,
 				E0461F162C0C593900A34619 /* TransferPointsToMoneyViewController.swift in Sources */,
 				B5D48BFF2BFB636300CDBA85 /* SceneDelegate.swift in Sources */,
+				E0461F1F2C0EF8F000A34619 /* HomeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,4 +1,3 @@
-
 import UIKit
 import SnapKit
 import Eureka
@@ -123,7 +122,9 @@ class HomeViewController: UIViewController {
         
         // Transfer Points to Gold Button
         transferPtsToGold.setTitle("Transfer Points To Gold", for: .normal)
-        styleButton(transferPtsToGold, color: UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0))
+        transferPtsToGold.setTitleColor(.white, for: .normal)
+        transferPtsToGold.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        transferPtsToGold.setBackgroundImage(UIImage(named: "GroupGreen2"), for: .normal)
         transferPtsToGold.layer.cornerRadius = 20
         transferPtsToGold.layer.masksToBounds = true
         transferPtsToGold.addTarget(self, action: #selector(transferToGoldButtonTapped), for: .touchUpInside)
@@ -131,15 +132,19 @@ class HomeViewController: UIViewController {
         
         // Transfer Points to Money Button
         transferPtsToMoney.setTitle("Transfer Points To Money", for: .normal)
-        styleButton(transferPtsToMoney, color: UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0))
+        transferPtsToMoney.setTitleColor(.white, for: .normal)
+        transferPtsToMoney.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        transferPtsToMoney.setBackgroundImage(UIImage(named: "GroupGreen3"), for: .normal)
         transferPtsToMoney.layer.cornerRadius = 20
         transferPtsToMoney.layer.masksToBounds = true
         view.addSubview(transferPtsToMoney)
         
         // Bonus Button
         bonus.setTitle("Extra Points!", for: .normal)
-        styleButton(bonus, color: UIColor(red: 0.451, green: 0.859, blue: 0.835, alpha: 1.0))
-        bonus.layer.cornerRadius = 18
+        bonus.setBackgroundImage(UIImage(named: "GroupGreen4"), for: .normal)
+        bonus.setTitleColor(.white, for: .normal)
+        bonus.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        bonus.layer.cornerRadius = 20
         bonus.layer.masksToBounds = true
         bonus.addTarget(self, action: #selector(bonusButtonTapped), for: .touchUpInside)
         view.addSubview(bonus)

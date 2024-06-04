@@ -11,7 +11,6 @@ class TransferPointsToGoldViewController: UIViewController {
     
     let backgroundImageView = UIImageView()
     let goldCardView = UIView()
-    let goldLabel = UILabel()
     let pointsLabel = UILabel()
     let checkButton = UIButton()
     let amountLabel = UILabel()
@@ -19,6 +18,7 @@ class TransferPointsToGoldViewController: UIViewController {
     let decreaseButton = UIButton(type: .system)
     let coinImageView = UIImageView()
     let coinLabel = UILabel()
+    let containerView = UIImageView(image: UIImage(named: "amount"))
     
     var goldAmount = 1 {
         didSet {
@@ -55,14 +55,9 @@ class TransferPointsToGoldViewController: UIViewController {
         
         // Coin Label
         coinLabel.text = "10"
-        coinLabel.font = UIFont.systemFont(ofSize: 16)
+        coinLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        coinLabel.textColor = .black
         goldCardView.addSubview(coinLabel)
-        
-        // Gold Label
-        goldLabel.text = "Gold"
-        goldLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        goldLabel.textColor = .black
-        goldCardView.addSubview(goldLabel)
         
         // Points Label
         pointsLabel.text = "Cost: 550 points"
@@ -70,38 +65,36 @@ class TransferPointsToGoldViewController: UIViewController {
         pointsLabel.textColor = .black
         goldCardView.addSubview(pointsLabel)
         
+        // Amount Container View
+        containerView.contentMode = .scaleAspectFill
+        containerView.isUserInteractionEnabled = true
+        goldCardView.addSubview(containerView)
+        
         // Amount Label
         amountLabel.text = "\(goldAmount) GM"
         amountLabel.font = UIFont.systemFont(ofSize: 16)
         amountLabel.textColor = .black
         amountLabel.textAlignment = .center
-        goldCardView.addSubview(amountLabel)
+        containerView.addSubview(amountLabel)
         
         // Increase Button
-        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .bold, scale: .large)
-        let increaseImage = UIImage(systemName: "plus.circle.fill", withConfiguration: symbolConfig)
-        increaseButton.setImage(increaseImage, for: .normal)
-        increaseButton.tintColor = .white
+        increaseButton.setTitle("", for: .normal) // Make the button invisible
         increaseButton.addTarget(self, action: #selector(increaseButtonTapped), for: .touchUpInside)
-        goldCardView.addSubview(increaseButton)
+        containerView.addSubview(increaseButton)
         
         // Decrease Button
-        let decreaseImage = UIImage(systemName: "minus.circle.fill", withConfiguration: symbolConfig)
-        decreaseButton.setImage(decreaseImage, for: .normal)
-        decreaseButton.tintColor = .white
+        decreaseButton.setTitle("", for: .normal) // Make the button invisible
         decreaseButton.addTarget(self, action: #selector(decreaseButtonTapped), for: .touchUpInside)
-        goldCardView.addSubview(decreaseButton)
+        containerView.addSubview(decreaseButton)
         
         // Check Button
-        let checkImage = UIImage(named:  "checkmark")
+        let checkImage = UIImage(named: "checkmark")
         checkButton.setImage(checkImage, for: .normal)
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         goldCardView.addSubview(checkButton)
     }
     
     func setupConstraints() {
-   
-        
         // Gold Card View Constraints
         goldCardView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
@@ -111,50 +104,53 @@ class TransferPointsToGoldViewController: UIViewController {
         
         // Background Image Constraints
         backgroundImageView.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
             make.leading.trailing.bottom.top.equalTo(goldCardView)
         }
         
         // Other subview constraints
         coinImageView.snp.makeConstraints { make in
-            make.top.equalTo(goldCardView).offset(50)
+            make.top.equalTo(goldCardView).offset(10)
             make.centerX.equalTo(goldCardView)
-            make.width.equalTo(100)
-            make.height.equalTo(100)
+            make.width.equalTo(250)
+            make.height.equalTo(230)
         }
         
         coinLabel.snp.makeConstraints { make in
-            make.top.equalTo(coinImageView.snp.bottom).offset(5)
-            make.centerX.equalTo(goldCardView)
+            make.top.equalTo(goldCardView).offset(35)
+            make.right.equalTo(goldCardView).offset(-35)
         }
         
-        goldLabel.snp.makeConstraints { make in
-            make.top.equalTo(coinLabel.snp.bottom).offset(20)
+        containerView.snp.makeConstraints { make in
+            make.top.equalTo(coinImageView.snp.bottom).offset(20)
             make.centerX.equalTo(goldCardView)
-        }
-        
-        amountLabel.snp.makeConstraints { make in
-            make.top.equalTo(goldLabel.snp.bottom).offset(20)
-            make.centerX.equalTo(goldCardView)
-        }
-        
-        increaseButton.snp.makeConstraints { make in
-            make.centerY.equalTo(amountLabel)
-            make.left.equalTo(amountLabel.snp.right).offset(10)
+            make.width.equalTo(300)
+            make.height.equalTo(50)
         }
         
         decreaseButton.snp.makeConstraints { make in
-            make.centerY.equalTo(amountLabel)
-            make.right.equalTo(amountLabel.snp.left).offset(-10)
+            make.centerY.equalTo(containerView)
+            make.left.equalTo(containerView).offset(10)
+            make.width.height.equalTo(30) // Adjust size as needed
+        }
+        
+        amountLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(containerView)
+            make.centerX.equalTo(containerView).offset(-30)
         }
         
         pointsLabel.snp.makeConstraints { make in
-            make.top.equalTo(amountLabel.snp.bottom).offset(10)
-            make.centerX.equalTo(goldCardView)
+            make.centerY.equalTo(containerView)
+            make.left.equalTo(amountLabel.snp.right).offset(10)
+        }
+        
+        increaseButton.snp.makeConstraints { make in
+            make.centerY.equalTo(containerView)
+            make.right.equalTo(containerView).offset(-10)
+            make.width.height.equalTo(30) // Adjust size as needed
         }
         
         checkButton.snp.makeConstraints { make in
-            make.top.equalTo(pointsLabel.snp.bottom).offset(20)
+            make.top.equalTo(containerView.snp.bottom).offset(20)
             make.centerX.equalTo(goldCardView)
             make.width.height.equalTo(40)
         }
@@ -165,7 +161,7 @@ class TransferPointsToGoldViewController: UIViewController {
     }
     
     @objc func decreaseButtonTapped() {
-        if goldAmount > 1 {
+        if (goldAmount > 1) {
             goldAmount -= 1
         }
     }

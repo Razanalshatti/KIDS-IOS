@@ -1,10 +1,3 @@
-//
-//  RewardViewController.swift
-//  KFH-Kids
-//
-//  Created by Aseel on 02/06/2024.
-//
-
 import UIKit
 import SnapKit
 

@@ -15,7 +15,7 @@
 //class TransferPointsToMoneyViewController: UIViewController {
 //    
 //    weak var delegate: TransferPointsToMoneyDelegate?
-//    
+//
 //    let backgroundImageView = UIImageView()
 //    let moneyCardView = UIView()
 //    let moneyLabel = UILabel()

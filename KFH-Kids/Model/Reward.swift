@@ -5,9 +5,10 @@ struct Reward: Codable {
     var id: Int
     var rewardType: String
     var description: String
+    let image: String?
     var requiredPoints: Int
-    var children: String?
     var childId: Int
+    var children: String?
 }
 
 /*

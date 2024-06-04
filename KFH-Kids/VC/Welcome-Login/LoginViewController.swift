@@ -126,7 +126,7 @@ class LoginViewController: UIViewController {
             switch result {
             case .success(let tokenResponse):
                 DispatchQueue.main.async {
-                    let homeViewController = HomeViewController()
+                    let homeViewController = HomeTableViewController()
                     homeViewController.child = tokenResponse
                     self?.navigationController?.pushViewController(homeViewController, animated: true)
                 }
