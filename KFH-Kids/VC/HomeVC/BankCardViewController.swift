@@ -2,8 +2,10 @@
 import UIKit
 import SnapKit
 
+
 class BankCardViewController: UIViewController {
     
+
     let bankCardImageView = UIImageView()
     let amountTextField = UITextField()
     let saveButton = UIButton(type: .system)
@@ -23,6 +25,7 @@ class BankCardViewController: UIViewController {
         setupConstraints()
         setupBalanceLabel()
         fetchBalance(childId: childId ?? 2)
+
     }
     
     func setupBankCardImageView() {

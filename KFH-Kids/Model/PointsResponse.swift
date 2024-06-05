@@ -2,10 +2,10 @@
 //  PointsResponse.swift
 //  KFH-Kids
 //
-//  Created by Nada Alshaibani on 04/06/2024.
+//  Created by Razan alshatti on 05/06/2024.
 //
 
 import Foundation
-struct PointsResponse: Decodable {
+struct PointsResponse: Decodable{
     var points: Int
 }

@@ -7,7 +7,15 @@
 
 import UIKit
 
-class HeaderTableViewCell: UITableViewCell {
+protocol BankCardDelegate:AnyObject {
+    func navigateToBankCardVC()
+}
+
+
+class HeaderTableViewCell: UITableViewCell{
+    
+    
+    weak var delegate: BankCardDelegate?
     
     let profileIcon = UIImageView()
     let usernameLabel = UILabel()
@@ -55,7 +63,7 @@ class HeaderTableViewCell: UITableViewCell {
         cardIcon.setImage(UIImage(named: "saving"), for: .normal)
         cardIcon.contentMode = .scaleAspectFit
         cardIcon.clipsToBounds = true
-        //cardIcon.addTarget(self, action: #selector(navigateToBankCard), for: .touchUpInside)
+        cardIcon.addTarget(self, action: #selector(navigateToBankCard), for: .touchUpInside)
         addSubview(cardIcon)
     }
     
@@ -93,6 +101,10 @@ class HeaderTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @objc func navigateToBankCard() {
+        delegate?.navigateToBankCardVC()
     }
 
 }

@@ -7,14 +7,13 @@ class WelcomeViewController: UIViewController {
     
     var tasks = [MyTask]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupBackground()
         setupLetsStartButton()
         
-        fetchTasks(childId: 1)
+        //testing()
         
     }
     
@@ -91,22 +90,5 @@ class WelcomeViewController: UIViewController {
 //        }
 //        
 //    }
-//    
-    func fetchTasks(childId: Int) {
-        NetworkManager.shared.GetTasks(childId: childId) { result in
-            switch result {
-            case .success(let tasks):
-                DispatchQueue.main.async {
-                    self.tasks = tasks
-                   
-                }
-            case .failure(let error):
-                print("Failed to fetch tasks: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    
-    
     
 }

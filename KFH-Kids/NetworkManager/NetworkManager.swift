@@ -129,34 +129,39 @@ class NetworkManager {
         }
     }
  
+  
     
-    // MARK: GetPoints - Done
+    // MARK: GetPoints
     func GetPoints(childId: Int, completion: @escaping (Result<PointsResponse, Error>) -> Void) {
         let URL = baseURL + "Child/GetPoints/\(childId)"
         
-        AF.request(URL, method: .get).responseDecodable(of: PointsResponse.self) { response in
-     
-             switch response.result {
-             case .success(let pointsResponse):
-                 //MARK: EXTRA LINE FOR DEBUGGING
-                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                     print("Raw response: (\(str)")
-                 }
-                 completion(.success(pointsResponse))
-             case .failure(let afError):
-                 //MARK: EXTRA LINE FOR DEBUGGING
-                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                     print("Raw response: (\(str)")
-                 }
-                 completion(.failure(afError as Error))
-              }
+        AF.request(URL, method: .get).responseDecodable(of:PointsResponse.self) {response in
+        switch response.result {
+            case .success(let pointsResponse):
+                //MARK: EXTRA LINE FOR DEBUGGING
+                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                    print("Raw response: (\(str)")
+                }
+                completion(.success(pointsResponse))
+            case .failure(let afError):
+                //MARK: EXTRA LINE FOR DEBUGGING
+                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                    print("Raw response: (\(str)")
+                }
+                completion(.failure(afError as Error))
+            }
         }
     }
     
-    // MARK: transfer - Done
-    func transfer(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
-        let URL = baseURL + "Child/{parentId}/transfer/{childId}"
-        AF.request(URL, method: .post, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
+    // MARK: transfer
+    func transfer(parentId: Int,childId: Int,transferPoints:Int, completion: @escaping (Result<Transfer, Error>) -> Void) {
+        
+        let URL = baseURL + "Child/\(parentId)/transfer/\(childId)"
+                
+        let transfer = Transfer(pointsToTransfer: transferPoints, trasferType: "", childId: "", type: "")
+      
+    
+        AF.request(URL, method: .post, parameters: transfer, encoder: JSONParameterEncoder.default).responseDecodable(of: Transfer.self) { response in
             switch response.result {
             case .success(let transfer):
                 //MARK: EXTRA LINE FOR DEBUGGING

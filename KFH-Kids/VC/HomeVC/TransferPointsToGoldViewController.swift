@@ -3,6 +3,7 @@ import SnapKit
 
 protocol TransferPointsToGoldDelegate: AnyObject {
     func removeBlurEffect()
+    
 }
 
 class TransferPointsToGoldViewController: UIViewController {
@@ -18,11 +19,14 @@ class TransferPointsToGoldViewController: UIViewController {
     let decreaseButton = UIButton(type: .system)
     let coinImageView = UIImageView()
     let coinLabel = UILabel()
-    let containerView = UIView()
+    let containerView = UIImageView(image: UIImage(named: "amount"))
     
+    var child: TokenResponse?
+
     var goldAmount = 1 {
         didSet {
-            updateAmountLabel()
+            amountLabel.text = "\(goldAmount) GM"
+            pointsLabel.text = "Cost: \(goldAmount * 550) points"
         }
     }
     
@@ -30,13 +34,13 @@ class TransferPointsToGoldViewController: UIViewController {
         super.viewDidLoad()
         setupSubviews()
         setupConstraints()
-        updateAmountLabel()  // Update the label initially
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("Dismissed !!!!!")
         delegate?.removeBlurEffect()
+        
     }
     
     func setupSubviews() {
@@ -44,10 +48,6 @@ class TransferPointsToGoldViewController: UIViewController {
         backgroundImageView.image = UIImage(named: "goldbackground")
         backgroundImageView.contentMode = .scaleAspectFill
         view.addSubview(backgroundImageView)
-        
-        let favoritesImageView = UIImageView(image: UIImage(named: "favourites"))
-            favoritesImageView.contentMode = .scaleAspectFit
-            goldCardView.addSubview(favoritesImageView)
         
         // Gold Card Background
         view.addSubview(goldCardView)
@@ -58,11 +58,9 @@ class TransferPointsToGoldViewController: UIViewController {
         goldCardView.addSubview(coinImageView)
         
         // Coin Label
-        coinLabel.text = "10"
         coinLabel.font = UIFont.boldSystemFont(ofSize: 22)
         coinLabel.textColor = .black
         goldCardView.addSubview(coinLabel)
-
         
         // Points Label
         pointsLabel.text = "Cost: 550 points"
@@ -71,38 +69,26 @@ class TransferPointsToGoldViewController: UIViewController {
         goldCardView.addSubview(pointsLabel)
         
         // Amount Container View
-        containerView.backgroundColor = .white
-        containerView.layer.cornerRadius = 25
-        containerView.layer.masksToBounds = true
+        containerView.contentMode = .scaleAspectFill
+        containerView.isUserInteractionEnabled = true
         goldCardView.addSubview(containerView)
         
         // Amount Label
+        amountLabel.text = "\(goldAmount) GM"
         amountLabel.font = UIFont.systemFont(ofSize: 16)
         amountLabel.textColor = .black
         amountLabel.textAlignment = .center
         containerView.addSubview(amountLabel)
         
         // Increase Button
-        increaseButton.setTitle("+", for: .normal)
-        increaseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 28)
-        increaseButton.setTitleColor(.black, for: .normal)
+        increaseButton.setTitle("", for: .normal)
         increaseButton.addTarget(self, action: #selector(increaseButtonTapped), for: .touchUpInside)
         containerView.addSubview(increaseButton)
         
         // Decrease Button
-        decreaseButton.setTitle("-", for: .normal)
-        decreaseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-        decreaseButton.setTitleColor(.black, for: .normal)
+        decreaseButton.setTitle("", for: .normal)
         decreaseButton.addTarget(self, action: #selector(decreaseButtonTapped), for: .touchUpInside)
         containerView.addSubview(decreaseButton)
-        
-        let imageSize: CGFloat = 24
-        favoritesImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(coinLabel)
-            make.leading.equalTo(coinLabel.snp.trailing).offset(5)
-            make.width.height.equalTo(30)
-        }
-
         
         // Check Button
         let checkImage = UIImage(named: "checkmark")
@@ -126,45 +112,50 @@ class TransferPointsToGoldViewController: UIViewController {
         
         // Other subview constraints
         coinImageView.snp.makeConstraints { make in
-            make.top.equalTo(goldCardView).offset(90)
+            make.top.equalTo(goldCardView).offset(10)
             make.centerX.equalTo(goldCardView)
-            make.width.equalTo(800)
-            make.height.equalTo(250)
+            make.width.equalTo(250)
+            make.height.equalTo(230)
         }
         
         coinLabel.snp.makeConstraints { make in
-            make.top.equalTo(goldCardView).offset(25)
-            make.right.equalTo(goldCardView).offset(-50)
+            make.top.equalTo(goldCardView).offset(35)
+            make.right.equalTo(goldCardView).offset(-35)
         }
         
         containerView.snp.makeConstraints { make in
-            make.top.equalTo(coinImageView.snp.bottom).offset(-40)
+            make.top.equalTo(coinImageView.snp.bottom).offset(20)
             make.centerX.equalTo(goldCardView)
-            make.width.equalTo(320)
+            make.width.equalTo(300)
             make.height.equalTo(50)
         }
         
         decreaseButton.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
             make.left.equalTo(containerView).offset(10)
-            make.width.height.equalTo(30) // Adjust size as needed
+            make.width.height.equalTo(30) 
         }
         
         amountLabel.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
-            make.centerX.equalTo(containerView)
+            make.centerX.equalTo(containerView).offset(-30)
+        }
+        
+        pointsLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(containerView)
+            make.left.equalTo(amountLabel.snp.right).offset(10)
         }
         
         increaseButton.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
             make.right.equalTo(containerView).offset(-10)
-            make.width.height.equalTo(30) // Adjust size as needed
+            make.width.height.equalTo(30)
         }
         
         checkButton.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.bottom).offset(20)
             make.centerX.equalTo(goldCardView)
-            make.width.height.equalTo(70)
+            make.width.height.equalTo(40)
         }
     }
     
@@ -179,24 +170,42 @@ class TransferPointsToGoldViewController: UIViewController {
     }
     
     @objc func checkButtonTapped() {
-        delegate?.removeBlurEffect()
-        dismiss(animated: true, completion: nil)
+        goldRequest()
     }
-    
-    func updateAmountLabel() {
-        let amountText = "\(goldAmount) GM"
-        let pointsText = "   =    \(goldAmount * 550) Points"
+
+    func goldRequest(){
         
-        let fullText = "\(amountText)  \(pointsText)"
-        let attributedString = NSMutableAttributedString(string: fullText)
+        var convertGoldToPoints = goldAmount * 550
+                
         
-        let amountRange = (fullText as NSString).range(of: amountText)
-        let pointsRange = (fullText as NSString).range(of: pointsText)
+        if child?.points ?? 0 < 550 {
+            let message = "NOT ENOUGH POINTS"
+            presentAlertWithTitle(title: "Error", message: message)
+        } else {
+            NetworkManager.shared.transfer(parentId: child?.parentId ?? 0, childId: child?.childId ?? 0, transferPoints: convertGoldToPoints) { result in
+                
+                DispatchQueue.main.async {
+                    switch result{
+                    case .success(let transfer):
+                        print("success \(transfer)")
+                      
+                        let message = "REQUEST SENT SUCCESSFULLY"
+                        self.presentAlertWithTitle(title: "Success", message: message)
+                                      case .failure(let error):
+                                      print("failure \(error)")
+                        self.delegate?.removeBlurEffect()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
         
-        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 18), range: amountRange)
-        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 18), range: pointsRange)
-        
-        amountLabel.attributedText = attributedString
+    func presentAlertWithTitle(title: String, message: String, completion: (() -> Void)? = nil) {
+        _ = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        _ = UIAlertAction(title: "OK", style: .default) { _ in
+            completion?()
+        }
     }
 }
 

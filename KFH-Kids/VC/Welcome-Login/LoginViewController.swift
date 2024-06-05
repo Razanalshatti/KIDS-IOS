@@ -16,6 +16,8 @@ class LoginViewController: UIViewController {
         setupUsernameTextField()
         setupPasswordTextField()
         setupLoginButton()
+        self.navigationItem.setHidesBackButton(true, animated: true)
+
     }
 
     func setupBackground() {
@@ -129,6 +131,7 @@ class LoginViewController: UIViewController {
                     let homeViewController = HomeTableViewController()
                     homeViewController.child = tokenResponse
                     self?.navigationController?.pushViewController(homeViewController, animated: true)
+            
                 }
             case .failure(_):
                 DispatchQueue.main.async {
