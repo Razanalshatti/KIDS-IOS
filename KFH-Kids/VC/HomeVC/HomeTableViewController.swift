@@ -13,7 +13,10 @@ import UIKit
 ///  Reward Cell --> UIColecitonView
 ///  Service Cell -> UITableViewCell 
 
-class HomeTableViewController: UITableViewController, TransferPointsToGoldDelegate, ActivityViewControllerDelegate{
+class HomeTableViewController: UITableViewController, TransferPointsToGoldDelegate, ActivityViewControllerDelegate, TransferPointsToMoneyDelegate{
+        
+    
+    
         
     
     var sections = ["","","Rewards","Serivce"]
@@ -21,6 +24,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
     var rewards : [Reward] = []
     var blurEffectView: UIVisualEffectView?
     var points: PointsResponse?
+    var claimedReward: ClaimRewards?
 
     
     override func viewDidLoad() {
@@ -174,7 +178,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             case 0:
                 transferToGoldButtonTapped()
             case 1:
-                print("second button clicked!")
+                transferToMoneyButtonTapped()
 
             case 2:
                 bonusButtonTapped()
@@ -204,7 +208,7 @@ extension HomeTableViewController {
                         self.rewards = tokenResponse
                         self.tableView.reloadData()
                         print("Rewards Count: \(self.rewards.count)")
-
+                        
                     }
                 case .failure(let error):
                     
@@ -213,18 +217,15 @@ extension HomeTableViewController {
                     }
                 }
             }
-           
-            
         }
-        
-    }  
-    
+    }
 }
+    
 
 //MARK: Navigation
 
 extension HomeTableViewController: BankCardDelegate {
- 
+    
     
     
     @objc func transferToGoldButtonTapped() {
@@ -239,6 +240,20 @@ extension HomeTableViewController: BankCardDelegate {
             sheet.detents = [.medium()]
         }
         
+        present(vc, animated: true, completion: nil)
+    }
+    @objc func transferToMoneyButtonTapped() {
+        let vc = TransferPointsToMoneyViewController()
+        vc.modalPresentationStyle = .pageSheet
+        vc.delegate = self
+        vc.child = child
+        vc.moneyLabel.text = String(child?.points ?? 0)
+
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
+        }
+
         present(vc, animated: true, completion: nil)
     }
     
@@ -277,17 +292,27 @@ extension HomeTableViewController: BankCardDelegate {
                 case .failure(let failure):
                     print("failed! \(failure)")
                 }
-            }
-            
-            
+            }  
         }
         blurEffectView?.removeFromSuperview()
         self.tableView.reloadData()
-
+        
     }
     
-
-    
+//    MARK: check with nawaf ‼️‼️
+    func claimYourReward(){
+        NetworkManager.shared.claimReward(id: claimedReward?.id ?? 0, rewardId: claimedReward?.rewardId ?? 0, childId: claimedReward?.childId ?? 0, claimDate: claimedReward?.claimDate ?? "") { result in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let claimed):
+                    print("success reward \(claimed)")
+                case .failure(let claimed):
+                    print("failure \(claimed)")
+                }
+            }
+        }
+    }
      func didCompleteActivity() {
       //  disableBonusButton()
     }

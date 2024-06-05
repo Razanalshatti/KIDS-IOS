@@ -20,6 +20,8 @@ class TransferPointsToMoneyViewController: UIViewController {
     let moneyLabel = UILabel()
     let containerView = UIView()
     
+    var child: TokenResponse?
+    
     var moneyAmount = 1 {
         didSet {
             updateAmountLabel()
@@ -46,8 +48,8 @@ class TransferPointsToMoneyViewController: UIViewController {
         view.addSubview(backgroundImageView)
         
         let favoritesImageView = UIImageView(image: UIImage(named: "favourites"))
-            favoritesImageView.contentMode = .scaleAspectFit
-            moneyCardView.addSubview(favoritesImageView)
+        favoritesImageView.contentMode = .scaleAspectFit
+        moneyCardView.addSubview(favoritesImageView)
         
         // Money Card Background
         view.addSubview(moneyCardView)
@@ -58,7 +60,6 @@ class TransferPointsToMoneyViewController: UIViewController {
         moneyCardView.addSubview(moneyImageView)
         
         // Money Label
-        moneyLabel.text = "10"
         moneyLabel.font = UIFont.boldSystemFont(ofSize: 22)
         moneyLabel.textColor = .black
         moneyCardView.addSubview(moneyLabel)
@@ -176,8 +177,10 @@ class TransferPointsToMoneyViewController: UIViewController {
     }
     
     @objc func checkButtonTapped() {
+        transferPointsToMoney()
         delegate?.removeBlurEffect()
         dismiss(animated: true, completion: nil)
+
     }
     
     func updateAmountLabel() {
@@ -195,6 +198,32 @@ class TransferPointsToMoneyViewController: UIViewController {
         
         amountLabel.attributedText = attributedString
     }
+    func transferPointsToMoney() {
+        let pointsToDeduct = moneyAmount * 10
+        if child?.points ?? 0 < 10 {
+            let message = "NOT ENOUGH POINTS!!"
+            presentAlertWithTitle(title: "ERROR", message: message)
+        }else {
+        NetworkManager.shared.transfer(parentId: child?.parentId ?? 0,childId: child?.childId ?? 0, transferPoints: pointsToDeduct) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let success):
+                    print("Transfer \(pointsToDeduct) points for \(self.moneyAmount) successfully")
+                    self.dismiss(animated: true, completion: nil)
+                case .failure(let failure):
+                    print("Failed to transfer points! \(failure.localizedDescription)")
+                }
+            }
+        }
+    }
+}
+    func presentAlertWithTitle(title: String, message: String, completion: (() -> Void)? = nil) {
+        _ = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        _ = UIAlertAction(title: "OK", style: .default) { _ in
+            completion?()
+        }
+    }
+
 }
 
 #if canImport(SwiftUI) && DEBUG

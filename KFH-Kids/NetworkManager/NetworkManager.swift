@@ -13,7 +13,7 @@ class NetworkManager {
     private let baseURL = "https://kidsapi20240528084240.azurewebsites.net/api/"
     static let shared = NetworkManager()
     
-    // MARK: Login - Done
+    // MARK: Login - ✅
     func login(child: Child, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
         let URL = baseURL + "Child/login"
         AF.request(URL, method: .post, parameters: child, encoder: JSONParameterEncoder.default).responseDecodable(of: TokenResponse.self) { response in
@@ -38,7 +38,7 @@ class NetworkManager {
     
     
     
-    // MARK: GetTasks - Done
+    // MARK: GetTasks - ✅
     func GetTasks(childId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         //Child/1/GetTasks
         let URL = baseURL + "Child/\(childId)/GetTasks"
@@ -62,7 +62,7 @@ class NetworkManager {
     }
     
     
-    // MARK: GetRewards - Done
+    // MARK: GetRewards - ✅
     func GetRewards(childId: Int,parentId:Int ,completion: @escaping (Result<[Reward], Error>) -> Void) {
         let URL = baseURL + "Child/\(childId)/GetRewards?parentId=\(parentId)"
         AF.request(URL, method: .get).responseDecodable(of: [Reward].self) { response in
@@ -106,7 +106,7 @@ class NetworkManager {
     }
 
     
-    // MARK: Balance - Done
+    // MARK: Balance - ✅
 
     func getBalance(childId: Int, completion: @escaping (Result<BalanceResponse, Error>) -> Void) {
         let URL = baseURL + "Child/\(childId)/balance"
@@ -131,7 +131,7 @@ class NetworkManager {
  
   
     
-    // MARK: GetPoints
+    // MARK: GetPoints ✅
     func GetPoints(childId: Int, completion: @escaping (Result<PointsResponse, Error>) -> Void) {
         let URL = baseURL + "Child/GetPoints/\(childId)"
         
@@ -153,7 +153,7 @@ class NetworkManager {
         }
     }
     
-    // MARK: transfer
+    // MARK: transfer 
     func transfer(parentId: Int,childId: Int,transferPoints:Int, completion: @escaping (Result<Transfer, Error>) -> Void) {
         
         let URL = baseURL + "Child/\(parentId)/transfer/\(childId)"
@@ -179,26 +179,48 @@ class NetworkManager {
         }
     }
     // MARK: ClaimRewards
-    func ClaimRewards(childId: Int, rewardId: Int, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
-        let URL = baseURL + "Child/\(childId)/claimedrewards/\(rewardId)"
-        AF.request(URL, method: .post).responseDecodable(of: TokenResponse.self) { response in
-            switch response.result {
-            case .success(let claimedReward):
-                //MARK: EXTRA LINE FOR DEBUGGING
-                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
+//    func ClaimRewards(childId: Int, rewardId: Int, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
+//        let URL = baseURL + "Child/\(childId)/claimedrewards/\(rewardId)"
+//        AF.request(URL, method: .post).responseDecodable(of: TokenResponse.self) { response in
+//            switch response.result {
+//            case .success(let claimedReward):
+//                //MARK: EXTRA LINE FOR DEBUGGING
+//                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+//                    print("Raw response: (\(str)")
+//                }
+//                completion(.success(claimedReward))
+//            case .failure(let afError):
+//                //MARK: EXTRA LINE FOR DEBUGGING
+//                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+//                    print("Raw response: (\(str)")
+//                }
+//                completion(.failure(afError as Error))
+//            }
+//        }
+//    }
+    // MARK: - ClaimRewards
+        func claimReward(id: Int, rewardId: Int, childId: Int, claimDate: String, completion: @escaping (Result<ClaimRewards, Error>) -> Void) {
+            let URL = baseURL + "Child/\(childId)/claimReward/\(rewardId)"
+            
+            let claim = ClaimRewards(id: id, rewardId: rewardId, childId: childId, claimDate: claimDate)
+            
+            AF.request(URL, method: .post, parameters: claim, encoder: JSONParameterEncoder.default).responseDecodable(of: ClaimRewards.self) { response in
+                switch response.result {
+                case .success(let claimRewards):
+                    // MARK: - EXTRA LINE FOR DEBUGGING
+                    if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                        print("Raw response: (\(str))")
+                    }
+                    completion(.success(claimRewards))
+                case .failure(let afError):
+                    // MARK: - EXTRA LINE FOR DEBUGGING
+                    if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                        print("Raw response: (\(str))")
+                    }
+                    completion(.failure(afError as Error))
                 }
-                completion(.success(claimedReward))
-            case .failure(let afError):
-                //MARK: EXTRA LINE FOR DEBUGGING
-                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
-                }
-                completion(.failure(afError as Error))
             }
         }
-    }
-
     
     // MARK: Fetch functions
 

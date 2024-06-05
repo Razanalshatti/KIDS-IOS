@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6EEC7ECC2C0F0DA00075F183 /* BalanceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC7ECB2C0F0DA00075F183 /* BalanceResponse.swift */; };
-		6EEC7ECE2C0F374A0075F183 /* PointsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC7ECD2C0F374A0075F183 /* PointsResponse.swift */; };
 		6EEC7ED02C105E520075F183 /* TaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC7ECF2C105E520075F183 /* TaskResponse.swift */; };
 		B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24952BFB780C00C0AC02 /* NetworkManager.swift */; };
 		B50F24982BFB781D00C0AC02 /* MyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F24972BFB781D00C0AC02 /* MyTask.swift */; };
@@ -53,7 +52,6 @@
 
 /* Begin PBXFileReference section */
 		6EEC7ECB2C0F0DA00075F183 /* BalanceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceResponse.swift; sourceTree = "<group>"; };
-		6EEC7ECD2C0F374A0075F183 /* PointsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsResponse.swift; sourceTree = "<group>"; };
 		6EEC7ECF2C105E520075F183 /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
 		B50F24952BFB780C00C0AC02 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B50F24972BFB781D00C0AC02 /* MyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTask.swift; sourceTree = "<group>"; };
@@ -315,7 +313,6 @@
 				B5D48BFD2BFB636300CDBA85 /* AppDelegate.swift in Sources */,
 				B598BE5D2BFF2ED2005C244C /* ActivityViewController.swift in Sources */,
 				B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */,
-				6EEC7ECE2C0F374A0075F183 /* PointsResponse.swift in Sources */,
 				E0908BD42BFDD37E008EA18A /* TokenResponse.swift in Sources */,
 				B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */,
 				B57B3D502C0F448E0036E30F /* ServiceTableViewCell.swift in Sources */,

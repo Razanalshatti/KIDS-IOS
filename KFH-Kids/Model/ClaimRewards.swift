@@ -2,11 +2,13 @@
 
 import Foundation
 struct ClaimRewards: Codable{
-    var Id: Int
-    var RewardId: Int
-    var ChildId: Int
-    var claimDate: Date
+    var id: Int
+    var rewardId: Int
+    var childId: Int
+    var claimDate: String
     
     
     
 }
+
+
