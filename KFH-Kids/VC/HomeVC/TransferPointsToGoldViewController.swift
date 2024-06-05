@@ -18,12 +18,11 @@ class TransferPointsToGoldViewController: UIViewController {
     let decreaseButton = UIButton(type: .system)
     let coinImageView = UIImageView()
     let coinLabel = UILabel()
-    let containerView = UIImageView(image: UIImage(named: "amount"))
+    let containerView = UIView()
     
     var goldAmount = 1 {
         didSet {
-            amountLabel.text = "\(goldAmount) GM"
-            pointsLabel.text = "Cost: \(goldAmount * 550) points"
+            updateAmountLabel()
         }
     }
     
@@ -31,6 +30,7 @@ class TransferPointsToGoldViewController: UIViewController {
         super.viewDidLoad()
         setupSubviews()
         setupConstraints()
+        updateAmountLabel()  // Update the label initially
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -45,6 +45,10 @@ class TransferPointsToGoldViewController: UIViewController {
         backgroundImageView.contentMode = .scaleAspectFill
         view.addSubview(backgroundImageView)
         
+        let favoritesImageView = UIImageView(image: UIImage(named: "favourites"))
+            favoritesImageView.contentMode = .scaleAspectFit
+            goldCardView.addSubview(favoritesImageView)
+        
         // Gold Card Background
         view.addSubview(goldCardView)
         
@@ -58,6 +62,7 @@ class TransferPointsToGoldViewController: UIViewController {
         coinLabel.font = UIFont.boldSystemFont(ofSize: 22)
         coinLabel.textColor = .black
         goldCardView.addSubview(coinLabel)
+
         
         // Points Label
         pointsLabel.text = "Cost: 550 points"
@@ -66,26 +71,38 @@ class TransferPointsToGoldViewController: UIViewController {
         goldCardView.addSubview(pointsLabel)
         
         // Amount Container View
-        containerView.contentMode = .scaleAspectFill
-        containerView.isUserInteractionEnabled = true
+        containerView.backgroundColor = .white
+        containerView.layer.cornerRadius = 25
+        containerView.layer.masksToBounds = true
         goldCardView.addSubview(containerView)
         
         // Amount Label
-        amountLabel.text = "\(goldAmount) GM"
         amountLabel.font = UIFont.systemFont(ofSize: 16)
         amountLabel.textColor = .black
         amountLabel.textAlignment = .center
         containerView.addSubview(amountLabel)
         
         // Increase Button
-        increaseButton.setTitle("", for: .normal) // Make the button invisible
+        increaseButton.setTitle("+", for: .normal)
+        increaseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 28)
+        increaseButton.setTitleColor(.black, for: .normal)
         increaseButton.addTarget(self, action: #selector(increaseButtonTapped), for: .touchUpInside)
         containerView.addSubview(increaseButton)
         
         // Decrease Button
-        decreaseButton.setTitle("", for: .normal) // Make the button invisible
+        decreaseButton.setTitle("-", for: .normal)
+        decreaseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
+        decreaseButton.setTitleColor(.black, for: .normal)
         decreaseButton.addTarget(self, action: #selector(decreaseButtonTapped), for: .touchUpInside)
         containerView.addSubview(decreaseButton)
+        
+        let imageSize: CGFloat = 24
+        favoritesImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(coinLabel)
+            make.leading.equalTo(coinLabel.snp.trailing).offset(5)
+            make.width.height.equalTo(30)
+        }
+
         
         // Check Button
         let checkImage = UIImage(named: "checkmark")
@@ -109,21 +126,21 @@ class TransferPointsToGoldViewController: UIViewController {
         
         // Other subview constraints
         coinImageView.snp.makeConstraints { make in
-            make.top.equalTo(goldCardView).offset(10)
+            make.top.equalTo(goldCardView).offset(90)
             make.centerX.equalTo(goldCardView)
-            make.width.equalTo(250)
-            make.height.equalTo(230)
+            make.width.equalTo(800)
+            make.height.equalTo(250)
         }
         
         coinLabel.snp.makeConstraints { make in
-            make.top.equalTo(goldCardView).offset(35)
-            make.right.equalTo(goldCardView).offset(-35)
+            make.top.equalTo(goldCardView).offset(25)
+            make.right.equalTo(goldCardView).offset(-50)
         }
         
         containerView.snp.makeConstraints { make in
-            make.top.equalTo(coinImageView.snp.bottom).offset(20)
+            make.top.equalTo(coinImageView.snp.bottom).offset(-40)
             make.centerX.equalTo(goldCardView)
-            make.width.equalTo(300)
+            make.width.equalTo(320)
             make.height.equalTo(50)
         }
         
@@ -135,12 +152,7 @@ class TransferPointsToGoldViewController: UIViewController {
         
         amountLabel.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
-            make.centerX.equalTo(containerView).offset(-30)
-        }
-        
-        pointsLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(containerView)
-            make.left.equalTo(amountLabel.snp.right).offset(10)
+            make.centerX.equalTo(containerView)
         }
         
         increaseButton.snp.makeConstraints { make in
@@ -152,7 +164,7 @@ class TransferPointsToGoldViewController: UIViewController {
         checkButton.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.bottom).offset(20)
             make.centerX.equalTo(goldCardView)
-            make.width.height.equalTo(40)
+            make.width.height.equalTo(70)
         }
     }
     
@@ -169,6 +181,22 @@ class TransferPointsToGoldViewController: UIViewController {
     @objc func checkButtonTapped() {
         delegate?.removeBlurEffect()
         dismiss(animated: true, completion: nil)
+    }
+    
+    func updateAmountLabel() {
+        let amountText = "\(goldAmount) GM"
+        let pointsText = "   =    \(goldAmount * 550) Points"
+        
+        let fullText = "\(amountText)  \(pointsText)"
+        let attributedString = NSMutableAttributedString(string: fullText)
+        
+        let amountRange = (fullText as NSString).range(of: amountText)
+        let pointsRange = (fullText as NSString).range(of: pointsText)
+        
+        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 18), range: amountRange)
+        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 18), range: pointsRange)
+        
+        amountLabel.attributedText = attributedString
     }
 }
 
