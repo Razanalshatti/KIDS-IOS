@@ -9,7 +9,8 @@ class BankCardViewController: UIViewController {
     let saveButton = UIButton(type: .system)
     
     var balance: Decimal?
-    var childId: Int = 0
+    var childId: Int?
+    var balanceLabel: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +21,8 @@ class BankCardViewController: UIViewController {
         setupAmountTextField()
         setupSaveButton()
         setupConstraints()
-        BalanceLabel()
-        fetchBalance(childId: childId)
+        setupBalanceLabel()
+        fetchBalance(childId: childId ?? 2)
     }
     
     func setupBankCardImageView() {
@@ -38,21 +39,22 @@ class BankCardViewController: UIViewController {
         amountTextField.keyboardType = .decimalPad
         view.addSubview(amountTextField)
     }
-    private func BalanceLabel() -> UILabel {
-        let balanceLabel = UILabel()
-        balanceLabel.text = "Balance: \(balance)"
-        balanceLabel.textColor = UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0)
-        balanceLabel.font = UIFont.boldSystemFont(ofSize: 39)
-        
-        self.view.addSubview(balanceLabel)
-        
-        balanceLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.view).offset(150)
-            make.top.equalTo(self.view).offset(190)
+    
+    private func setupBalanceLabel() {
+            let label = UILabel() // Create a local variable for the label
+            label.text = "Balance: \(balance ?? 0)" // Initial text
+            label.textColor = UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0)
+            label.font = UIFont.boldSystemFont(ofSize: 39)
+            
+            self.view.addSubview(label)
+            
+            label.snp.makeConstraints { make in
+                make.leading.equalTo(self.view).offset(150)
+                make.top.equalTo(self.view).offset(190)
+            }
+            
+           balanceLabel = label // Assign the created label to the class property
         }
-        
-        return balanceLabel
-    }
     
     func setupSaveButton() {
         // Set up the save button
@@ -114,17 +116,17 @@ class BankCardViewController: UIViewController {
     }
     
     func fetchBalance(childId: Int){
-        let token = "your_token_here" // replace with your actual token
-        NetworkManager.shared.getBalance(token: token, childId: childId) { result in
+        NetworkManager.shared.getBalance(childId: childId) { result in
             switch result {
             case.success(let data):
-                self.balance = data.Balance
                 DispatchQueue.main.async {
-                    self.BalanceLabel()
+                    self.balance = data.balance
+                    self.balanceLabel?.text = "Balance: \(self.balance ?? 0)"
                 }
             case.failure(let error):
                 print("Failed to fetch balance: \(error.localizedDescription)")
             }
         }
+    
     }
 }

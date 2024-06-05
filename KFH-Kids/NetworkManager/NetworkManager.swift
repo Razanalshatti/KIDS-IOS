@@ -13,7 +13,7 @@ class NetworkManager {
     private let baseURL = "https://kidsapi20240528084240.azurewebsites.net/api/"
     static let shared = NetworkManager()
     
-    // MARK: Login
+    // MARK: Login - Done
     func login(child: Child, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
         let URL = baseURL + "Child/login"
         AF.request(URL, method: .post, parameters: child, encoder: JSONParameterEncoder.default).responseDecodable(of: TokenResponse.self) { response in
@@ -38,22 +38,23 @@ class NetworkManager {
     
     
     
-    // MARK: GetTasks
+    // MARK: GetTasks - Done
     func GetTasks(childId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         //Child/1/GetTasks
         let URL = baseURL + "Child/\(childId)/GetTasks"
+        
         AF.request(URL, method: .get).responseDecodable(of: [MyTask].self) { response in
             switch response.result {
             case .success(let tasks):
-                //MARK: EXTRA LINE FOR DEBUGGING
+                // MARK: EXTRA LINE FOR DEBUGGING
                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
                     print("Raw response: (\(str)")
                 }
                 completion(.success(tasks))
             case .failure(let afError):
-                //MARK: EXTRA LINE FOR DEBUGGING
+                // MARK: EXTRA LINE FOR DEBUGGING
                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
+                    print("Failed to fetch, the response: (\(str)")
                 }
                 completion(.failure(afError as Error))
             }
@@ -61,8 +62,7 @@ class NetworkManager {
     }
     
     
-    
-    // MARK: GetRewards
+    // MARK: GetRewards - Done
     func GetRewards(childId: Int,parentId:Int ,completion: @escaping (Result<[Reward], Error>) -> Void) {
         let URL = baseURL + "Child/\(childId)/GetRewards?parentId=\(parentId)"
         AF.request(URL, method: .get).responseDecodable(of: [Reward].self) { response in
@@ -106,48 +106,54 @@ class NetworkManager {
     }
 
     
-    // MARK: Balance
-    func getBalance(token: String, childId: Int, completion: @escaping (Result<BalanceResponse, Error>) -> Void) {
+    // MARK: Balance - Done
+
+    func getBalance(childId: Int, completion: @escaping (Result<BalanceResponse, Error>) -> Void) {
         let URL = baseURL + "Child/\(childId)/balance"
-        let headers: HTTPHeaders = [.authorization(bearerToken: token)]
-        AF.request(URL, method: .get, parameters: childId, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-            switch response.result{
-            case .success(let data):
-                do {
-                    let balance = try JSONDecoder().decode(BalanceResponse.self, from: data ?? Data())
-                    completion(.success(balance))
-                    } catch {
-                        completion(.failure(error))
-                    }
+        AF.request(URL, method: .get).responseDecodable(of: BalanceResponse.self) { response in
+            
+            switch response.result {
+            case .success(let balanceResponse):
+                //MARK: EXTRA LINE FOR DEBUGGING
+                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                    print("Raw response: (\(str)")
+                }
+                completion(.success(balanceResponse))
             case .failure(let afError):
+                //MARK: EXTRA LINE FOR DEBUGGING
+                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                    print("Raw response: (\(str)")
+                }
                 completion(.failure(afError as Error))
             }
         }
     }
  
     
-    // MARK: GetPoints
-    func GetPoints(childId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
+    // MARK: GetPoints - Done
+    func GetPoints(childId: Int, completion: @escaping (Result<PointsResponse, Error>) -> Void) {
         let URL = baseURL + "Child/GetPoints/\(childId)"
-        AF.request(URL, method: .get, parameters: childId, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
-            switch response.result {
-            case .success(let points):
-                //MARK: EXTRA LINE FOR DEBUGGING
-                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
-                }
-                completion(.success(points))
-            case .failure(let afError):
-                //MARK: EXTRA LINE FOR DEBUGGING
-                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
-                }
-                completion(.failure(afError as Error))
-            }
+        
+        AF.request(URL, method: .get).responseDecodable(of: PointsResponse.self) { response in
+     
+             switch response.result {
+             case .success(let pointsResponse):
+                 //MARK: EXTRA LINE FOR DEBUGGING
+                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                     print("Raw response: (\(str)")
+                 }
+                 completion(.success(pointsResponse))
+             case .failure(let afError):
+                 //MARK: EXTRA LINE FOR DEBUGGING
+                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                     print("Raw response: (\(str)")
+                 }
+                 completion(.failure(afError as Error))
+              }
         }
     }
     
-    // MARK: transfer
+    // MARK: transfer - Done
     func transfer(child: Child, completion: @escaping (Result<[MyTask], Error>) -> Void) {
         let URL = baseURL + "Child/{parentId}/transfer/{childId}"
         AF.request(URL, method: .post, parameters: child, encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in

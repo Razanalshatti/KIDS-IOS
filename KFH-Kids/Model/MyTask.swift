@@ -1,16 +1,17 @@
 
 import Foundation
 struct MyTask: Codable {
-    var Id: Int
-    var ParentId: Int
-    var TaskType: String
-    var Description: String
-    var Date: Date
-    var Points: Int
+    var id: Int
+    var parentId: Int
+    var taskType: String
+    var description: String
+    var date: String // Date represented as String
+    var points: Int
     var childId: Int
-    var dueDate: Date
+    var category: String? // Assuming category is a String
+    var categoryId: Int? // Assuming categoryId is an Int
     var isCompleted: Bool
-    var Parent: Parent
-    
+    var parent: String? // Assuming parent is a String
+      
 }
 
