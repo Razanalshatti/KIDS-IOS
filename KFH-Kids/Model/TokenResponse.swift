@@ -6,7 +6,7 @@ struct TokenResponse: Codable {
     let token: String
     let username: String
     let parentId: Int
-    let points: Int
+    var points: Int
     let baitiAccountNumber: Int
     let savingsAccountNumber: Int
     let balance: Decimal

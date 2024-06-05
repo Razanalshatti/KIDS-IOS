@@ -265,15 +265,28 @@ extension HomeTableViewController: BankCardDelegate {
     }
     
     func removeBlurEffect() {
-        blurEffectView?.removeFromSuperview()
         
         // Make the Points API CALL
         
-        //MARK: self.child?.points = points?.points ?? 0
-        
+        NetworkManager.shared.GetPoints(childId: child!.childId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let success):
+                    print("success \(success)")
+                    self.child?.points = success.points
+                case .failure(let failure):
+                    print("failed! \(failure)")
+                }
+            }
+            
+            
+        }
+        blurEffectView?.removeFromSuperview()
         self.tableView.reloadData()
 
     }
+    
+
     
      func didCompleteActivity() {
       //  disableBonusButton()
@@ -295,4 +308,6 @@ extension HomeTableViewController: BankCardDelegate {
         navigationController?.pushViewController(bankCardVC, animated: true)
 
     }
+
 }
+

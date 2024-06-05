@@ -3,6 +3,7 @@ import SnapKit
 
 protocol TransferPointsToGoldDelegate: AnyObject {
     func removeBlurEffect()
+    
 }
 
 class TransferPointsToGoldViewController: UIViewController {
@@ -175,16 +176,13 @@ class TransferPointsToGoldViewController: UIViewController {
     func goldRequest(){
         
         var convertGoldToPoints = goldAmount * 550
-        let deductionResult : Int
-        deductionResult = (child?.points ?? 0) - 550
-        
-        
+                
         
         if child?.points ?? 0 < 550 {
             let message = "NOT ENOUGH POINTS"
             presentAlertWithTitle(title: "Error", message: message)
         } else {
-            NetworkManager.shared.transfer(parentId: child?.parentId ?? 0, childId: child?.childId ?? 0, transferPoints: deductionResult) { result in
+            NetworkManager.shared.transfer(parentId: child?.parentId ?? 0, childId: child?.childId ?? 0, transferPoints: convertGoldToPoints) { result in
                 
                 DispatchQueue.main.async {
                     switch result{

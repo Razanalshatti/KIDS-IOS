@@ -152,11 +152,11 @@ class NetworkManager {
     func transfer(parentId: Int,childId: Int,transferPoints:Int, completion: @escaping (Result<Transfer, Error>) -> Void) {
         
         let URL = baseURL + "Child/\(parentId)/transfer/\(childId)"
-        
-        let parameters: [String: Int] = ["pointsToTransfer": transferPoints]
-           
+                
+        let transfer = Transfer(pointsToTransfer: transferPoints, trasferType: "", childId: "", type: "")
+      
     
-        AF.request(URL, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: Transfer.self) { response in
+        AF.request(URL, method: .post, parameters: transfer, encoder: JSONParameterEncoder.default).responseDecodable(of: Transfer.self) { response in
             switch response.result {
             case .success(let transfer):
                 //MARK: EXTRA LINE FOR DEBUGGING
