@@ -7,7 +7,8 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
     let pointsBalanceLabel = UILabel()
     var tasks: [MyTask] = []
     var childPoints: Int = 0
-
+    var childId: Int = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -17,6 +18,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         setupPointsBalanceLabel()
         loadTasks()
         updatePointsBalance()
+        fetchTasks(childId: childId )
     }
 
     func setupTableView() {
@@ -43,17 +45,19 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func loadTasks() {
-        tasks = [
-            MyTask(Id: 1, ParentId: 101, TaskType: "Clean Your Bedroom", Description: "Room", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 101, Username: "aseel", Password: "1234", Email: "A@gmail.com", PhoneNumber: "94010640", children: "razan")),
-            MyTask(Id: 2, ParentId: 102, TaskType: "Do Your Homework", Description: "Math", Date: Date(), Points: 10, childId: 2, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 102, Username: "nada", Password: "1234", Email: "N@gmail.com", PhoneNumber: "94999428", children: "aseel")),
-            MyTask(Id: 3, ParentId: 103, TaskType: "Swimming Class and Gym Time", Description: "Park", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 103, Username: "fatma", Password: "1234", Email: "F@gmail.com", PhoneNumber: "94010640", children: "razan"))
-        ]
+//        tasks = [
+//            MyTask(Id: 1, ParentId: 101, TaskType: "Clean Your Bedroom", Description: "Room", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 101, Username: "aseel", Password: "1234", Email: "A@gmail.com", PhoneNumber: "94010640", children: "razan")),
+//            MyTask(Id: 2, ParentId: 102, TaskType: "Do Your Homework", Description: "Math", Date: Date(), Points: 10, childId: 2, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 102, Username: "nada", Password: "1234", Email: "N@gmail.com", PhoneNumber: "94999428", children: "aseel")),
+//            MyTask(Id: 3, ParentId: 103, TaskType: "Swimming Class and Gym Time", Description: "Park", Date: Date(), Points: 10, childId: 1, dueDate: Date().addingTimeInterval(-86400), isCompleted: false, Parent: Parent.init(ParentId: 103, Username: "fatma", Password: "1234", Email: "F@gmail.com", PhoneNumber: "94010640", children: "razan"))
+//        ]
         tableView.reloadData()
         updatePointsBalance()
     }
 
     func updatePointsBalance() {
-        childPoints = tasks.filter { $0.isCompleted }.reduce(0) { $0 + $1.Points }
+        // COMMENT FROM NAWAF
+     
+    //childPoints = tasks.filter { $0.isCompleted }.reduce(0) { $0 + $1.Points }
         pointsBalanceLabel.text = "Points: \(childPoints)"
     }
 
@@ -75,7 +79,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
             guard let self = self else { return }
             var task = self.tasksForSection(indexPath.section)[indexPath.row]
             task.isCompleted.toggle()
-            if let index = self.tasks.firstIndex(where: { $0.Id == task.Id }) {
+            if let index = self.tasks.firstIndex(where: { $0.id == task.id }) {
                 self.tasks[index] = task
             }
             self.updatePointsBalance()
@@ -103,4 +107,24 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
             return []
         }
     }
+    
+    func fetchTasks(childId: Int) {
+        NetworkManager.shared.GetTasks(childId: childId) { result in
+            switch result {
+            case .success(let tasks):
+                DispatchQueue.main.async {
+                    self.tasks = tasks
+                    
+                    self.tableView.reloadData()
+                    self.updatePointsBalance()
+                }
+            case .failure(let error):
+                print("Failed to fetch tasks: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    
+
 }

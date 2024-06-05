@@ -71,8 +71,8 @@ class TaskCell: UITableViewCell {
     
     func configure(with task: MyTask) {
         self.task = task
-        descriptionLabel.text = task.Description
-        pointsLabel.text = "\(task.Points)"
+        descriptionLabel.text = task.description
+        pointsLabel.text = "\(task.points)"
         
         if task.isCompleted {
             taskBackgroundView.image = UIImage(named: "GroupGreen3")
