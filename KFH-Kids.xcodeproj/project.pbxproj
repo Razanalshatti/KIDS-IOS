@@ -38,6 +38,7 @@
 		B5D48C042BFB636300CDBA85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C022BFB636300CDBA85 /* Main.storyboard */; };
 		B5D48C062BFB636300CDBA85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C052BFB636300CDBA85 /* Assets.xcassets */; };
 		B5D48C092BFB636300CDBA85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D48C072BFB636300CDBA85 /* LaunchScreen.storyboard */; };
+		B5DC555B2C107159005B8E79 /* PointsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DC555A2C107159005B8E79 /* PointsResponse.swift */; };
 		E0461F142C0C400E00A34619 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F132C0C400E00A34619 /* RewardViewController.swift */; };
 		E0461F162C0C593900A34619 /* TransferPointsToMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */; };
 		E0461F182C0EF17F00A34619 /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F172C0EF17F00A34619 /* RewardCell.swift */; };
@@ -76,6 +77,7 @@
 		B5D48C052BFB636300CDBA85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5D48C082BFB636300CDBA85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5D48C0A2BFB636300CDBA85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5DC555A2C107159005B8E79 /* PointsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsResponse.swift; sourceTree = "<group>"; };
 		E0461F132C0C400E00A34619 /* RewardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferPointsToMoneyViewController.swift; sourceTree = "<group>"; };
 		E0461F172C0EF17F00A34619 /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				B5A9FC752BFC9AB100897686 /* PointsTransferRequest.swift */,
 				B5A9FC772BFCAEA800897686 /* Parent.swift */,
 				6EEC7ECB2C0F0DA00075F183 /* BalanceResponse.swift */,
+				B5DC555A2C107159005B8E79 /* PointsResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0908BCF2BFDD36E008EA18A /* LoginViewController.swift in Sources */,
+				B5DC555B2C107159005B8E79 /* PointsResponse.swift in Sources */,
 				B50F24962BFB780C00C0AC02 /* NetworkManager.swift in Sources */,
 				B5D48BFD2BFB636300CDBA85 /* AppDelegate.swift in Sources */,
 				B598BE5D2BFF2ED2005C244C /* ActivityViewController.swift in Sources */,

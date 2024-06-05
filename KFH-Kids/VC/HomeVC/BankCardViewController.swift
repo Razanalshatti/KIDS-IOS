@@ -2,8 +2,10 @@
 import UIKit
 import SnapKit
 
+
 class BankCardViewController: UIViewController {
     
+
     let bankCardImageView = UIImageView()
     let amountTextField = UITextField()
     let saveButton = UIButton(type: .system)
@@ -21,7 +23,7 @@ class BankCardViewController: UIViewController {
         setupSaveButton()
         setupConstraints()
         BalanceLabel()
-        fetchBalance(childId: childId)
+       // fetchBalance(childId: childId)
     }
     
     func setupBankCardImageView() {
@@ -113,18 +115,18 @@ class BankCardViewController: UIViewController {
         amountTextField.text = ""
     }
     
-    func fetchBalance(childId: Int){
-        let token = "your_token_here" // replace with your actual token
-        NetworkManager.shared.getBalance(token: token, childId: childId) { result in
-            switch result {
-            case.success(let data):
-                self.balance = data.Balance
-                DispatchQueue.main.async {
-                    self.BalanceLabel()
-                }
-            case.failure(let error):
-                print("Failed to fetch balance: \(error.localizedDescription)")
-            }
-        }
-    }
+//    func fetchBalance(childId: Int){
+//        let token = "your_token_here" // replace with your actual token
+//        NetworkManager.shared.getBalance(token: token, childId: childId) { result in
+//            switch result {
+//            case.success(let data):
+//                self.balance = data.Balance
+//                DispatchQueue.main.async {
+//                    self.BalanceLabel()
+//                }
+//            case.failure(let error):
+//                print("Failed to fetch balance: \(error.localizedDescription)")
+//            }
+//        }
+//    }
 }

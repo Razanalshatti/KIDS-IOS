@@ -16,6 +16,8 @@ class LoginViewController: UIViewController {
         setupUsernameTextField()
         setupPasswordTextField()
         setupLoginButton()
+        self.navigationItem.setHidesBackButton(true, animated: true)
+
     }
 
     func setupBackground() {

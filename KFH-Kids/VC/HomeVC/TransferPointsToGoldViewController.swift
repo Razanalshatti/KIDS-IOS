@@ -20,6 +20,8 @@ class TransferPointsToGoldViewController: UIViewController {
     let coinLabel = UILabel()
     let containerView = UIImageView(image: UIImage(named: "amount"))
     
+    var child: TokenResponse?
+
     var goldAmount = 1 {
         didSet {
             amountLabel.text = "\(goldAmount) GM"
@@ -37,6 +39,7 @@ class TransferPointsToGoldViewController: UIViewController {
         super.viewDidDisappear(animated)
         print("Dismissed !!!!!")
         delegate?.removeBlurEffect()
+        
     }
     
     func setupSubviews() {
@@ -54,7 +57,6 @@ class TransferPointsToGoldViewController: UIViewController {
         goldCardView.addSubview(coinImageView)
         
         // Coin Label
-        coinLabel.text = "10"
         coinLabel.font = UIFont.boldSystemFont(ofSize: 22)
         coinLabel.textColor = .black
         goldCardView.addSubview(coinLabel)
@@ -78,12 +80,12 @@ class TransferPointsToGoldViewController: UIViewController {
         containerView.addSubview(amountLabel)
         
         // Increase Button
-        increaseButton.setTitle("", for: .normal) // Make the button invisible
+        increaseButton.setTitle("", for: .normal)
         increaseButton.addTarget(self, action: #selector(increaseButtonTapped), for: .touchUpInside)
         containerView.addSubview(increaseButton)
         
         // Decrease Button
-        decreaseButton.setTitle("", for: .normal) // Make the button invisible
+        decreaseButton.setTitle("", for: .normal)
         decreaseButton.addTarget(self, action: #selector(decreaseButtonTapped), for: .touchUpInside)
         containerView.addSubview(decreaseButton)
         
@@ -130,7 +132,7 @@ class TransferPointsToGoldViewController: UIViewController {
         decreaseButton.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
             make.left.equalTo(containerView).offset(10)
-            make.width.height.equalTo(30) // Adjust size as needed
+            make.width.height.equalTo(30) 
         }
         
         amountLabel.snp.makeConstraints { make in
@@ -146,7 +148,7 @@ class TransferPointsToGoldViewController: UIViewController {
         increaseButton.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
             make.right.equalTo(containerView).offset(-10)
-            make.width.height.equalTo(30) // Adjust size as needed
+            make.width.height.equalTo(30)
         }
         
         checkButton.snp.makeConstraints { make in
@@ -167,8 +169,45 @@ class TransferPointsToGoldViewController: UIViewController {
     }
     
     @objc func checkButtonTapped() {
-        delegate?.removeBlurEffect()
-        dismiss(animated: true, completion: nil)
+        goldRequest()
+    }
+
+    func goldRequest(){
+        
+        var convertGoldToPoints = goldAmount * 550
+        let deductionResult : Int
+        deductionResult = (child?.points ?? 0) - 550
+        
+        
+        
+        if child?.points ?? 0 < 550 {
+            let message = "NOT ENOUGH POINTS"
+            presentAlertWithTitle(title: "Error", message: message)
+        } else {
+            NetworkManager.shared.transfer(parentId: child?.parentId ?? 0, childId: child?.childId ?? 0, transferPoints: deductionResult) { result in
+                
+                DispatchQueue.main.async {
+                    switch result{
+                    case .success(let transfer):
+                        print("success \(transfer)")
+                      
+                        let message = "REQUEST SENT SUCCESSFULLY"
+                        self.presentAlertWithTitle(title: "Success", message: message)
+                                      case .failure(let error):
+                                      print("failure \(error)")
+                        self.delegate?.removeBlurEffect()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+        
+    func presentAlertWithTitle(title: String, message: String, completion: (() -> Void)? = nil) {
+        _ = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        _ = UIAlertAction(title: "OK", style: .default) { _ in
+            completion?()
+        }
     }
 }
 

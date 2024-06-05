@@ -64,10 +64,19 @@ class RewardCell: UITableViewCell {
     
     func configure(with reward: Reward) {
         descriptionLabel.text = reward.description
-        if let imageURL = URL(string: reward.image ?? "DefaultGift") {
-            rewardImageView.kf.setImage(with: imageURL)
-        } else {
-            rewardImageView.image = nil
-        }
+//        if let imageURL = URL(string: reward.image ?? "DefaultGift") {
+//            rewardImageView.kf.setImage(with: imageURL)
+//        } else {
+            if reward.rewardType.lowercased() == "babdood" { // change babdood to toy
+                rewardImageView.image = UIImage(named: "dabdoob")
+                
+            } else if reward.rewardType.lowercased() == "money" {
+                rewardImageView.image = nil
+                
+            }else if reward.rewardType.lowercased() == "vacation" {
+                rewardImageView.image = nil
+                
+            }
+//        }
     }
 }
