@@ -38,7 +38,7 @@ class RewardCollectionViewCell: UICollectionViewCell {
         customBackgroundView.addSubview(rewardImageView)
         
         // Description Label
-        descriptionLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        descriptionLabel.font = UIFont.boldSystemFont(ofSize: 19)
         descriptionLabel.textColor = .darkGray
         descriptionLabel.numberOfLines = 2
         descriptionLabel.textAlignment = .center
@@ -54,12 +54,13 @@ class RewardCollectionViewCell: UICollectionViewCell {
         rewardImageView.snp.makeConstraints { make in
             make.top.equalTo(customBackgroundView).offset(-10)
             make.centerX.equalTo(customBackgroundView)
-            make.width.height.equalTo(65)
+            make.width.height.equalTo(90)
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(rewardImageView.snp.bottom).offset(5)
             make.leading.trailing.equalTo(rewardImageView)
+            
 
         }
 

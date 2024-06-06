@@ -1,10 +1,3 @@
-//
-//  HomeTableViewController.swift
-//  KFH-Kids
-//
-//  Created by Aseel on 04/06/2024.
-//
-
 import UIKit
 
 //MARK: Todo
@@ -166,27 +159,21 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             return cell
             
         } else if indexPath.section == 2 {
-            
-            
             //MARK: Cell that is CollecitonView
             let cell = tableView.dequeueReusableCell(withIdentifier: "RewardCollectionTableViewCell", for: indexPath) as! RewardCollectionTableViewCell
             
             cell.rewards = rewards
             cell.delegate = self
             
-       
-            
-            
-            
             return cell
-            
-
-            
+    
         } else if indexPath.section == 3 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as! ServiceTableViewCell
             let buttonTitles = ["Transfer Points To Gold","Transfer Points To Money","Extra Points!"]
+            let buttonBg = ["GroupGreen2","GroupGreen3","GroupGreen4"]
             cell.transferPtsToGold.setTitle(buttonTitles[indexPath.row], for: .normal)
+            cell.transferPtsToGold.setBackgroundImage(UIImage(named: buttonBg[indexPath.row]), for: .normal)
             cell.selectionStyle = .none
 
             return cell
@@ -303,13 +290,13 @@ extension HomeTableViewController: BankCardDelegate {
     }
     
     @objc func bonusButtonTapped() {
+        addBlurEffect()
         let vc = ActivityViewController()
         vc.modalPresentationStyle = .pageSheet
         vc.delegate = self
         
         if let sheet = vc.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.prefersGrabberVisible = true
+            sheet.detents = [.medium()]
         }
         
         present(vc, animated: true, completion: nil)
@@ -417,12 +404,16 @@ extension HomeTableViewController: BankCardDelegate {
         bonusButtonDisabledUntil = nil
         UserDefaults.standard.removeObject(forKey: "bonusButtonDisabledUntil")
     }
+    
+    
    
     func navigateToBankCardVC() {
         let bankCardVC = BankCardViewController()
         navigationController?.pushViewController(bankCardVC, animated: true)
 
     }
+    
+    
 
 }
 
