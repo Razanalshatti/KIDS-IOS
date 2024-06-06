@@ -1,13 +1,13 @@
 import UIKit
 import SnapKit
 
-protocol TransferPointsToMoneyDelegate: AnyObject {
-    func removeBlurEffect()
-}
+//protocol TransferPointsToMoneyDelegate: AnyObject {
+//    func removeBlurEffect()
+//}
 
 class TransferPointsToMoneyViewController: UIViewController {
     
-    weak var delegate: TransferPointsToMoneyDelegate?
+    weak var delegate: TransferPointsToGoldDelegate?
     
     let backgroundImageView = UIImageView()
     let moneyCardView = UIView()
@@ -39,6 +39,7 @@ class TransferPointsToMoneyViewController: UIViewController {
         super.viewDidDisappear(animated)
         print("Dismissed !!!!!")
         delegate?.removeBlurEffect()
+        
     }
     
     func setupSubviews() {
@@ -145,7 +146,7 @@ class TransferPointsToMoneyViewController: UIViewController {
         decreaseButton.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
             make.left.equalTo(containerView).offset(10)
-            make.width.height.equalTo(30) // Adjust size as needed
+            make.width.height.equalTo(30) 
         }
         
         amountLabel.snp.makeConstraints { make in
@@ -199,19 +200,23 @@ class TransferPointsToMoneyViewController: UIViewController {
         amountLabel.attributedText = attributedString
     }
     func transferPointsToMoney() {
-        let pointsToDeduct = moneyAmount * 10
-        if child?.points ?? 0 < 10 {
+        var pointsToDeduct = moneyAmount * 10
+        
+        if child?.points ?? 0 < 10{
             let message = "NOT ENOUGH POINTS!!"
             presentAlertWithTitle(title: "ERROR", message: message)
         }else {
         NetworkManager.shared.transfer(parentId: child?.parentId ?? 0,childId: child?.childId ?? 0, transferPoints: pointsToDeduct) { result in
             DispatchQueue.main.async {
-                switch result {
-                case .success(let success):
-                    print("Transfer \(pointsToDeduct) points for \(self.moneyAmount) successfully")
+                switch result{
+                case .success(let transfer):
+                    print("success \(transfer)")
+                    let message = "REQUEST SENT SUCCESSFULLY"
+                    self.presentAlertWithTitle(title: "Success", message: message)
+                                  case .failure(let error):
+                                  print("failure \(error)")
+                    self.delegate?.removeBlurEffect()
                     self.dismiss(animated: true, completion: nil)
-                case .failure(let failure):
-                    print("Failed to transfer points! \(failure.localizedDescription)")
                 }
             }
         }
@@ -251,3 +256,8 @@ struct GenericViewControllerRepresentables<ViewController: UIViewController>: UI
     }
 }
 #endif
+
+
+
+    
+

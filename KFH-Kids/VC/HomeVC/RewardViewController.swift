@@ -64,3 +64,40 @@ class RewardViewController: UIView {
     }
 
 }
+//@objc func rewardButtonTapped() {
+//        guard let points = child?.points else { return }
+//
+//        if points >= 100 { // Assuming 100 points are required to claim the reward
+//            showRewardMessage(points: points)
+//        } else {
+//            navigateToTasksPage()
+//        }
+//    }
+//
+//    func showRewardMessage(points: Int) {
+//        let alertController = UIAlertController(title: "Congratulations!", message: "You have \(points) points. Would you like to claim your reward?", preferredStyle: .alert)
+//
+//        let claimAction = UIAlertAction(title: "Claim", style: .default) { _ in
+//            self.claimReward()
+//        }
+//        let tasksAction = UIAlertAction(title: "Go to Tasks", style: .default) { _ in
+//            self.navigateToTasksPage()
+//        }
+//
+//        alertController.addAction(claimAction)
+//        alertController.addAction(tasksAction)
+//
+//        present(alertController, animated: true, completion: nil)
+//    }
+//
+//    func claimReward() {
+//        // Implement your reward claiming logic here
+//        print("Reward claimed!")
+//    }
+//
+//    func navigateToTasksPage() {
+//        let tasksVC = TasksViewController()
+//        tasksVC.child = self.child
+//        navigationController?.pushViewController(tasksVC, animated: true)
+//    }
+//

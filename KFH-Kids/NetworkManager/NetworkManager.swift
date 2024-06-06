@@ -178,44 +178,25 @@ class NetworkManager {
             }
         }
     }
-    // MARK: ClaimRewards
-//    func ClaimRewards(childId: Int, rewardId: Int, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
-//        let URL = baseURL + "Child/\(childId)/claimedrewards/\(rewardId)"
-//        AF.request(URL, method: .post).responseDecodable(of: TokenResponse.self) { response in
-//            switch response.result {
-//            case .success(let claimedReward):
-//                //MARK: EXTRA LINE FOR DEBUGGING
-//                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-//                    print("Raw response: (\(str)")
-//                }
-//                completion(.success(claimedReward))
-//            case .failure(let afError):
-//                //MARK: EXTRA LINE FOR DEBUGGING
-//                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-//                    print("Raw response: (\(str)")
-//                }
-//                completion(.failure(afError as Error))
-//            }
-//        }
-//    }
-    // MARK: - ClaimRewards
-        func claimReward(id: Int, rewardId: Int, childId: Int, claimDate: String, completion: @escaping (Result<ClaimRewards, Error>) -> Void) {
-            let URL = baseURL + "Child/\(childId)/claimReward/\(rewardId)"
+
+    // MARK: - ClaimReward
+        func claimReward(id: Int, rewardId: Int, childId: Int, claimDate: String, completion: @escaping (Result<ClaimReward, Error>) -> Void) {
+            let URL = baseURL + "Child/\(childId)/claimThisReward"
+
+            let claim = ClaimReward(id: id, rewardId: rewardId, childId: childId, claimDate: "2024-06-06")
             
-            let claim = ClaimRewards(id: id, rewardId: rewardId, childId: childId, claimDate: claimDate)
-            
-            AF.request(URL, method: .post, parameters: claim, encoder: JSONParameterEncoder.default).responseDecodable(of: ClaimRewards.self) { response in
+            AF.request(URL, method: .post, parameters: claim, encoder: JSONParameterEncoder.default).responseDecodable(of: ClaimReward.self) { response in
                 switch response.result {
-                case .success(let claimRewards):
+                case .success(let claimReward):
                     // MARK: - EXTRA LINE FOR DEBUGGING
                     if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                        print("Raw response: (\(str))")
+                        print("Success Raw response claimReward: (\(str))")
                     }
-                    completion(.success(claimRewards))
+                    completion(.success(claimReward))
                 case .failure(let afError):
                     // MARK: - EXTRA LINE FOR DEBUGGING
                     if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                        print("Raw response: (\(str))")
+                        print("Failed Raw response claimReward (\(str))")
                     }
                     completion(.failure(afError as Error))
                 }
