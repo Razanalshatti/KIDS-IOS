@@ -183,7 +183,7 @@ class NetworkManager {
         func claimReward(id: Int, rewardId: Int, childId: Int, claimDate: String, completion: @escaping (Result<ClaimReward, Error>) -> Void) {
             let URL = baseURL + "Child/\(childId)/claimThisReward"
 
-            let claim = ClaimReward(id: id, rewardId: rewardId, childId: childId, claimDate: "2024-06-06")
+            let claim = ClaimReward(id: id, rewardId: rewardId, childId: childId, claimDate: claimDate)
             
             AF.request(URL, method: .post, parameters: claim, encoder: JSONParameterEncoder.default).responseDecodable(of: ClaimReward.self) { response in
                 switch response.result {

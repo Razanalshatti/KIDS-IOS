@@ -341,10 +341,14 @@ extension HomeTableViewController: BankCardDelegate {
     
 
     func claimYourReward(reward: Reward){
-        NetworkManager.shared.claimReward(id: 0, 
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let formattedDate = dateFormatter.string(from: currentDate)
+        NetworkManager.shared.claimReward(id: 0,
                                           rewardId: reward.id,
                                           childId: reward.childId,
-                                          claimDate: "2024-06-06") { result in
+                                          claimDate: formattedDate) { result in
             
             DispatchQueue.main.async {
                 switch result {
