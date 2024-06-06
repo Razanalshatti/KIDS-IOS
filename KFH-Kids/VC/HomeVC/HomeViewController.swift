@@ -4,15 +4,6 @@ import Eureka
 import Alamofire
 import Kingfisher
 
-
-//MARK: TODO: Reward
-/// 1- Fetch rewards in Home VC
-/// 2- Count the rewards, and show the follwoing based on the rewrds in the  BE
-/// let rewardView1 = RewardView()
-/// let rewardView2 = RewardView()
-/// let rewardView3 = RewardView()
-// MARK: 3- create navigations to claim either rewards or tasks. .child
-
 class HomeViewController: UIViewController {
     
     let screenImage = UIImageView()

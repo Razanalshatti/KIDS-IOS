@@ -64,6 +64,7 @@ class ActivityViewController: UIViewController {
         
         activityLabel.font = UIFont.boldSystemFont(ofSize: 24)
         activityLabel.textAlignment = .center
+        activityLabel.textColor = .white
         activityLabel.numberOfLines = 0
         goldCardView.addSubview(activityLabel)
         
@@ -87,7 +88,7 @@ class ActivityViewController: UIViewController {
         
         countdownLabel.font = UIFont.systemFont(ofSize: 18)
         countdownLabel.textAlignment = .center
-        countdownLabel.textColor = .gray
+        countdownLabel.textColor = .white
         goldCardView.addSubview(countdownLabel)
     }
     
@@ -105,14 +106,14 @@ class ActivityViewController: UIViewController {
         }
         
         activityLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
             make.left.equalTo(goldCardView).offset(20)
             make.right.equalTo(goldCardView).offset(-20)
         }
         
         
         activityImageView.snp.makeConstraints { make in
-            make.top.equalTo(activityLabel.snp.bottom).offset(10)
+            make.top.equalTo(activityLabel.snp.bottom)
             make.centerX.equalTo(goldCardView)
             make.width.height.equalTo(200)
         }
@@ -123,19 +124,19 @@ class ActivityViewController: UIViewController {
         }
         
         trueButton.snp.makeConstraints { make in
-            make.top.equalTo(countdownLabel.snp.bottom).offset(10)
+            make.top.equalTo(countdownLabel.snp.bottom).offset(-80)
             make.right.equalTo(view.snp.centerX).offset(-20)
             make.width.height.equalTo(50)
         }
         
         falseButton.snp.makeConstraints { make in
-            make.top.equalTo(countdownLabel.snp.bottom).offset(10)
+            make.top.equalTo(countdownLabel.snp.bottom).offset(-80)
             make.left.equalTo(view.snp.centerX).offset(20)
             make.width.height.equalTo(50)
         }
         
         finishButton.snp.makeConstraints { make in
-            make.top.equalTo(trueButton.snp.bottom).offset(20)
+            make.top.equalTo(activityLabel.snp.bottom).offset(250)
             make.centerX.equalTo(goldCardView)
             make.width.equalTo(200)
             make.height.equalTo(50)
