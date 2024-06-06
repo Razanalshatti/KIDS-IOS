@@ -65,7 +65,7 @@ class RewardCollectionTableViewCell: UITableViewCell, UICollectionViewDelegate, 
     
     // Adjust the size of the cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200) // Adjust size as needed
+        return CGSize(width: 105, height: 140) // Adjust size as needed
     }
     
 
