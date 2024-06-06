@@ -77,7 +77,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        self.title = "Baity"
+        self.title = "BAITI"
         self.navigationItem.setHidesBackButton(true, animated: true)
         tableView.register(ServiceTableViewCell.self, forCellReuseIdentifier: "ServiceCell")
         tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: "ImageCell")
