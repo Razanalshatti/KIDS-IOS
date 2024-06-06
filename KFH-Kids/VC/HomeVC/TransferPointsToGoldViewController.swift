@@ -40,7 +40,6 @@ class TransferPointsToGoldViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("Dismissed !!!!!")
         delegate?.removeBlurEffect()
         
     }

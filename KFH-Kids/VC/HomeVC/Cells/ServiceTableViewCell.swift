@@ -1,10 +1,3 @@
-//
-//  ServiceTableViewCell.swift
-//  KFH-Kids
-//
-//  Created by Razan alshatti on 04/06/2024.
-//
-
 import UIKit
 
 class ServiceTableViewCell: UITableViewCell {
@@ -30,7 +23,7 @@ class ServiceTableViewCell: UITableViewCell {
         transferPtsToGold.setTitleColor(.white, for: .normal)
         transferPtsToGold.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         transferPtsToGold.setBackgroundImage(UIImage(named: "GroupGreen3"), for: .normal)
-        transferPtsToGold.layer.cornerRadius = 20
+        transferPtsToGold.layer.cornerRadius = 1
         transferPtsToGold.layer.masksToBounds = true
         //transferPtsToGold.addTarget(self, action: #selector(transferToGoldButtonTapped), for: .touchUpInside)
         addSubview(transferPtsToGold)
@@ -62,9 +55,10 @@ class ServiceTableViewCell: UITableViewCell {
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(50)
+            make.height.equalTo(55)
+            
         }
-//        
+//
 //        // Transfer Points to Money Button
 //        transferPtsToMoney.snp.makeConstraints { make in
 //            make.top.equalTo(transferPtsToGold.snp.bottom).offset(20)
