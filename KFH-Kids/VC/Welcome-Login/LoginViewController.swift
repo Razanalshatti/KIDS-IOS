@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
     private func setupLoginLabel() {
         let loginLabel = UILabel()
         loginLabel.text = "Login"
-        loginLabel.textColor = UIColor(red: 1.0, green: 0.796, blue: 0.486, alpha: 1.0)
+        loginLabel.textColor = UIColor(red: 0.988, green: 0.769, blue: 0.235, alpha: 1)
         loginLabel.font = UIFont.boldSystemFont(ofSize: 39)
         
         self.view.addSubview(loginLabel)
@@ -86,7 +86,7 @@ class LoginViewController: UIViewController {
         let loginButton = UIButton(type: .system)
         loginButton.setTitle("Let's Go", for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        loginButton.backgroundColor = UIColor(red: 1, green: 0.797, blue: 0.488, alpha: 1)
+        loginButton.backgroundColor = UIColor(red: 0.988, green: 0.769, blue: 0.235, alpha: 1)
         loginButton.layer.cornerRadius = 20
         loginButton.setTitleColor(.white, for: .normal)
 
@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(loginButton)
         
         loginButton.snp.makeConstraints { make in
-            make.width.equalTo(153)
+            make.width.equalTo(160)
             make.height.equalTo(40)
             make.centerX.equalTo(self.view)
             make.top.equalTo(self.view).offset(532)
