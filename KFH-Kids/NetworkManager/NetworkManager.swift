@@ -85,20 +85,44 @@ class NetworkManager {
 
     
     // MARK: task completion
-    func taskCompletion(childId: Int,taskId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
+//    func taskCompletion(childId: Int,taskId: Int, completion: @escaping (Result<[MyTask], Error>) -> Void) {
+//        let URL = baseURL + "Child/\(childId)/tasks/\(taskId)/complete"
+//        AF.request(URL, method: .put).responseDecodable(of: [MyTask].self) { response in
+//            switch response.result {
+//            case .success(let complete):
+//                //MARK: EXTRA LINE FOR DEBUGGING
+//                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+//                    print("Raw response 1: (\(str)")
+//                }
+//                completion(.success(complete))
+//            case .failure(let afError):
+//                //MARK: EXTRA LINE FOR DEBUGGING
+//                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+//                    print("Raw response 2: (\(str)")
+//                }
+//                completion(.failure(afError as Error))
+//            }
+//        }
+//    }
+    func taskCompletion(childId: Int, taskId: Int, completion: @escaping (Result<String, Error>) -> Void) {
         let URL = baseURL + "Child/\(childId)/tasks/\(taskId)/complete"
-        AF.request(URL, method: .put, parameters: [childId, taskId], encoder: URLEncodedFormParameterEncoder.default).responseDecodable(of: [MyTask].self) { response in
+        AF.request(URL, method: .put).responseJSON { response in
             switch response.result {
-            case .success(let complete):
-                //MARK: EXTRA LINE FOR DEBUGGING
-                if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
+            case .success(let json):
+                if let responseDict = json as? [String: Any], let message = responseDict["message"] as? String {
+                    // For debugging
+                    if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                        print("Raw response 1: \(str)")
+                    }
+                    completion(.success(message))
+                } else {
+                    // Handle unexpected response format
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unexpected response format"])))
                 }
-                completion(.success(complete))
             case .failure(let afError):
-                //MARK: EXTRA LINE FOR DEBUGGING
+                // For debugging
                 if let data = response.data, let str = String(data: data, encoding: .utf8) {
-                    print("Raw response: (\(str)")
+                    print("Raw response 2: \(str)")
                 }
                 completion(.failure(afError as Error))
             }
