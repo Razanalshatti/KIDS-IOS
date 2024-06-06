@@ -52,7 +52,7 @@ class RewardCollectionViewCell: UICollectionViewCell {
         }
 
         rewardImageView.snp.makeConstraints { make in
-            make.top.equalTo(customBackgroundView).offset(-10)
+            make.top.equalTo(customBackgroundView).offset(10)
             make.centerX.equalTo(customBackgroundView)
             make.width.height.equalTo(65)
         }
@@ -75,7 +75,7 @@ class RewardCollectionViewCell: UICollectionViewCell {
                 rewardImageView.image = UIImage(named: "dabdoob")
                 
             } else if reward.rewardType.lowercased() == "money" {
-                rewardImageView.image = nil
+                rewardImageView.image = UIImage(named: "cash")
                 
             }else if reward.rewardType.lowercased() == "vacation" {
                 rewardImageView.image = UIImage(named: "vacation")
