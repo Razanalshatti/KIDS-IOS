@@ -5,8 +5,8 @@ class TaskCell: UITableViewCell {
     
     let descriptionLabel = UILabel()
     let pointsLabel = UILabel()
-    let taskBackgroundView = UIImageView() // Changed to UIImageView
-    let pointsBackgroundView = UIImageView() // Changed to UIImageView
+    let taskBackgroundView = UIImageView()
+    let pointsBackgroundView = UIImageView()
     
     var task: MyTask?
     var checkboxAction: (() -> Void)?
@@ -29,7 +29,7 @@ class TaskCell: UITableViewCell {
         pointsBackgroundView.addSubview(pointsLabel)
         
         taskBackgroundView.layer.cornerRadius = 20
-        taskBackgroundView.clipsToBounds = true // Ensure the image respects the corner radius
+        taskBackgroundView.clipsToBounds = true 
         pointsBackgroundView.layer.cornerRadius = 15
         pointsBackgroundView.clipsToBounds = true
         

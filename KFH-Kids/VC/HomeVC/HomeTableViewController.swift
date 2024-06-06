@@ -21,7 +21,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         guard let points = child?.points else { return }
         let selectedRewrard = rewards[rewardIndexPath]
         
-        if points >= selectedRewrard.requiredPoints { // Assuming 100 points are required to claim the reward
+        if points >= selectedRewrard.requiredPoints { 
             showRewardMessage(points: points, reward: selectedRewrard)
             
             } else {
@@ -70,7 +70,14 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        self.title = "BAITI"
+        let imageView = UIImageView(image: UIImage(systemName: "house.fill"))
+        imageView.tintColor = .black // Set the tint color as needed
+        self.navigationItem.titleView = imageView
+        
+        let backButtonImage = UIImage(systemName: "house.fill")
+        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
+        backButton.tintColor = .black
         self.navigationItem.setHidesBackButton(true, animated: true)
         tableView.register(ServiceTableViewCell.self, forCellReuseIdentifier: "ServiceCell")
         tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: "ImageCell")
@@ -80,6 +87,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         fetchRewards(childId: child?.childId ?? 0, parentId: child?.parentId ?? 0)
         self.tableView.separatorColor = UIColor.clear
+        
         
         print("Rewards Count: \(rewards.count)")
         
@@ -190,7 +198,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         } else if indexPath.section == 1 {
             return 200
         } else if indexPath.section == 2 {
-         return 160
+         return 150
         } else if indexPath.section == 3 {
             return 75
         } else {
