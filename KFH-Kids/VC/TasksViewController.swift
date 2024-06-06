@@ -53,7 +53,7 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func updatePointsBalance() {
-        pointsBalanceLabel.text = "Points: \(child?.points)"
+        pointsBalanceLabel.text = "Points: \(child?.points ?? 0)"
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

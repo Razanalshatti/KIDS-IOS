@@ -14,6 +14,7 @@ class RewardCell: UITableViewCell {
     let customBackgroundView = UIView()
     let rewardImageView = UIImageView()
     let descriptionLabel = UILabel()
+    let pointsLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -64,6 +65,7 @@ class RewardCell: UITableViewCell {
     
     func configure(with reward: Reward) {
         descriptionLabel.text = reward.description
+        pointsLabel.text = String(reward.requiredPoints)
 //        if let imageURL = URL(string: reward.image ?? "DefaultGift") {
 //            rewardImageView.kf.setImage(with: imageURL)
 //        } else {

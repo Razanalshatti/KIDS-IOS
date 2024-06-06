@@ -14,6 +14,7 @@ class RewardCollectionViewCell: UICollectionViewCell {
     let customBackgroundView = UIView()
     let rewardImageView = UIImageView()
     let descriptionLabel = UILabel()
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,33 +38,36 @@ class RewardCollectionViewCell: UICollectionViewCell {
         customBackgroundView.addSubview(rewardImageView)
         
         // Description Label
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.font = UIFont.boldSystemFont(ofSize: 14)
         descriptionLabel.textColor = .darkGray
         descriptionLabel.numberOfLines = 2
         descriptionLabel.textAlignment = .center
         customBackgroundView.addSubview(descriptionLabel)
+        
     }
 
     private func setupConstraints() {
         customBackgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
+            make.edges.equalToSuperview()
         }
 
         rewardImageView.snp.makeConstraints { make in
-            make.top.equalTo(customBackgroundView).offset(10)
+            make.top.equalTo(customBackgroundView).offset(-10)
             make.centerX.equalTo(customBackgroundView)
-            make.width.height.equalTo(80)
+            make.width.height.equalTo(65)
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(rewardImageView.snp.bottom).offset(5)
-            make.left.equalTo(customBackgroundView).offset(10)
-            make.right.equalTo(customBackgroundView).offset(-10)
+            make.leading.trailing.equalTo(rewardImageView)
+
         }
+
     }
     
     func configure(with reward: Reward) {
         descriptionLabel.text = reward.description
+        
 //        if let imageURL = URL(string: reward.image ?? "DefaultGift") {
 //            rewardImageView.kf.setImage(with: imageURL)
 //        } else {

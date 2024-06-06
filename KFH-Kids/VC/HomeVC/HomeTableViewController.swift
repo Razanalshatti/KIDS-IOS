@@ -59,6 +59,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         func navigateToTasksPage() {
             let tasksVC = TasksViewController()
 //            tasksVC.child = self.child
+            tasksVC.child = self.child
             navigationController?.pushViewController(tasksVC, animated: true)
         }
     
@@ -172,6 +173,9 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             
             cell.rewards = rewards
             cell.delegate = self
+            
+       
+            
             
             
             return cell
