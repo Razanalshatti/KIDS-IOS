@@ -8,19 +8,64 @@
 import UIKit
 
 //MARK: Todo
-///  Create cell --> Header ✅
-///  Image Cell -> Image
 ///  Reward Cell --> UIColecitonView
-///  Service Cell -> UITableViewCell 
 
-class HomeTableViewController: UITableViewController, TransferPointsToGoldDelegate, ActivityViewControllerDelegate{
-        
+class HomeTableViewController: UITableViewController, TransferPointsToGoldDelegate, ActivityViewControllerDelegate,RewardCollectionViewCellDelegate{
     
+    var rewardIndexPath = 0
     var sections = ["","","Rewards","Serivce"]
     var child: TokenResponse?
     var rewards : [Reward] = []
     var blurEffectView: UIVisualEffectView?
     var points: PointsResponse?
+    let bonus = UIButton(type: .system)
+    var bonusButtonDisabledUntil: Date?
+    var bonusButtonTimer: Timer?
+
+    func collectionViewCellTapped(at indexPath: IndexPath) {
+        print("selected \(indexPath.item)")
+        rewardIndexPath = indexPath.item
+        guard let points = child?.points else { return }
+        let selectedRewrard = rewards[rewardIndexPath]
+        
+        if points >= selectedRewrard.requiredPoints { // Assuming 100 points are required to claim the reward
+            showRewardMessage(points: points, reward: selectedRewrard)
+            
+            } else {
+                navigateToTasksPage()
+            }
+        
+        
+    }
+    
+    
+    func showRewardMessage(points: Int, reward: Reward) {
+            let alertController = UIAlertController(title: "Congratulations!", message: "You have \(points) points. Would you like to claim your reward?", preferredStyle: .alert)
+    
+            let claimAction = UIAlertAction(title: "Claim", style: .default) { _ in
+                self.claimYourReward(reward: reward)
+            }
+            let tasksAction = UIAlertAction(title: "Go to Tasks", style: .default) { _ in
+                self.navigateToTasksPage()
+            }
+    
+            alertController.addAction(claimAction)
+            alertController.addAction(tasksAction)
+    
+            present(alertController, animated: true, completion: nil)
+        }
+
+    
+        func navigateToTasksPage() {
+            let tasksVC = TasksViewController()
+//            tasksVC.child = self.child
+            navigationController?.pushViewController(tasksVC, animated: true)
+        }
+    
+    
+    func updatePoints() {
+        
+    }
 
     
     override func viewDidLoad() {
@@ -37,9 +82,9 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: "ImageCell")
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: "HeaderCell")
         tableView.register(RewardCell.self, forCellReuseIdentifier: "RewardCell")
+        tableView.register(RewardCollectionTableViewCell.self, forCellReuseIdentifier: "RewardCollectionTableViewCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         fetchRewards(childId: child?.childId ?? 0, parentId: child?.parentId ?? 0)
-        
         self.tableView.separatorColor = UIColor.clear
         
         print("Rewards Count: \(rewards.count)")
@@ -85,7 +130,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             
         } else if section == 2 {
             
-            return rewards.count
+            return 1
             
         } else if section == 3 {
             
@@ -120,18 +165,18 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             return cell
             
         } else if indexPath.section == 2 {
-            // Reward cell
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RewardCell", for: indexPath) as! RewardCell
-            let reward = rewards[indexPath.row] // calling the array = rows
-
-            print(reward.description)
             
-            cell.configure(with: reward)
-            cell.selectionStyle = .none
-            // Configure the cell...
+            //MARK: Cell that is CollecitonView
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RewardCollectionTableViewCell", for: indexPath) as! RewardCollectionTableViewCell
+            
+            cell.rewards = rewards
+            cell.delegate = self
+            
             
             return cell
+            
+
             
         } else if indexPath.section == 3 {
             
@@ -154,7 +199,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         } else if indexPath.section == 1 {
             return 200
         } else if indexPath.section == 2 {
-         return 200
+         return 220
         } else if indexPath.section == 3 {
             return 75
         } else {
@@ -174,7 +219,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             case 0:
                 transferToGoldButtonTapped()
             case 1:
-                print("second button clicked!")
+                transferToMoneyButtonTapped()
 
             case 2:
                 bonusButtonTapped()
@@ -204,7 +249,7 @@ extension HomeTableViewController {
                         self.rewards = tokenResponse
                         self.tableView.reloadData()
                         print("Rewards Count: \(self.rewards.count)")
-
+                        
                     }
                 case .failure(let error):
                     
@@ -213,18 +258,15 @@ extension HomeTableViewController {
                     }
                 }
             }
-           
-            
         }
-        
-    }  
-    
+    }
 }
+    
 
 //MARK: Navigation
 
 extension HomeTableViewController: BankCardDelegate {
- 
+    
     
     
     @objc func transferToGoldButtonTapped() {
@@ -239,6 +281,20 @@ extension HomeTableViewController: BankCardDelegate {
             sheet.detents = [.medium()]
         }
         
+        present(vc, animated: true, completion: nil)
+    }
+    @objc func transferToMoneyButtonTapped() {
+        addBlurEffect()
+        let vc = TransferPointsToMoneyViewController()
+        vc.modalPresentationStyle = .pageSheet
+        vc.delegate = self
+        vc.child = child
+        vc.moneyLabel.text = String(child?.points ?? 0)
+
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+
         present(vc, animated: true, completion: nil)
     }
     
@@ -265,43 +321,94 @@ extension HomeTableViewController: BankCardDelegate {
     }
     
     func removeBlurEffect() {
-        
         // Make the Points API CALL
-        
         NetworkManager.shared.GetPoints(childId: child!.childId) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let success):
                     print("success \(success)")
                     self.child?.points = success.points
+                    self.tableView.reloadData()
                 case .failure(let failure):
                     print("failed! \(failure)")
                 }
-            }
-            
-            
+            }  
         }
         blurEffectView?.removeFromSuperview()
         self.tableView.reloadData()
-
+        
     }
     
 
+    func claimYourReward(reward: Reward){
+        NetworkManager.shared.claimReward(id: 0, 
+                                          rewardId: reward.id,
+                                          childId: reward.childId,
+                                          claimDate: "2024-06-06") { result in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let claimed):
+                    print("success reward \(claimed)")
+                    self.rewards.remove(at: self.rewardIndexPath)
+                    self.tableView.reloadData()
+                case .failure(let claimed):
+                    print("failure \(claimed)")
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
     
      func didCompleteActivity() {
-      //  disableBonusButton()
+       disableBonusButton()
     }
-    
-//    func disableBonusButton() {
-//        bonus.isEnabled = false
-//        bonus.backgroundColor = .gray
-//        
-//        bonusButtonDisabledUntil = Date().addingTimeInterval(1)
-//        UserDefaults.standard.set(bonusButtonDisabledUntil, forKey: "bonusButtonDisabledUntil")
-//        
-//        startBonusButtonTimer()
-//    }
-    
+    func checkBonusButtonState() {
+        if let disabledUntil = UserDefaults.standard.object(forKey: "bonusButtonDisabledUntil") as? Date {
+            bonusButtonDisabledUntil = disabledUntil
+            
+            if Date() < disabledUntil {
+                disableBonusButton()
+                startBonusButtonTimer()
+            } else {
+                enableBonusButton()
+            }
+        }
+    }
+    func disableBonusButton() {
+        bonus.isEnabled = false
+        bonus.backgroundColor = .gray
+        
+        bonusButtonDisabledUntil = Date().addingTimeInterval(1)
+        UserDefaults.standard.set(bonusButtonDisabledUntil, forKey: "bonusButtonDisabledUntil")
+        
+        startBonusButtonTimer()
+    }
+    func startBonusButtonTimer() {
+        bonusButtonTimer?.invalidate()
+        bonusButtonTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { timer in
+            if let disabledUntil = self.bonusButtonDisabledUntil {
+                let remainingTime = Int(disabledUntil.timeIntervalSinceNow)
+                
+                if remainingTime <= 0 {
+                    self.enableBonusButton()
+                    timer.invalidate()
+                } else {
+                    let hours = remainingTime / 3600
+                    let minutes = (remainingTime % 3600) / 60
+                    let seconds = remainingTime % 60
+                    self.bonus.setTitle(String(format: "Bonus (%02d:%02d:%02d)", hours, minutes, seconds), for: .disabled)
+                }
+            }
+        }
+    }
+    func enableBonusButton() {
+        bonus.isEnabled = true
+        bonus.backgroundColor = UIColor(red: 0.451, green: 0.859, blue: 0.835, alpha: 1.0)
+        bonusButtonDisabledUntil = nil
+        UserDefaults.standard.removeObject(forKey: "bonusButtonDisabledUntil")
+    }
    
     func navigateToBankCardVC() {
         let bankCardVC = BankCardViewController()

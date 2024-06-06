@@ -1,13 +1,13 @@
 import UIKit
 import SnapKit
 
-protocol TransferPointsToMoneyDelegate: AnyObject {
-    func removeBlurEffect()
-}
+//protocol TransferPointsToMoneyDelegate: AnyObject {
+//    func removeBlurEffect()
+//}
 
 class TransferPointsToMoneyViewController: UIViewController {
     
-    weak var delegate: TransferPointsToMoneyDelegate?
+    weak var delegate: TransferPointsToGoldDelegate?
     
     let backgroundImageView = UIImageView()
     let moneyCardView = UIView()
@@ -19,6 +19,8 @@ class TransferPointsToMoneyViewController: UIViewController {
     let moneyImageView = UIImageView()
     let moneyLabel = UILabel()
     let containerView = UIView()
+    
+    var child: TokenResponse?
     
     var moneyAmount = 1 {
         didSet {
@@ -37,6 +39,7 @@ class TransferPointsToMoneyViewController: UIViewController {
         super.viewDidDisappear(animated)
         print("Dismissed !!!!!")
         delegate?.removeBlurEffect()
+        
     }
     
     func setupSubviews() {
@@ -46,8 +49,8 @@ class TransferPointsToMoneyViewController: UIViewController {
         view.addSubview(backgroundImageView)
         
         let favoritesImageView = UIImageView(image: UIImage(named: "favourites"))
-            favoritesImageView.contentMode = .scaleAspectFit
-            moneyCardView.addSubview(favoritesImageView)
+        favoritesImageView.contentMode = .scaleAspectFit
+        moneyCardView.addSubview(favoritesImageView)
         
         // Money Card Background
         view.addSubview(moneyCardView)
@@ -58,7 +61,6 @@ class TransferPointsToMoneyViewController: UIViewController {
         moneyCardView.addSubview(moneyImageView)
         
         // Money Label
-        moneyLabel.text = "10"
         moneyLabel.font = UIFont.boldSystemFont(ofSize: 22)
         moneyLabel.textColor = .black
         moneyCardView.addSubview(moneyLabel)
@@ -144,7 +146,7 @@ class TransferPointsToMoneyViewController: UIViewController {
         decreaseButton.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
             make.left.equalTo(containerView).offset(10)
-            make.width.height.equalTo(30) // Adjust size as needed
+            make.width.height.equalTo(30) 
         }
         
         amountLabel.snp.makeConstraints { make in
@@ -176,8 +178,10 @@ class TransferPointsToMoneyViewController: UIViewController {
     }
     
     @objc func checkButtonTapped() {
+        transferPointsToMoney()
         delegate?.removeBlurEffect()
         dismiss(animated: true, completion: nil)
+
     }
     
     func updateAmountLabel() {
@@ -195,6 +199,36 @@ class TransferPointsToMoneyViewController: UIViewController {
         
         amountLabel.attributedText = attributedString
     }
+    func transferPointsToMoney() {
+        var pointsToDeduct = moneyAmount * 10
+        
+        if child?.points ?? 0 < 10{
+            let message = "NOT ENOUGH POINTS!!"
+            presentAlertWithTitle(title: "ERROR", message: message)
+        }else {
+        NetworkManager.shared.transfer(parentId: child?.parentId ?? 0,childId: child?.childId ?? 0, transferPoints: pointsToDeduct) { result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let transfer):
+                    print("success \(transfer)")
+                    let message = "REQUEST SENT SUCCESSFULLY"
+                    self.presentAlertWithTitle(title: "Success", message: message)
+                                  case .failure(let error):
+                                  print("failure \(error)")
+                    self.delegate?.removeBlurEffect()
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
+}
+    func presentAlertWithTitle(title: String, message: String, completion: (() -> Void)? = nil) {
+        _ = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        _ = UIAlertAction(title: "OK", style: .default) { _ in
+            completion?()
+        }
+    }
+
 }
 
 #if canImport(SwiftUI) && DEBUG
@@ -222,3 +256,8 @@ struct GenericViewControllerRepresentables<ViewController: UIViewController>: UI
     }
 }
 #endif
+
+
+
+    
+

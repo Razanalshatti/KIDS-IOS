@@ -1,22 +1,22 @@
 //
-//  RewardCell.swift
+//  RewardCollectionViewCell.swift
 //  KFH-Kids
 //
 //  Created by Aseel on 04/06/2024.
 //
-
 import UIKit
 import SnapKit
 import Kingfisher
 
-class RewardCell: UITableViewCell {
+//MARK: UICollectionViewCell
+class RewardCollectionViewCell: UICollectionViewCell {
     
     let customBackgroundView = UIView()
     let rewardImageView = UIImageView()
     let descriptionLabel = UILabel()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupSubviews()
         setupConstraints()
     }
@@ -52,7 +52,7 @@ class RewardCell: UITableViewCell {
         rewardImageView.snp.makeConstraints { make in
             make.top.equalTo(customBackgroundView).offset(10)
             make.centerX.equalTo(customBackgroundView)
-            make.width.height.equalTo(80) 
+            make.width.height.equalTo(80)
         }
         
         descriptionLabel.snp.makeConstraints { make in
