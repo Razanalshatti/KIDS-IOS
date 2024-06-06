@@ -28,7 +28,7 @@ class RewardCollectionViewCell: UICollectionViewCell {
     
     private func setupSubviews() {
         // Custom Background View
-        customBackgroundView.backgroundColor = UIColor(red: 1.0, green: 0.949, blue: 0.878, alpha: 1.0)
+        customBackgroundView.backgroundColor = UIColor(red: 0.863, green: 0.929, blue: 0.894, alpha: 1)
         customBackgroundView.layer.cornerRadius = 15
         customBackgroundView.layer.masksToBounds = true
         contentView.addSubview(customBackgroundView)
@@ -78,7 +78,7 @@ class RewardCollectionViewCell: UICollectionViewCell {
                 rewardImageView.image = nil
                 
             }else if reward.rewardType.lowercased() == "vacation" {
-                rewardImageView.image = nil
+                rewardImageView.image = UIImage(named: "vacation")
                 
             }
 //        }
