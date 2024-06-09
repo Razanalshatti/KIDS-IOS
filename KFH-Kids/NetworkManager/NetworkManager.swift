@@ -156,7 +156,7 @@ class NetworkManager {
   
     
     // MARK: GetPoints ✅
-    func GetPoints(childId: Int, completion: @escaping (Result<PointsResponse, Error>) -> Void) {
+    func getPoints(childId: Int, completion: @escaping (Result<PointsResponse, Error>) -> Void) {
         let URL = baseURL + "Child/GetPoints/\(childId)"
         
         AF.request(URL, method: .get).responseDecodable(of:PointsResponse.self) {response in
@@ -177,7 +177,63 @@ class NetworkManager {
         }
     }
     
-    // MARK: transfer 
+    // MARK: GetChildDetails ✅
+    func getChildDetails(childId: Int, completion: @escaping (Result<ChildDetails, Error>) -> Void) {
+        let URL = baseURL + "Parent/ChildDetails/\(childId)"
+        
+        AF.request(URL, method: .get).responseDecodable(of: ChildDetails.self) { response in
+            switch response.result {
+            case .success(let childDetails):
+                // MARK: EXTRA LINE FOR DEBUGGING
+                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                    print("Raw response: \(str)")
+                }
+                completion(.success(childDetails))
+            case .failure(let afError):
+                // MARK: EXTRA LINE FOR DEBUGGING
+                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                    print("Raw response: \(str)")
+                }
+                completion(.failure(afError as Error))
+            }
+        }
+    }
+    
+    
+    // MARK: UpdateChildDetails ✅
+    func updateChildDetails(childId: Int, updateRequest: UpdateChildDetailsRequest, completion: @escaping (Result<UserDetailsResponse, Error>) -> Void) {
+        
+        let URL = baseURL + "Parent/ChildDetails/\(childId)"
+        AF.request(URL, method: .patch, parameters: updateRequest, encoder: JSONParameterEncoder.default).response { response in
+            if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                       print("updateChildDetails response: \(str)")
+                   } else {
+                       print("No data received")
+                   }
+            
+            print("Status Code: \(response.response?.statusCode ?? 0)")
+            print("Headers: \(response.response?.allHeaderFields ?? [:])")
+            
+            switch response.result {
+            case .success(let data):
+                do {
+                    let updatedDetails = try JSONDecoder().decode(UserDetailsResponse.self, from: data ?? Data())
+                    completion(.success(updatedDetails))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let afError):
+                completion(.failure(afError as Error))
+            }
+        }
+    }
+
+
+
+
+
+    
+    // MARK: transfer points!
     func transfer(parentId: Int,childId: Int,transferPoints:Int, completion: @escaping (Result<Transfer, Error>) -> Void) {
         
         let URL = baseURL + "Child/\(parentId)/transfer/\(childId)"
@@ -202,6 +258,35 @@ class NetworkManager {
             }
         }
     }
+    
+    // MARK: transfer points!
+    func transferMoney(childId: Int,transferMoney:Int, completion: @escaping (Result<TransferMoneyResponse, Error>) -> Void) {
+        
+        let URL = baseURL + "Child/\(childId)/transfer-to-baitiaccount"
+                
+        let transfer = TransferMoney(amount:transferMoney)
+    
+        AF.request(URL, method: .post, parameters: transfer, encoder: JSONParameterEncoder.default).responseDecodable(of: TransferMoneyResponse.self) { response in
+            switch response.result {
+            case .success(let transfer):
+                //MARK: EXTRA LINE FOR DEBUGGING
+                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                    print("Raw response: (\(str)")
+                }
+                completion(.success(transfer))
+            case .failure(let afError):
+                //MARK: EXTRA LINE FOR DEBUGGING
+                if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                    print("Raw response: (\(str)")
+                }
+                completion(.failure(afError as Error))
+            }
+        }
+    }
+    
+    
+    //https://kidsapi20240528084240.azurewebsites.net/api/Child/2/transfer-to-baitiaccount
+
 
     // MARK: - ClaimReward
         func claimReward(id: Int, rewardId: Int, childId: Int, claimDate: String, completion: @escaping (Result<ClaimReward, Error>) -> Void) {

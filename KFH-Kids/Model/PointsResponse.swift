@@ -6,6 +6,7 @@
 //
 
 import Foundation
-struct PointsResponse: Decodable{
+
+struct PointsResponse: Codable{
     var points: Int
 }

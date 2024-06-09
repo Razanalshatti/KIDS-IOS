@@ -125,7 +125,7 @@ class TransferPointsToMoneyViewController: UIViewController {
         
         // Other subview constraints
         moneyImageView.snp.makeConstraints { make in
-            make.top.equalTo(moneyCardView).offset(85)
+            make.top.equalTo(moneyCardView).offset(50)
             make.centerX.equalTo(moneyCardView)
             make.width.equalTo(250)
             make.height.equalTo(230)

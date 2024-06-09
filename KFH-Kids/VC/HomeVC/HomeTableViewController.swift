@@ -70,10 +70,9 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        let imageView = UIImageView(image: UIImage(systemName: "house.fill"))
-        imageView.tintColor = .black // Set the tint color as needed
-        self.navigationItem.titleView = imageView
-        
+       
+        title = "Home"
+
         let backButtonImage = UIImage(systemName: "house.fill")
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
@@ -161,7 +160,8 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             // Image Cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageTableViewCell
             
-            cell.backgroundImageView.image = UIImage(named: "background2")
+            cell.backgroundImageView.image = UIImage(named: "background4")
+            cell.backgroundImageView.layer.cornerRadius = 25
             cell.selectionStyle = .none
 
             return cell
@@ -198,7 +198,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         } else if indexPath.section == 1 {
             return 200
         } else if indexPath.section == 2 {
-         return 150
+         return 140
         } else if indexPath.section == 3 {
             return 75
         } else {
@@ -301,6 +301,7 @@ extension HomeTableViewController: BankCardDelegate {
         addBlurEffect()
         let vc = ActivityViewController()
         vc.modalPresentationStyle = .pageSheet
+        vc.child = child
         vc.delegate = self
         
         if let sheet = vc.sheetPresentationController {
@@ -321,7 +322,7 @@ extension HomeTableViewController: BankCardDelegate {
     
     func removeBlurEffect() {
         // Make the Points API CALL
-        NetworkManager.shared.GetPoints(childId: child!.childId) { result in
+        NetworkManager.shared.getPoints(childId: child!.childId) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let success):
@@ -417,6 +418,7 @@ extension HomeTableViewController: BankCardDelegate {
    
     func navigateToBankCardVC() {
         let bankCardVC = BankCardViewController()
+        bankCardVC.childId = child?.childId
         navigationController?.pushViewController(bankCardVC, animated: true)
 
     }

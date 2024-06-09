@@ -61,6 +61,7 @@ class RewardViewController: UIView {
     func configure(image: UIImage?, description: String) {
         rewardImageView.image = image
         descriptionLabel.text = description
+        
     }
 
 }

@@ -18,22 +18,31 @@ class ActivityViewController: UIViewController {
     let activityTypes: [ActivityType] = [.exercise, .quiz, .quranRecitation]
     var selectedActivity: ActivityType?
     
-    let exerciseImages: [String] = ["walk", "tramploine", "jumping jacks", "push ups", "time to move"]
+    let exerciseImages: [(String, Bool)] = [
+        ("walk",true), 
+        ("trampoline",true),
+        ("jumping jacks",true),
+        ("push ups",true),
+        ("time to move",true)
+    ]
     let quizQuestions: [(String, Bool)] = [
         ("عدد الثواني بالدقيقه = ٦٠ ثانيه", true),
         ("ما هو المسجد الأول الذي أسس في الإسلام = مسجد قباء", true),
-        ("عيد الاضحي يكون في شهر رمضان", false),
-        ("اول ايه نزلت في القران الكرسي", false),
-        ("اعظم سوره في القران هي الفاتحه", true)
+        ("عيد الاضحى يكون في شهر رمضان", false),
+        ("اول آيه نزلت في القران هي آية الكرسي", false),
+        ("أعظم سورة في القران هي الفاتحه", true)
     ]
-    let quranImages: [String] = ["alekhlaas", "alfalaq", "alnaas"]
+    let quranImages: [(String, Bool)] = [
+        ("سورة الاخلاص",true),
+        ("سورة الفلق",true),
+        ("سورة الناس",true)
+    ]
     
     let activityLabel = UILabel()
     let goldCardView = UIView()
     let activityImageView = UIImageView()
     let trueButton = UIButton(type: .system)
     let falseButton = UIButton(type: .system)
-    let finishButton = UIButton(type: .system)
     let countdownLabel = UILabel()
     let backgroundImageView = UIImageView()
     var feedbackLabel: UILabel?
@@ -41,12 +50,18 @@ class ActivityViewController: UIViewController {
     var countdownTimer: Timer?
     var remainingSeconds = 0
     var currentQuizQuestion: (String, Bool)?
+    var currentExercise: (String, Bool)?
+    var currentQuranRecitation: (String, Bool)?
+    var child: TokenResponse?
+    var childDetails: ChildDetails?
+    var checkCorrect: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
         setupConstraints()
         pickRandomActivity()
+        fetchChildDetails(childId: child?.childId ?? 0)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -79,17 +94,12 @@ class ActivityViewController: UIViewController {
         falseButton.addTarget(self, action: #selector(answerButtonTapped(_:)), for: .touchUpInside)
         goldCardView.addSubview(falseButton)
         
-        finishButton.setTitle("Finish", for: .normal)
-        finishButton.backgroundColor = UIColor(red: 1, green: 0.797, blue: 0.488, alpha: 1)
-        finishButton.layer.cornerRadius = 20
-        finishButton.setTitleColor(.white, for: .normal)
-        finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
-        goldCardView.addSubview(finishButton)
         
         countdownLabel.font = UIFont.systemFont(ofSize: 18)
         countdownLabel.textAlignment = .center
         countdownLabel.textColor = .white
         goldCardView.addSubview(countdownLabel)
+        
     }
     
     func setupConstraints() {
@@ -111,7 +121,6 @@ class ActivityViewController: UIViewController {
             make.right.equalTo(goldCardView).offset(-20)
         }
         
-        
         activityImageView.snp.makeConstraints { make in
             make.top.equalTo(activityLabel.snp.bottom)
             make.centerX.equalTo(goldCardView)
@@ -124,72 +133,71 @@ class ActivityViewController: UIViewController {
         }
         
         trueButton.snp.makeConstraints { make in
-            make.top.equalTo(countdownLabel.snp.bottom).offset(-80)
+            make.top.equalTo(activityLabel.snp.bottom).offset(230)
             make.right.equalTo(view.snp.centerX).offset(-20)
             make.width.height.equalTo(50)
         }
         
         falseButton.snp.makeConstraints { make in
-            make.top.equalTo(countdownLabel.snp.bottom).offset(-80)
+            make.top.equalTo(activityLabel.snp.bottom).offset(230)
             make.left.equalTo(view.snp.centerX).offset(20)
             make.width.height.equalTo(50)
         }
         
-        finishButton.snp.makeConstraints { make in
-            make.top.equalTo(activityLabel.snp.bottom).offset(250)
-            make.centerX.equalTo(goldCardView)
-            make.width.equalTo(200)
-            make.height.equalTo(50)
-        }
+
     }
     
     func pickRandomActivity() {
-        selectedActivity = activityTypes.randomElement()
-        
-        switch selectedActivity {
-        case .exercise:
-            activityLabel.text = "Exercise"
-            if let randomExerciseImage = exerciseImages.randomElement() {
-                activityImageView.image = UIImage(named: randomExerciseImage)
-            }
-            startCountdown(seconds: 15)
-            trueButton.isHidden = true
-            falseButton.isHidden = true
-        case .quiz:
-            activityLabel.text = "Quiz"
-            if let randomQuestion = quizQuestions.randomElement() {
-                currentQuizQuestion = randomQuestion
-                activityLabel.text = randomQuestion.0
-            }
-            activityImageView.image = nil
-            trueButton.isHidden = false
-            falseButton.isHidden = false
-            countdownLabel.text = ""
-        case .quranRecitation:
-            activityLabel.text = "Qur’an Recitation"
-            if let randomQuranImage = quranImages.randomElement() {
-                activityImageView.image = UIImage(named: randomQuranImage)
-            }
-            trueButton.isHidden = true
-            falseButton.isHidden = true
-            countdownLabel.text = ""
-        case .none:
-            break
-        }
-    }
+           selectedActivity = activityTypes.randomElement()
+           
+           switch selectedActivity {
+           case .exercise:
+               activityLabel.text = "Exercise"
+               if let randomExercise = exerciseImages.randomElement() {
+                   activityImageView.image = UIImage(named: randomExercise.0)
+                   activityLabel.text = randomExercise.0
+                   currentExercise = randomExercise
+               }
+              // startCountdown(seconds: 30)
+               trueButton.isHidden = false
+               falseButton.isHidden = false
+           case .quiz:
+               activityLabel.text = "Quiz"
+               if let randomQuestion = quizQuestions.randomElement() {
+                   currentQuizQuestion = randomQuestion
+                   activityLabel.text = randomQuestion.0
+               }
+               activityImageView.image = nil
+               trueButton.isHidden = false
+               falseButton.isHidden = false
+               countdownLabel.text = ""
+           case .quranRecitation:
+               activityLabel.text = "Qur’an Recitation"
+               if let randomQuran = quranImages.randomElement() {
+                   activityImageView.image = UIImage(named: randomQuran.0)
+                   activityLabel.text = randomQuran.0
+                   currentQuranRecitation = randomQuran
+               }
+              // startCountdown(seconds: 60)
+               trueButton.isHidden = false
+               falseButton.isHidden = false
+               countdownLabel.text = ""
+           case .none:
+               break
+           }
+       }
+    
     
     func startCountdown(seconds: Int) {
         remainingSeconds = seconds
         updateCountdownLabel()
         
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { timer in
             self.remainingSeconds -= 1
             self.updateCountdownLabel()
             
             if self.remainingSeconds <= 0 {
                 timer.invalidate()
-                self.finishButton.isEnabled = true
-                self.finishButton.backgroundColor = UIColor(red: 1, green: 0.497, blue: 0.488, alpha: 1)
             }
         }
     }
@@ -198,47 +206,84 @@ class ActivityViewController: UIViewController {
         countdownLabel.text = "Time remaining: \(remainingSeconds) seconds"
     }
     
+
     @objc func answerButtonTapped(_ sender: UIButton) {
-        guard let currentQuizQuestion = currentQuizQuestion else { return }
-        let isCorrect = (sender == trueButton) == currentQuizQuestion.1
+            var isCorrect = false
+            
+            switch selectedActivity {
+            case .quiz:
+                guard let currentQuizQuestion = currentQuizQuestion else { return }
+                isCorrect = (sender == trueButton) == currentQuizQuestion.1
+            case .exercise:
+                isCorrect = (sender == trueButton)
+            case .quranRecitation:
+                isCorrect = (sender == trueButton)
+            case .none:
+                return
+            }
+            
+        let alertController = UIAlertController(
+                    title: isCorrect ? "Bravo!" : "Sorry",
+                    message: isCorrect ? "You got 10 points" : "Please try again",
+                    preferredStyle: .alert
+                )
         
-        if feedbackLabel != nil {
-            // Shake the buttons
-            let animation = CABasicAnimation(keyPath: "position")
-            animation.duration = 0.05
-            animation.repeatCount = 3
-            animation.autoreverses = true
-            animation.fromValue = NSValue(cgPoint: CGPoint(x: sender.center.x - 5, y: sender.center.y))
-            animation.toValue = NSValue(cgPoint: CGPoint(x: sender.center.x + 5, y: sender.center.y))
-            sender.layer.add(animation, forKey: "position")
-            return
-        }
+                let action = UIAlertAction(title: "OK", style: .default) { _ in
+                    if isCorrect {
+                        self.addTenPoints()
+                        self.dismiss(animated: true, completion: nil)
+                    } else {
+                        self.pickRandomActivity()
+                    }
+                }
+                alertController.addAction(action)
+                present(alertController, animated: true, completion: nil)
+            }
+    
+    func addTenPoints() {
+        guard let childDetails = childDetails else { return }
         
-        feedbackLabel = UILabel()
-        feedbackLabel!.font = UIFont.boldSystemFont(ofSize: 24)
-        feedbackLabel!.textAlignment = .center
-        feedbackLabel!.text = isCorrect ? "Correct!" : "Wrong!"
-        feedbackLabel!.textColor = isCorrect ? .green : .red
-        feedbackLabel!.translatesAutoresizingMaskIntoConstraints = false
+        let newDetail = UpdateChildDetailsRequest(
+            id: childDetails.id,
+            username: childDetails.username,
+            password: childDetails.password,
+            points: childDetails.points + 10,
+            savingsAccountNumber: childDetails.savingsAccountNumber,
+            balance: childDetails.balance
+        )
         
-        view.addSubview(feedbackLabel!)
-        
-        feedbackLabel!.snp.makeConstraints { make in
-            make.centerX.equalTo(view)
-            make.top.equalTo(falseButton.snp.bottom).offset(20)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.feedbackLabel?.removeFromSuperview()
-            self.feedbackLabel = nil
-            self.finishButtonTapped()
+        addPoints(childId: child?.childId ?? 0, updateRequest: newDetail)
+    }
+    
+    // Method to fetch child details
+    func fetchChildDetails(childId: Int) {
+        NetworkManager.shared.getChildDetails(childId: childId) { [weak self] result in
+            switch result {
+            case .success(let details):
+                print(details.points)
+                self?.childDetails = details
+            case .failure(let error):
+                print("Failed to fetch child details: \(error)")
+            }
         }
     }
     
-    @objc func finishButtonTapped() {
-        dismiss(animated: true) {
-            self.delegate?.removeBlurEffect() // Ensure this line calls the correct method
-
+    // Method to update child details with new points
+    func addPoints(childId: Int, updateRequest: UpdateChildDetailsRequest) {
+        NetworkManager.shared.updateChildDetails(childId: childId, updateRequest: updateRequest) { result in
+            switch result {
+            case .success(let updatedDetails):
+                DispatchQueue.main.async {
+//                    let alert = UIAlertController(title: "Success", message: "Points added successfully", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+//                        self.dismiss(animated: true, completion: nil)
+//                    }))
+//                    self.present(alert, animated: true, completion: nil)
+                    print("Successfully updated child details: \(updatedDetails)")
+                }
+            case .failure(let error):
+                print("Failed to update child details: \(error.localizedDescription)")
+            }
         }
     }
 }

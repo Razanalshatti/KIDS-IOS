@@ -15,6 +15,8 @@ class RewardCell: UITableViewCell {
     let rewardImageView = UIImageView()
     let descriptionLabel = UILabel()
     let pointsLabel = UILabel()
+    let favoriteIcon = UIImageView()
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,12 +39,24 @@ class RewardCell: UITableViewCell {
         rewardImageView.contentMode = .scaleAspectFit
         customBackgroundView.addSubview(rewardImageView)
         
+        // Favorite Icon
+        favoriteIcon.image = UIImage(named: "coin")
+        favoriteIcon.contentMode = .scaleAspectFit
+        customBackgroundView.addSubview(favoriteIcon)
+        
         // Description Label
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.textColor = .darkGray
         descriptionLabel.numberOfLines = 2
         descriptionLabel.textAlignment = .center
         customBackgroundView.addSubview(descriptionLabel)
+        
+        // points Label
+        pointsLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        pointsLabel.textColor = .darkGray
+        pointsLabel.numberOfLines = 2
+        pointsLabel.textAlignment = .center
+        customBackgroundView.addSubview(pointsLabel)
     }
 
     private func setupConstraints() {
@@ -56,19 +70,28 @@ class RewardCell: UITableViewCell {
             make.width.height.equalTo(80) 
         }
         
-        descriptionLabel.snp.makeConstraints { make in
+        pointsLabel.snp.makeConstraints { make in
             make.top.equalTo(rewardImageView.snp.bottom).offset(5)
-            make.left.equalTo(customBackgroundView).offset(10)
-            make.right.equalTo(customBackgroundView).offset(-10)
+            make.leading.trailing.equalTo(customBackgroundView)
+        }
+        
+        favoriteIcon.snp.makeConstraints { make in
+            make.centerY.equalTo(pointsLabel)
+            make.leading.equalTo(pointsLabel.snp.trailing)
+            make.width.height.equalTo(24)
+              }
+        
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(pointsLabel.snp.bottom).offset(5)
+            make.centerX.equalTo(customBackgroundView)
         }
     }
     
     func configure(with reward: Reward) {
         descriptionLabel.text = reward.description
         pointsLabel.text = String(reward.requiredPoints)
-//        if let imageURL = URL(string: reward.image ?? "DefaultGift") {
-//            rewardImageView.kf.setImage(with: imageURL)
-//        } else {
+        favoriteIcon.image = UIImage(named: "favourites")
+
             if reward.rewardType.lowercased() == "toy" { // change babdood to toy
                 rewardImageView.image = UIImage(named: "dabdoob")
                 

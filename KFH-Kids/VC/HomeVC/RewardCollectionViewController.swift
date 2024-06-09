@@ -1,10 +1,3 @@
-//
-//  RewardCollectionViewController.swift
-//  KFH-Kids
-//
-//  Created by Razan alshatti on 06/06/2024.
-//
-
 import Foundation
 import UIKit
 
@@ -24,7 +17,7 @@ class RewardCollectionTableViewCell: UITableViewCell, UICollectionViewDelegate, 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal // Horizontal scrolling
-        layout.minimumLineSpacing = 10 // Space between items
+        layout.minimumLineSpacing = 0.5 // Space between items
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCollectionView()
@@ -65,7 +58,7 @@ class RewardCollectionTableViewCell: UITableViewCell, UICollectionViewDelegate, 
     
     // Adjust the size of the cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 105, height: 140) // Adjust size as needed
+        return CGSize(width: 120, height: 160) // Adjust size as needed
     }
     
 

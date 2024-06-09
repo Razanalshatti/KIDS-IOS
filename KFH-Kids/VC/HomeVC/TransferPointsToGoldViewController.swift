@@ -3,7 +3,6 @@ import SnapKit
 
 protocol TransferPointsToGoldDelegate: AnyObject {
     func removeBlurEffect()
-    
 }
 
 class TransferPointsToGoldViewController: UIViewController {
@@ -22,12 +21,9 @@ class TransferPointsToGoldViewController: UIViewController {
     let containerView = UIView()
     
     var child: TokenResponse?
-
     var goldAmount = 1 {
         didSet {
             updateCoinLabel()
-//            amountLabel.text = "\(goldAmount) GM"
-//            pointsLabel.text = "Cost: \(goldAmount * 550) points"
         }
     }
     
@@ -41,7 +37,6 @@ class TransferPointsToGoldViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         delegate?.removeBlurEffect()
-        
     }
     
     func setupSubviews() {
@@ -94,8 +89,8 @@ class TransferPointsToGoldViewController: UIViewController {
         
         // Decrease Button
         decreaseButton.setTitle("-", for: .normal)
-        increaseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        increaseButton.setTitleColor(.black, for: .normal)
+        decreaseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        decreaseButton.setTitleColor(.black, for: .normal)
         decreaseButton.addTarget(self, action: #selector(decreaseButtonTapped), for: .touchUpInside)
         containerView.addSubview(decreaseButton)
         
@@ -128,7 +123,7 @@ class TransferPointsToGoldViewController: UIViewController {
         
         // Other subview constraints
         coinImageView.snp.makeConstraints { make in
-            make.top.equalTo(goldCardView).offset(85)
+            make.top.equalTo(goldCardView).offset(50)
             make.centerX.equalTo(goldCardView)
             make.width.equalTo(250)
             make.height.equalTo(230)
@@ -149,7 +144,7 @@ class TransferPointsToGoldViewController: UIViewController {
         decreaseButton.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
             make.left.equalTo(containerView).offset(10)
-            make.width.height.equalTo(30) 
+            make.width.height.equalTo(30)  // Set the size explicitly
         }
         
         amountLabel.snp.makeConstraints { make in
@@ -157,15 +152,10 @@ class TransferPointsToGoldViewController: UIViewController {
             make.centerX.equalTo(containerView)
         }
         
-//        pointsLabel.snp.makeConstraints { make in
-//            make.centerY.equalTo(containerView)
-//            make.left.equalTo(containerView).offset(10)
-//        }
-        
         increaseButton.snp.makeConstraints { make in
             make.centerY.equalTo(containerView)
             make.right.equalTo(containerView).offset(-10)
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(30)  // Set the size explicitly
         }
         
         checkButton.snp.makeConstraints { make in
@@ -180,7 +170,7 @@ class TransferPointsToGoldViewController: UIViewController {
     }
     
     @objc func decreaseButtonTapped() {
-        if (goldAmount > 1) {
+        if goldAmount > 1 {
             goldAmount -= 1
         }
     }
@@ -188,7 +178,8 @@ class TransferPointsToGoldViewController: UIViewController {
     @objc func checkButtonTapped() {
         goldRequest()
     }
-    func updateCoinLabel(){
+    
+    func updateCoinLabel() {
         let coinText = "\(goldAmount) GM"
         let pointsText = "   =    \(goldAmount * 550) Points"
         let fullText = "\(coinText)  \(pointsText)"
@@ -203,26 +194,22 @@ class TransferPointsToGoldViewController: UIViewController {
         amountLabel.attributedText = attributedString
     }
 
-    func goldRequest(){
-        
-        var convertGoldToPoints = goldAmount * 550
-                
+    func goldRequest() {
+        let convertGoldToPoints = goldAmount * 550
         
         if child?.points ?? 0 < 550 {
             let message = "NOT ENOUGH POINTS"
             presentAlertWithTitle(title: "Error", message: message)
         } else {
             NetworkManager.shared.transfer(parentId: child?.parentId ?? 0, childId: child?.childId ?? 0, transferPoints: convertGoldToPoints) { result in
-                
                 DispatchQueue.main.async {
-                    switch result{
+                    switch result {
                     case .success(let transfer):
                         print("success \(transfer)")
-                      
                         let message = "REQUEST SENT SUCCESSFULLY"
                         self.presentAlertWithTitle(title: "Success", message: message)
-                                      case .failure(let error):
-                                      print("failure \(error)")
+                    case .failure(let error):
+                        print("failure \(error)")
                         self.delegate?.removeBlurEffect()
                         self.dismiss(animated: true, completion: nil)
                     }
@@ -230,12 +217,14 @@ class TransferPointsToGoldViewController: UIViewController {
             }
         }
     }
-        
+    
     func presentAlertWithTitle(title: String, message: String, completion: (() -> Void)? = nil) {
-        _ = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        _ = UIAlertAction(title: "OK", style: .default) { _ in
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             completion?()
         }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
 

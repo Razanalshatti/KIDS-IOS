@@ -28,7 +28,6 @@
 		B5A9FC672BFC6BBE00897686 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC662BFC6BBE00897686 /* Kingfisher */; };
 		B5A9FC6A2BFC6BD800897686 /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = B5A9FC692BFC6BD800897686 /* Eureka */; };
 		B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC6B2BFC78C000897686 /* Reward.swift */; };
-		B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */; };
 		B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */; };
 		B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC712BFC956A00897686 /* Transfer.swift */; };
 		B5A9FC742BFC991F00897686 /* CompletedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FC732BFC991F00897686 /* CompletedTask.swift */; };
@@ -50,6 +49,9 @@
 		E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */; };
 		E0908BD32BFDD37E008EA18A /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BD12BFDD37E008EA18A /* Child.swift */; };
 		E0908BD42BFDD37E008EA18A /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BD22BFDD37E008EA18A /* TokenResponse.swift */; };
+		E0CE150B2C15876900E25B3B /* TransferMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CE150A2C15876900E25B3B /* TransferMoney.swift */; };
+		E0CE150D2C1592AB00E25B3B /* ChildDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CE150C2C1592AB00E25B3B /* ChildDetails.swift */; };
+		E0CE150F2C15938A00E25B3B /* UpdateChildDetailsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CE150E2C15938A00E25B3B /* UpdateChildDetailsRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,7 +70,6 @@
 		B58604962BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferPointsToGoldViewController.swift; sourceTree = "<group>"; };
 		B598BE5C2BFF2ED2005C244C /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		B5A9FC6B2BFC78C000897686 /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
-		B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimRewards.swift; sourceTree = "<group>"; };
 		B5A9FC712BFC956A00897686 /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
 		B5A9FC732BFC991F00897686 /* CompletedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTask.swift; sourceTree = "<group>"; };
@@ -92,6 +93,9 @@
 		E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E0908BD12BFDD37E008EA18A /* Child.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		E0908BD22BFDD37E008EA18A /* TokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		E0CE150A2C15876900E25B3B /* TransferMoney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMoney.swift; sourceTree = "<group>"; };
+		E0CE150C2C1592AB00E25B3B /* ChildDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDetails.swift; sourceTree = "<group>"; };
+		E0CE150E2C15938A00E25B3B /* UpdateChildDetailsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChildDetailsRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,14 +150,17 @@
 				E0908BD22BFDD37E008EA18A /* TokenResponse.swift */,
 				B50F24972BFB781D00C0AC02 /* MyTask.swift */,
 				B5A9FC6B2BFC78C000897686 /* Reward.swift */,
+				E0CE150C2C1592AB00E25B3B /* ChildDetails.swift */,
 				B5A9FC6F2BFC838C00897686 /* ClaimRewards.swift */,
 				B5A9FC712BFC956A00897686 /* Transfer.swift */,
 				B5A9FC732BFC991F00897686 /* CompletedTask.swift */,
 				B5A9FC752BFC9AB100897686 /* PointsTransferRequest.swift */,
 				B5A9FC772BFCAEA800897686 /* Parent.swift */,
 				6EEC7ECB2C0F0DA00075F183 /* BalanceResponse.swift */,
+				E0CE150E2C15938A00E25B3B /* UpdateChildDetailsRequest.swift */,
 				6EEC7ECF2C105E520075F183 /* TaskResponse.swift */,
 				B5DC555A2C107159005B8E79 /* PointsResponse.swift */,
+				E0CE150A2C15876900E25B3B /* TransferMoney.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -215,7 +222,6 @@
 		E0461F1B2C0EF83200A34619 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
-				B5A9FC6D2BFC7CE700897686 /* HomeViewController.swift */,
 				E0461F1E2C0EF8F000A34619 /* HomeTableViewController.swift */,
 				B58604942BFE02E400C70D2D /* BankCardViewController.swift */,
 				B58604962BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift */,
@@ -320,17 +326,19 @@
 				B598BE5D2BFF2ED2005C244C /* ActivityViewController.swift in Sources */,
 				B5A9FC702BFC838C00897686 /* ClaimRewards.swift in Sources */,
 				E0908BD42BFDD37E008EA18A /* TokenResponse.swift in Sources */,
+				E0CE150B2C15876900E25B3B /* TransferMoney.swift in Sources */,
 				B58604912BFDD8DC00C70D2D /* TasksViewController.swift in Sources */,
 				B57B3D502C0F448E0036E30F /* ServiceTableViewCell.swift in Sources */,
 				B5DC55622C11A458005B8E79 /* RewardCollectionViewController.swift in Sources */,
 				B50F24982BFB781D00C0AC02 /* MyTask.swift in Sources */,
+				E0CE150F2C15938A00E25B3B /* UpdateChildDetailsRequest.swift in Sources */,
 				B5A9FC6C2BFC78C000897686 /* Reward.swift in Sources */,
 				E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */,
 				6EEC7ED02C105E520075F183 /* TaskResponse.swift in Sources */,
 				B5A9FC762BFC9AB100897686 /* PointsTransferRequest.swift in Sources */,
+				E0CE150D2C1592AB00E25B3B /* ChildDetails.swift in Sources */,
 				E0461F142C0C400E00A34619 /* RewardViewController.swift in Sources */,
 				B5A9FC742BFC991F00897686 /* CompletedTask.swift in Sources */,
-				B5A9FC6E2BFC7CE700897686 /* HomeViewController.swift in Sources */,
 				B5A9FC722BFC956A00897686 /* Transfer.swift in Sources */,
 				B5A9FC782BFCAEA800897686 /* Parent.swift in Sources */,
 				B57B3D4E2C0F3B5E0036E30F /* ImageTableViewCell.swift in Sources */,

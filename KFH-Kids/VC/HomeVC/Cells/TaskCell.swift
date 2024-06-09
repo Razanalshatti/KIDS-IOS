@@ -79,7 +79,7 @@ class TaskCell: UITableViewCell {
             pointsBackgroundView.image = UIImage(named: "Point3")
         } else {
             taskBackgroundView.image = UIImage(named: "GroupGreen2")
-            pointsBackgroundView.image = UIImage(named: "Point2")
+            pointsBackgroundView.image = UIImage(named: "point2")
         }
     }
     
