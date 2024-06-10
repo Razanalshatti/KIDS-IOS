@@ -17,6 +17,8 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         view.backgroundColor = .white
         title = "Tasks"
         
+        childId = child!.childId
+        childPoints = child!.points
         setupTableView()
         setupPointsBalanceLabel()
         fetchTasks(childId: childId)

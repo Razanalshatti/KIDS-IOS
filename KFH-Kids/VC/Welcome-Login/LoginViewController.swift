@@ -51,7 +51,6 @@ class LoginViewController: UIViewController {
         usernameTextField.placeholder = "Username"
         usernameTextField.backgroundColor = UIColor(white: 0.9, alpha: 1)
         usernameTextField.layer.cornerRadius = 20
-        usernameTextField.text = "Razan"
         usernameTextField.setLeftPaddingPoints(10)
         
         self.view.addSubview(usernameTextField)
@@ -69,7 +68,6 @@ class LoginViewController: UIViewController {
         passwordTextField.backgroundColor = UIColor(white: 0.9, alpha: 1)
         passwordTextField.layer.cornerRadius = 20
         passwordTextField.isSecureTextEntry = true
-        passwordTextField.text = "1234"
         passwordTextField.setLeftPaddingPoints(10)
         
         self.view.addSubview(passwordTextField)

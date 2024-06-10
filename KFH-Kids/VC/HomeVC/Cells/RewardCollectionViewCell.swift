@@ -50,7 +50,6 @@ class RewardCollectionViewCell: UICollectionViewCell {
 
         
         // points Label
-//        pointsLabel.font = UIFont.boldSystemFont(ofSize: 14)
         pointsLabel.font = UIFont.systemFont(ofSize: 14, weight: .black)
         pointsLabel.textColor = .darkGray
         pointsLabel.numberOfLines = 2
@@ -78,7 +77,6 @@ class RewardCollectionViewCell: UICollectionViewCell {
         }
 
         rewardImageView.snp.makeConstraints { make in
-//            make.bottom.equalTo(pointsLabel.snp.top)
             make.top.equalTo(customBackgroundView).offset(5)
             make.centerX.equalTo(customBackgroundView)
             make.width.height.equalTo(50)
@@ -114,11 +112,7 @@ class RewardCollectionViewCell: UICollectionViewCell {
         descriptionLabel.text = reward.description
         pointsLabel.text = "\(reward.requiredPoints)"
 
-
         
-//        if let imageURL = URL(string: reward.image ?? "DefaultGift") {
-//            rewardImageView.kf.setImage(with: imageURL)
-//        } else {
             if reward.rewardType.lowercased() == "toy" { // change babdood to toy
                 rewardImageView.image = UIImage(named: "dabdoob")
                 

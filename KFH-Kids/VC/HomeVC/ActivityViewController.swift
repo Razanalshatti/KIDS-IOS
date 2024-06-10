@@ -274,11 +274,7 @@ class ActivityViewController: UIViewController {
             switch result {
             case .success(let updatedDetails):
                 DispatchQueue.main.async {
-//                    let alert = UIAlertController(title: "Success", message: "Points added successfully", preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-//                        self.dismiss(animated: true, completion: nil)
-//                    }))
-//                    self.present(alert, animated: true, completion: nil)
+
                     print("Successfully updated child details: \(updatedDetails)")
                 }
             case .failure(let error):
