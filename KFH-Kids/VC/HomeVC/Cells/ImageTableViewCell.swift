@@ -24,6 +24,7 @@ class ImageTableViewCell: UITableViewCell {
     private func setupSubviews() {
         // Background Image
         backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.layer.cornerRadius = 20
         backgroundImageView.layer.masksToBounds = true
         addSubview(backgroundImageView)
     }
@@ -31,10 +32,12 @@ class ImageTableViewCell: UITableViewCell {
     private func setupConstraints(){
         // Background Image
         backgroundImageView.snp.makeConstraints { make in
-            backgroundImageView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(200) // Adjust this value as needed to change how much of the bottom the image takes up
         }
+    }
+
         
     }
-}
+

@@ -16,6 +16,7 @@ class RewardCollectionViewCell: UICollectionViewCell {
     let descriptionLabel = UILabel()
     let pointsLabel = UILabel()
     let favoriteIcon = UIImageView()
+    let dividerView = UIView()
 
 
     
@@ -37,8 +38,9 @@ class RewardCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(customBackgroundView)
 
         // Reward Image
-        rewardImageView.contentMode = .scaleAspectFit
-        rewardImageView.layer.cornerRadius = 50
+        rewardImageView.contentMode = .scaleAspectFill
+        rewardImageView.clipsToBounds = true
+        rewardImageView.layer.cornerRadius = 50/2
         customBackgroundView.addSubview(rewardImageView)
         
         // Favorite Icon
@@ -46,19 +48,27 @@ class RewardCollectionViewCell: UICollectionViewCell {
         favoriteIcon.contentMode = .scaleAspectFit
         customBackgroundView.addSubview(favoriteIcon)
 
-        // Description Label
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        descriptionLabel.textColor = .darkGray
-        descriptionLabel.numberOfLines = 2
-        descriptionLabel.textAlignment = .center
-        customBackgroundView.addSubview(descriptionLabel)
         
         // points Label
-        pointsLabel.font = UIFont.boldSystemFont(ofSize: 14)
+//        pointsLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        pointsLabel.font = UIFont.systemFont(ofSize: 14, weight: .black)
         pointsLabel.textColor = .darkGray
         pointsLabel.numberOfLines = 2
         pointsLabel.textAlignment = .center
         customBackgroundView.addSubview(pointsLabel)
+        
+        // Divider View
+        dividerView.backgroundColor = UIColor.lightGray
+        customBackgroundView.addSubview(dividerView)
+        
+      
+        
+        // Description Label
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .heavy)
+        descriptionLabel.textColor = .darkGray
+        descriptionLabel.numberOfLines = 2
+        descriptionLabel.textAlignment = .center
+        customBackgroundView.addSubview(descriptionLabel)
         
     }
 
@@ -68,26 +78,33 @@ class RewardCollectionViewCell: UICollectionViewCell {
         }
 
         rewardImageView.snp.makeConstraints { make in
-            make.top.equalTo(customBackgroundView).offset(-10)
+//            make.bottom.equalTo(pointsLabel.snp.top)
+            make.top.equalTo(customBackgroundView).offset(5)
             make.centerX.equalTo(customBackgroundView)
-            make.width.height.equalTo(40)
+            make.width.height.equalTo(50)
         }
         
         pointsLabel.snp.makeConstraints { make in
-            make.top.equalTo(rewardImageView.snp.bottom).offset(5)
+            make.centerX.centerY.equalTo(customBackgroundView)
             make.leading.trailing.equalTo(customBackgroundView)
         }
         
         favoriteIcon.snp.makeConstraints { make in
-            make.centerY.equalTo(pointsLabel)
-            make.leading.equalTo(pointsLabel.snp.trailing)
-            make.width.height.equalTo(24)
+            make.top.equalTo(pointsLabel)
+            make.trailing.equalTo(pointsLabel).offset(-15)
+            make.width.height.equalTo(15)
               }
     
         
+        // Divider View Constraints
+              dividerView.snp.makeConstraints { make in
+                  make.bottom.equalTo(descriptionLabel.snp.top).offset(-7)
+                  make.leading.trailing.equalTo(customBackgroundView)
+                  make.height.equalTo(0.5)
+              }
         
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(pointsLabel.snp.bottom).offset(5)
+            make.bottom.equalTo(customBackgroundView).offset(-15)
             make.centerX.equalTo(customBackgroundView)
         }
     }
@@ -109,8 +126,8 @@ class RewardCollectionViewCell: UICollectionViewCell {
                 rewardImageView.image = UIImage(named: "cash")
                 
             }else if reward.rewardType.lowercased() == "vacation" {
-                rewardImageView.image = UIImage(named: "vacation")
-                
+                rewardImageView.image = UIImage(named: "Disney")
+              
             }
 //        }
     }

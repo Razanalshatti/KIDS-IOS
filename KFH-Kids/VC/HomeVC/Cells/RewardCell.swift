@@ -40,7 +40,7 @@ class RewardCell: UITableViewCell {
         customBackgroundView.addSubview(rewardImageView)
         
         // Favorite Icon
-        favoriteIcon.image = UIImage(named: "coin")
+        favoriteIcon.image = UIImage(named: "favourites")
         favoriteIcon.contentMode = .scaleAspectFit
         customBackgroundView.addSubview(favoriteIcon)
         
@@ -74,6 +74,7 @@ class RewardCell: UITableViewCell {
             make.top.equalTo(rewardImageView.snp.bottom).offset(5)
             make.leading.trailing.equalTo(customBackgroundView)
         }
+        
         
         favoriteIcon.snp.makeConstraints { make in
             make.centerY.equalTo(pointsLabel)

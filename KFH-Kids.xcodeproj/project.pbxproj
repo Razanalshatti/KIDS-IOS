@@ -44,7 +44,7 @@
 		E0461F142C0C400E00A34619 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F132C0C400E00A34619 /* RewardViewController.swift */; };
 		E0461F162C0C593900A34619 /* TransferPointsToMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */; };
 		E0461F182C0EF17F00A34619 /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F172C0EF17F00A34619 /* RewardCell.swift */; };
-		E0461F1F2C0EF8F000A34619 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F1E2C0EF8F000A34619 /* HomeTableViewController.swift */; };
+		E0461F1F2C0EF8F000A34619 /* §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0461F1E2C0EF8F000A34619 /* §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§.swift */; };
 		E0908BCF2BFDD36E008EA18A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */; };
 		E0908BD02BFDD36E008EA18A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */; };
 		E0908BD32BFDD37E008EA18A /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0908BD12BFDD37E008EA18A /* Child.swift */; };
@@ -88,7 +88,7 @@
 		E0461F132C0C400E00A34619 /* RewardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		E0461F152C0C593900A34619 /* TransferPointsToMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferPointsToMoneyViewController.swift; sourceTree = "<group>"; };
 		E0461F172C0EF17F00A34619 /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
-		E0461F1E2C0EF8F000A34619 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		E0461F1E2C0EF8F000A34619 /* §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§.swift"; sourceTree = "<group>"; };
 		E0908BCD2BFDD36E008EA18A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E0908BCE2BFDD36E008EA18A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E0908BD12BFDD37E008EA18A /* Child.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 		E0461F1B2C0EF83200A34619 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
-				E0461F1E2C0EF8F000A34619 /* HomeTableViewController.swift */,
+				E0461F1E2C0EF8F000A34619 /* §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§.swift */,
 				B58604942BFE02E400C70D2D /* BankCardViewController.swift */,
 				B58604962BFE0DE500C70D2D /* TransferPointsToGoldViewController.swift */,
 				B598BE5C2BFF2ED2005C244C /* ActivityViewController.swift */,
@@ -354,7 +354,7 @@
 				E0461F162C0C593900A34619 /* TransferPointsToMoneyViewController.swift in Sources */,
 				B5D48BFF2BFB636300CDBA85 /* SceneDelegate.swift in Sources */,
 				B57B3D4C2C0F2F730036E30F /* TextingTableViewCell.swift in Sources */,
-				E0461F1F2C0EF8F000A34619 /* HomeTableViewController.swift in Sources */,
+				E0461F1F2C0EF8F000A34619 /* §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

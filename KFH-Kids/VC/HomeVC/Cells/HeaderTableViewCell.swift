@@ -1,10 +1,3 @@
-//
-//  HeaderTableViewCell.swift
-//  KFH-Kids
-//
-//  Created by Razan alshatti on 04/06/2024.
-//
-
 import UIKit
 
 protocol BankCardDelegate:AnyObject {
@@ -91,7 +84,7 @@ class HeaderTableViewCell: UITableViewCell{
         cardIcon.snp.makeConstraints { make in
             make.centerY.equalTo(profileIcon)
             make.right.equalToSuperview().offset(-20)
-            make.width.equalTo(40)
+            make.width.equalTo(45)
             make.height.equalTo(30)
         }
     }

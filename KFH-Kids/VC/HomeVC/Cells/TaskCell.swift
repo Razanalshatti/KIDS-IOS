@@ -4,6 +4,7 @@ import SnapKit
 class TaskCell: UITableViewCell {
     
     let descriptionLabel = UILabel()
+    let taskTypeLabel = UILabel()
     let pointsLabel = UILabel()
     let taskBackgroundView = UIImageView()
     let pointsBackgroundView = UIImageView()
@@ -25,6 +26,7 @@ class TaskCell: UITableViewCell {
     func setupSubviews() {
         contentView.addSubview(taskBackgroundView)
         taskBackgroundView.addSubview(descriptionLabel)
+        taskBackgroundView.addSubview(taskTypeLabel)
         contentView.addSubview(pointsBackgroundView)
         pointsBackgroundView.addSubview(pointsLabel)
         
@@ -33,8 +35,10 @@ class TaskCell: UITableViewCell {
         pointsBackgroundView.layer.cornerRadius = 15
         pointsBackgroundView.clipsToBounds = true
         
-        descriptionLabel.font = UIFont.systemFont(ofSize: 16)
+        descriptionLabel.font = UIFont.systemFont(ofSize: 18)
         descriptionLabel.textColor = .black
+        taskTypeLabel.font = UIFont.systemFont(ofSize: 11)
+        taskTypeLabel.textColor = .gray
         
         pointsLabel.font = UIFont.systemFont(ofSize: 16)
         pointsLabel.textColor = .black
@@ -59,7 +63,12 @@ class TaskCell: UITableViewCell {
         }
         
         descriptionLabel.snp.makeConstraints { make in
+            make.edges.equalTo(taskBackgroundView).inset(11)
+            make.top.bottom.equalTo(descriptionLabel).inset(1)
+        }
+        taskTypeLabel.snp.makeConstraints { make in
             make.edges.equalTo(taskBackgroundView).inset(10)
+            make.top.bottom.equalTo(descriptionLabel).inset(45)
         }
         
         pointsLabel.snp.makeConstraints { make in
@@ -72,6 +81,7 @@ class TaskCell: UITableViewCell {
     func configure(with task: MyTask) {
         self.task = task
         descriptionLabel.text = task.description
+        taskTypeLabel.text = task.taskType
         pointsLabel.text = "\(task.points)"
         
         if task.isCompleted {

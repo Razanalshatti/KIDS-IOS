@@ -20,7 +20,7 @@ class ActivityViewController: UIViewController {
     
     let exerciseImages: [(String, Bool)] = [
         ("walk",true), 
-        ("trampoline",true),
+        ("tramploine",true),
         ("jumping jacks",true),
         ("push ups",true),
         ("time to move",true)
@@ -155,7 +155,7 @@ class ActivityViewController: UIViewController {
                activityLabel.text = "Exercise"
                if let randomExercise = exerciseImages.randomElement() {
                    activityImageView.image = UIImage(named: randomExercise.0)
-                   activityLabel.text = randomExercise.0
+                   //activityLabel.text = randomExercise.0
                    currentExercise = randomExercise
                }
               // startCountdown(seconds: 30)

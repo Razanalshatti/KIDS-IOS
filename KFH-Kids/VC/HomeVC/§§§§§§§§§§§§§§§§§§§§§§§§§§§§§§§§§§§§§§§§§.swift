@@ -14,7 +14,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
     let bonus = UIButton(type: .system)
     var bonusButtonDisabledUntil: Date?
     var bonusButtonTimer: Timer?
-
+    
     func collectionViewCellTapped(at indexPath: IndexPath) {
         print("selected \(indexPath.item)")
         rewardIndexPath = indexPath.item
@@ -24,43 +24,43 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         if points >= selectedRewrard.requiredPoints { 
             showRewardMessage(points: points, reward: selectedRewrard)
             
-            } else {
-                navigateToTasksPage()
-            }
+        } else {
+            navigateToTasksPage()
+        }
         
         
     }
     
     
     func showRewardMessage(points: Int, reward: Reward) {
-            let alertController = UIAlertController(title: "Congratulations!", message: "You have \(points) points. Would you like to claim your reward?", preferredStyle: .alert)
-    
-            let claimAction = UIAlertAction(title: "Claim", style: .default) { _ in
-                self.claimYourReward(reward: reward)
-            }
-            let tasksAction = UIAlertAction(title: "Go to Tasks", style: .default) { _ in
-                self.navigateToTasksPage()
-            }
-    
-            alertController.addAction(claimAction)
-            alertController.addAction(tasksAction)
-    
-            present(alertController, animated: true, completion: nil)
+        let alertController = UIAlertController(title: "Congratulations!", message: "You have \(points) points. Would you like to claim your reward?", preferredStyle: .alert)
+        
+        let claimAction = UIAlertAction(title: "Claim", style: .default) { _ in
+            self.claimYourReward(reward: reward)
         }
-
-    
-        func navigateToTasksPage() {
-            let tasksVC = TasksViewController()
-//            tasksVC.child = self.child
-            tasksVC.child = self.child
-            navigationController?.pushViewController(tasksVC, animated: true)
+        let tasksAction = UIAlertAction(title: "Go to Tasks", style: .default) { _ in
+            self.navigateToTasksPage()
         }
+        
+        alertController.addAction(claimAction)
+        alertController.addAction(tasksAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    func navigateToTasksPage() {
+        let tasksVC = TasksViewController()
+        //            tasksVC.child = self.child
+        tasksVC.child = self.child
+        navigationController?.pushViewController(tasksVC, animated: true)
+    }
     
     
     func updatePoints() {
         
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,9 +70,9 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-       
+        
         title = "Home"
-
+        
         let backButtonImage = UIImage(systemName: "house.fill")
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
@@ -118,8 +118,8 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         }
         return sectionName
     }
-
-
+    
+    
     
     // display items inside a specific section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -160,10 +160,10 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             // Image Cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageTableViewCell
             
-            cell.backgroundImageView.image = UIImage(named: "background4")
+            cell.backgroundImageView.image = UIImage(named: "background6")
             cell.backgroundImageView.layer.cornerRadius = 25
             cell.selectionStyle = .none
-
+            
             return cell
             
         } else if indexPath.section == 2 {
@@ -174,7 +174,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             cell.delegate = self
             
             return cell
-    
+            
         } else if indexPath.section == 3 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as! ServiceTableViewCell
@@ -183,7 +183,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             cell.transferPtsToGold.setTitle(buttonTitles[indexPath.row], for: .normal)
             cell.transferPtsToGold.setBackgroundImage(UIImage(named: buttonBg[indexPath.row]), for: .normal)
             cell.selectionStyle = .none
-
+            
             return cell
             
         } else {
@@ -198,7 +198,7 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         } else if indexPath.section == 1 {
             return 200
         } else if indexPath.section == 2 {
-         return 140
+            return 140
         } else if indexPath.section == 3 {
             return 75
         } else {
@@ -213,13 +213,13 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
         } else if indexPath.section == 2 {
             
         } else if indexPath.section == 3 {
-
+            
             switch indexPath.row {
             case 0:
                 transferToGoldButtonTapped()
             case 1:
                 transferToMoneyButtonTapped()
-
+                
             case 2:
                 bonusButtonTapped()
             default:
@@ -227,6 +227,12 @@ class HomeTableViewController: UITableViewController, TransferPointsToGoldDelega
             }
             
         } else {
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.textColor = .black
         }
     }
 }
