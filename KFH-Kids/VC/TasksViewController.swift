@@ -132,12 +132,31 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
                 case .success(let updatedTasks):
                     DispatchQueue.main.async {
                         self.updatePointsBalance()
+                        self.getPoint()
                         self.tableView.reloadData()
                     }
                 case .failure(let error):
                     print("Failed to complete task: \(error.localizedDescription)")
                 }
             }
+    }
+    
+    func getPoint(){
+        
+        NetworkManager.shared.getPoints(childId: child!.childId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let success):
+                    print("success \(success)")
+                    self.child?.points = success.points
+                    self.pointsBalanceLabel.text = "\(success.points)"
+                    self.tableView.reloadData()
+                case .failure(let failure):
+                    print("failed! \(failure)")
+                }
+            }
+        }
+        
     }
    
 
